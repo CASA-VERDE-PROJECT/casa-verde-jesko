@@ -162,9 +162,51 @@ a{color:inherit;text-decoration:none}
   .manifiesto .pal{opacity:1;filter:none}
   .frase .difusa{filter:none}
 }
+/* ---------- pantalla de carga (traida del proyecto viejo): el logo se construye palito a palito ---------- */
+#preloader{position:fixed;inset:0;z-index:9999;background:#0C2424;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;will-change:transform}
+.pre-stage{width:min(64vw,460px);will-change:transform}
+.pre-stage svg{width:100%;height:auto;overflow:visible;display:block}
+.pre-stage svg *{fill:none;stroke:#F5F0E8;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.pre-stage svg .pre-verde{stroke:var(--verde)}
+.pre-word{font-family:Archivo,'Helvetica Neue',Arial,sans-serif;font-size:13px;font-weight:500;letter-spacing:.5em;text-transform:uppercase;color:rgba(255,255,255,.85);text-indent:.5em}
+@media (prefers-reduced-motion:reduce){#preloader{display:none}}
 </style>
 </head>
 <body>
+
+<!-- pantalla de carga: el logo se construye en 3D -->
+<div id="preloader" aria-hidden="true">
+  <div class="pre-stage">
+    <svg viewBox="30 120 700 290">
+      <path d="M50,388 H710"/>
+      <path d="M95,360 H665"/>
+      <path d="M50,388 L95,360 M710,388 L665,360"/>
+      <path d="M150,360 V224 M150,224 H305 M305,224 V360"/>
+      <path class="pre-verde" d="M180,252 h30 v50 h-30 Z"/>
+      <path class="pre-verde" d="M237,252 h30 v50 h-30 Z"/>
+      <path d="M108,222 L348,178"/>
+      <path d="M112,232 L348,190"/>
+      <path d="M302,146 L648,212"/>
+      <path d="M300,158 L646,222"/>
+      <path d="M352,170 V360"/>
+      <path d="M424,183 V360"/>
+      <path d="M496,197 V360"/>
+      <path d="M556,208 V360"/>
+      <path d="M340,240 H560 M340,262 H560 M340,284 H560"/>
+      <path d="M556,254 H692"/>
+      <path d="M556,264 H692"/>
+      <path d="M668,264 V360"/>
+    </svg>
+  </div>
+  <p class="pre-word">Casa Verde</p>
+</div>
+<script>
+/* failsafe: pase lo que pase, la pantalla de carga nunca bloquea la pagina */
+setTimeout(function(){
+  var p = document.getElementById('preloader');
+  if(p){ p.style.transition = 'opacity .45s ease'; p.style.opacity = '0'; setTimeout(function(){ p.remove(); document.body.style.overflow = ''; }, 480); }
+}, 4200);
+</script>
 
 <nav class="nav" aria-label="Principal">
   <div class="nav-links"><a href="#casa">La casa</a><a href="#lancha">Lancha</a><a href="#espacios">Espacios</a></div>
@@ -366,6 +408,22 @@ a{color:inherit;text-decoration:none}
     onToggle: function(self){ btn.classList.toggle('guardado', self.isActive); }});
 
   addEventListener('load', function(){ medir(); ScrollTrigger.refresh(); });
+})();
+</script>
+<script>
+/* pantalla de carga: animacion del logo */
+(function(){
+  var pre = document.getElementById('preloader');
+  if(!pre) return;
+  if(!window.gsap || matchMedia('(prefers-reduced-motion: reduce)').matches){ pre.remove(); return; }
+  document.body.style.overflow = 'hidden';
+  var trazos = pre.querySelectorAll('svg path');
+  trazos.forEach(function(p){ var L = p.getTotalLength(); p.style.strokeDasharray = L; p.style.strokeDashoffset = L; });
+  gsap.timeline({onComplete: function(){ pre.remove(); document.body.style.overflow = ''; if(window.ScrollTrigger) ScrollTrigger.refresh(); }})
+    .fromTo('.pre-stage', {rotateX: 34, rotateY: -16, scale: .86, transformPerspective: 900}, {rotateX: 0, rotateY: 0, scale: 1, duration: 2.1, ease: 'power2.inOut'}, 0)
+    .to(trazos, {strokeDashoffset: 0, duration: 1.4, stagger: .06, ease: 'power2.inOut'}, .1)
+    .from('.pre-word', {opacity: 0, letterSpacing: '.9em', duration: .7, ease: 'power2.out'}, 1.5)
+    .to(pre, {yPercent: -100, duration: .75, ease: 'power4.inOut'}, 2.55);
 })();
 </script>
 </body>
