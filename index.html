@@ -312,6 +312,14 @@ setTimeout(function(){
     <div class="pie"><span>Casa Verde</span><span>Una casa de La Capital del Cielo</span></div>
   </section>
 
+  <section class="cenital cielo" aria-label="El cielo de Los Roques">
+    <div class="escena">
+      <div class="cen-foto" style="background-image:url('img/cielo.jpg')" role="img" aria-label="Un ave marina vuela bajo la luna en el cielo azul de Los Roques"></div>
+      <div class="palabra izq">Cielo</div>
+      <div class="palabra der">abierto</div>
+    </div>
+  </section>
+
   <section class="cenital" id="lancha" aria-label="La lancha de la casa">
     <div class="escena">
       <div class="cen-foto" id="cenFoto" role="img" aria-label="Vista desde arriba de la lancha sobre agua turquesa"></div>
@@ -497,11 +505,13 @@ setTimeout(function(){
     scrollTrigger: {trigger: mt, start: 'top 82%', end: 'bottom 45%', scrub: .5}});
 
   /* cenital: la toma se acerca y las dos palabras se cierran hacia la lancha */
-  gsap.fromTo('#cenFoto', {scale: 1.32}, {scale: 1, ease: 'none', scrollTrigger: {trigger: '.cenital', start: 'top top', end: 'bottom bottom', scrub: .6}});
-  if(innerWidth > 860){
-    gsap.fromTo('.palabra.izq', {xPercent: -30, opacity: 0}, {xPercent: 0, opacity: 1, ease: 'none', scrollTrigger: {trigger: '.cenital', start: 'top 60%', end: 'top top', scrub: .6}});
-    gsap.fromTo('.palabra.der', {xPercent: 30, opacity: 0}, {xPercent: 0, opacity: 1, ease: 'none', scrollTrigger: {trigger: '.cenital', start: 'top 60%', end: 'top top', scrub: .6}});
-  }
+  gsap.utils.toArray('.cenital').forEach(function(sec){
+    gsap.fromTo(sec.querySelector('.cen-foto'), {scale: 1.32}, {scale: 1, ease: 'none', scrollTrigger: {trigger: sec, start: 'top top', end: 'bottom bottom', scrub: .6}});
+    if(innerWidth > 860){
+      gsap.fromTo(sec.querySelector('.palabra.izq'), {xPercent: -30, opacity: 0}, {xPercent: 0, opacity: 1, ease: 'none', scrollTrigger: {trigger: sec, start: 'top 60%', end: 'top top', scrub: .6}});
+      gsap.fromTo(sec.querySelector('.palabra.der'), {xPercent: 30, opacity: 0}, {xPercent: 0, opacity: 1, ease: 'none', scrollTrigger: {trigger: sec, start: 'top 60%', end: 'top top', scrub: .6}});
+    }
+  });
 
   /* ficha: el numero cuenta y la foto se mueve un poco */
   var o = {v: 0}, cuenta = document.getElementById('cuenta');
