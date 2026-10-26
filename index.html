@@ -122,11 +122,11 @@ a{color:inherit;text-decoration:none}
 .esp p{margin-top:8px;font-size:14px;line-height:1.5;color:var(--taupe);max-width:36ch}
 
 /* ---------- reservar ---------- */
-.pedir{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:140px var(--gut) 60px;overflow:hidden}
-.pedir-foto{position:absolute;inset:0;background:url('img/portada-atardecer.jpg') center/cover;will-change:transform}
-.pedir::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(13,10,9,.15) 0%,rgba(13,10,9,.25) 45%,rgba(13,10,9,.82) 100%)}
+.pedir{position:relative;min-height:max(100svh,calc(100vw * .7));display:flex;flex-direction:column;justify-content:flex-end;padding:140px var(--gut) 60px;overflow:hidden}
+.pedir-foto{position:absolute;inset:0;background:url('img/fachada.jpg') center 42%/cover;will-change:transform}
+.pedir::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(13,10,9,.18) 0%,rgba(13,10,9,0) 30%,rgba(13,10,9,.1) 55%,rgba(13,10,9,.78) 100%)}
 .pedir>*:not(.pedir-foto){position:relative;z-index:2}
-.pedir h2{font-size:clamp(46px,8.6vw,150px);font-weight:500;letter-spacing:-.055em;line-height:.9;font-variation-settings:var(--ancho)}
+.pedir h2{font-size:clamp(46px,7vw,124px);font-weight:500;letter-spacing:-.055em;line-height:.9;font-variation-settings:var(--ancho)}
 .pedir-fila{display:grid;grid-template-columns:1fr auto;gap:30px;align-items:end;margin-top:44px;padding-top:22px;border-top:1px solid rgba(255,248,237,.4)}
 .pedir-fila p{font-size:15px;line-height:1.55;max-width:46ch;color:rgba(255,248,237,.86)}
 .btn{display:inline-flex;align-items:center;gap:16px;background:var(--base);color:var(--ink);border-radius:999px;padding:17px 30px;font-size:15px;font-weight:600;transition:background .3s,color .3s}
@@ -154,6 +154,7 @@ a{color:inherit;text-decoration:none}
   .esp-cab{flex-direction:column;align-items:flex-start}
   .esp{width:78vw}
   .pedir-fila{grid-template-columns:1fr}
+  .pedir-foto{background-position:22% 30%}
 }
 @media (prefers-reduced-motion:reduce){
   .manifiesto .pal{opacity:1;filter:none}
@@ -249,7 +250,7 @@ a{color:inherit;text-decoration:none}
   </section>
 
   <section class="pedir" id="reservar" aria-labelledby="t-res">
-    <div class="pedir-foto" id="pedirFoto"></div>
+    <div class="pedir-foto" id="pedirFoto" role="img" aria-label="Fachada de Casa Verde vista desde el agua"></div>
     <h2 id="t-res">Reserva<br>Casa Verde</h2>
     <div class="pedir-fila">
       <p>Escríbenos por WhatsApp con tus fechas y cuántos son, y te respondemos con disponibilidad.</p>
