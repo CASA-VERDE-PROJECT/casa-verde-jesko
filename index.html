@@ -54,11 +54,10 @@ a{color:inherit;text-decoration:none}
 .escena{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
 .cabina{position:absolute;inset:0;z-index:0;background:#1c1b1a}
 .mar{position:absolute;inset:0;z-index:1;overflow:hidden}
-.mar-foto{position:absolute;inset:-12%;background:url('img/playa.jpg') center 52%/cover;will-change:transform}
+.mar-foto{position:absolute;inset:-12%;background:url('img/cielo.jpg') center 50%/cover;will-change:transform}
 /* la ventana recortada sobre un muro gris oscuro parejo; se escala desde el centro del vano */
 .pared{position:absolute;inset:0;z-index:3;background:#1c1b1a;display:grid;place-items:center;transform-origin:var(--hx) var(--hy);will-change:transform,opacity}
 .ventana{height:62svh;width:auto;max-width:none}
-@media (min-width:861px){.mar-foto{background-position:center 74%}}
 @media (max-width:860px){.ventana{height:auto;width:80vw}}
 .meta{text-shadow:0 1px 16px rgba(0,0,0,.55)}
 .tipo{position:absolute;inset:0;z-index:4;pointer-events:none}
@@ -310,14 +309,6 @@ setTimeout(function(){
   <section class="manifiesto" id="casa">
     <h2 id="manif">Una casa frente al mar en Gran Roque, con WiFi Starlink. Doble altura, celosías que se abren a la brisa y una lancha propia para salir a los cayos.</h2>
     <div class="pie"><span>Casa Verde</span><span>Una casa de La Capital del Cielo</span></div>
-  </section>
-
-  <section class="cenital cielo" aria-label="El cielo de Los Roques">
-    <div class="escena">
-      <div class="cen-foto" style="background-image:url('img/cielo.jpg')" role="img" aria-label="Un ave marina vuela bajo la luna en el cielo azul de Los Roques"></div>
-      <div class="palabra izq">Cielo</div>
-      <div class="palabra der">abierto</div>
-    </div>
   </section>
 
   <section class="cenital" id="lancha" aria-label="La lancha de la casa">
