@@ -36,6 +36,7 @@ a{color:inherit;text-decoration:none}
 .nav-links{display:flex;gap:40px}
 .nav-mark{font-size:14px;letter-spacing:.32em;text-transform:uppercase;font-variation-settings:var(--ancho);white-space:nowrap}
 .nav-der{display:flex;justify-content:flex-end;gap:32px}
+.nav-gal{display:none}
 
 /* ---------- boton fijo ---------- */
 .reservar{position:fixed;z-index:70;left:50%;bottom:30px;transform:translateX(-50%);display:flex;align-items:center;gap:8px;transition:opacity .35s,transform .35s}
@@ -140,6 +141,7 @@ a{color:inherit;text-decoration:none}
   .nav{grid-template-columns:1fr auto;padding:20px}
   .nav-links,.nav-der{display:none}
   .nav-mark{justify-self:start}
+  .nav-gal{display:block;justify-self:end;font-size:12px;letter-spacing:.14em;text-transform:uppercase}
   .hero{height:290vh}
   .frase{font-size:clamp(30px,8.6vw,46px)}
   .frase.izq{left:20px;top:11vh}
@@ -220,6 +222,10 @@ footer{background:linear-gradient(rgba(0,0,0,.60),rgba(0,0,0,.65)),url('IMG_0861
 .pre-stage svg .pre-verde{stroke:var(--verde)}
 .pre-word{font-family:Archivo,'Helvetica Neue',Arial,sans-serif;font-size:13px;font-weight:500;letter-spacing:.5em;text-transform:uppercase;color:rgba(255,255,255,.85);text-indent:.5em}
 @media (prefers-reduced-motion:reduce){#preloader{display:none}}
+
+/* el texto no se puede seleccionar (pedido del usuario); los campos de formulario si */
+html{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+input,textarea,select{-webkit-user-select:text;user-select:text}
 </style>
 </head>
 <body>
@@ -259,9 +265,10 @@ setTimeout(function(){
 </script>
 
 <nav class="nav" aria-label="Principal">
-  <div class="nav-links"><a href="#casa">La casa</a><a href="#lancha">Lancha</a><a href="#espacios">Espacios</a></div>
+  <div class="nav-links"><a href="#casa">La casa</a><a href="#lancha">Lancha</a><a href="#espacios">Espacios</a><a href="galeria.html">Galería</a></div>
   <a class="nav-mark" href="#top">Casa Verde</a>
   <div class="nav-der"><span>Gran Roque, Los Roques</span><a href="#reservar">Reservar</a></div>
+  <a class="nav-gal" href="galeria.html">Galería</a>
 </nav>
 
 <a class="reservar" id="reservarBtn" href="https://wa.me/584123030330?text=Hola%2C%20quiero%20informaci%C3%B3n%20para%20reservar%20Casa%20Verde." target="_blank" rel="noopener">
@@ -376,8 +383,8 @@ setTimeout(function(){
     <div class="foot-div" aria-hidden="true"></div>
     <ul class="foot-links">
       <li><a href="#casa">La Casa</a></li>
-      <li><a href="#lancha">Lancha</a></li>
       <li><a href="#espacios">Espacios</a></li>
+      <li><a href="galeria.html">Galería</a></li>
       <li><a href="#reservar">Reservar</a></li>
     </ul>
     <div class="foot-socials">

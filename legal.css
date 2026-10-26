@@ -115,3 +115,7 @@ td strong { color: var(--verde-dk); }
   .lg-box { padding: 18px 20px; }
   .lg-foot ul { flex-direction: column; gap: 14px; }
 }
+
+/* el texto no se puede seleccionar (pedido del usuario); los campos de formulario si */
+html{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+input,textarea,select{-webkit-user-select:text;user-select:text}
