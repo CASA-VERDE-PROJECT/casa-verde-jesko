@@ -49,12 +49,14 @@ a{color:inherit;text-decoration:none}
 /* ---------- hero: la pared con el ventanal ---------- */
 .hero{height:320vh;position:relative}
 .escena{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
-.cabina{position:absolute;inset:0;z-index:0;background:radial-gradient(70% 90% at 50% 50%,#211e1c 0%,#1b1917 60%,#121110 100%)}
+.cabina{position:absolute;inset:0;z-index:0;background:#1c1b1a}
 .mar{position:absolute;inset:0;z-index:1;overflow:hidden}
 .mar-foto{position:absolute;inset:-12%;background:url('img/playa.jpg') center 52%/cover;will-change:transform}
-.pared{position:absolute;inset:0;z-index:3;width:100%;height:100%;object-fit:contain;transform-origin:var(--hx) var(--hy);will-change:transform,opacity}
+/* la ventana recortada sobre un muro gris oscuro parejo; se escala desde el centro del vano */
+.pared{position:absolute;inset:0;z-index:3;background:#1c1b1a;display:grid;place-items:center;transform-origin:var(--hx) var(--hy);will-change:transform,opacity}
+.ventana{height:62svh;width:auto;max-width:none}
 @media (min-width:861px){.mar-foto{background-position:center 74%}}
-@media (max-width:860px){.pared{object-fit:cover}}
+@media (max-width:860px){.ventana{height:auto;width:80vw}}
 .meta{text-shadow:0 1px 16px rgba(0,0,0,.55)}
 .tipo{position:absolute;inset:0;z-index:4;pointer-events:none}
 .frase{position:absolute;font-size:clamp(40px,6.2vw,104px);line-height:.94;font-weight:500;letter-spacing:-.045em;white-space:nowrap;font-variation-settings:var(--ancho)}
@@ -180,7 +182,7 @@ a{color:inherit;text-decoration:none}
     <div class="escena">
       <div class="cabina"></div>
       <div class="mar"><div class="mar-foto" id="marFoto"></div></div>
-      <img class="pared" id="pared" src="img/ventana.jpg" alt="Ventana de una habitación con celosías abiertas hacia la playa">
+      <div class="pared" id="pared"><img class="ventana" id="ventana" src="img/ventana.jpg" width="965" height="1649" alt="Ventana de una habitación con celosías abiertas hacia la playa"></div>
       <div class="tipo" id="tipo">
         <h1 class="frase izq">Despierta<span class="difusa">frente al mar</span></h1>
         <div class="frase der" aria-hidden="true">Duerme<span class="difusa">en Los Roques</span></div>
@@ -281,8 +283,9 @@ a{color:inherit;text-decoration:none}
   gsap.registerPlugin(ScrollTrigger);
 
   /* geometria del hueco medida del canal alfa de cada imagen (fraccion de la imagen) */
-  /* foto real de la ventana de una habitacion: 1440x2560, vano 831x1466 en +286+448 */
-  var P = {w:1440, h:2560, cx:.4872, cy:.4613, hw:.5771, hh:.5727};
+  /* ventana recortada (965x1649): vano 831x1466 en +69+107 */
+  var P = {cx:.5021, cy:.5094, hw:.8611, hh:.8890};
+  var ventana = document.getElementById('ventana');
 
   var pared = document.getElementById('pared'), marFoto = document.getElementById('marFoto');
   var tipo = document.getElementById('tipo'), meta = document.getElementById('meta'), marca = document.getElementById('marca');
@@ -290,16 +293,15 @@ a{color:inherit;text-decoration:none}
   var mar = document.querySelector('.mar');
 
   function medir(){
-    var vw = innerWidth, vh = innerHeight, movil = vw <= 860;
-    /* escritorio: contain (la foto es vertical); telefono: cover */
-    var e = movil ? Math.max(vw / P.w, vh / P.h) : Math.min(vw / P.w, vh / P.h);
-    var aw = P.w * e, ah = P.h * e, ox = (vw - aw) / 2, oy = (vh - ah) / 2;
+    var vw = innerWidth, vh = innerHeight;
+    gsap.set(pared, {scale: 1});
+    var aw = ventana.offsetWidth, ah = ventana.offsetHeight, ox = ventana.offsetLeft, oy = ventana.offsetTop;
     var cx = ox + P.cx * aw, cy = oy + P.cy * ah;      /* centro del hueco en pantalla */
     var hw = P.hw * aw / 2, hh = P.hh * ah / 2;        /* medio ancho y medio alto del hueco */
     g.cx = cx; g.cy = cy; g.hw = hw; g.hh = hh;
     pared.style.setProperty('--hx', cx + 'px');
     pared.style.setProperty('--hy', cy + 'px');
-    g.k0 = movil ? 1 : .96;
+    g.k0 = 1;
     /* el hueco tapa la pantalla cuando cubre la esquina mas lejana en cada eje */
     g.kMax = Math.max(Math.max(cx, vw - cx) / hw, Math.max(cy, vh - cy) / hh) * 1.08;
   }
