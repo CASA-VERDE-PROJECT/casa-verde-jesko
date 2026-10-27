@@ -94,7 +94,7 @@ a{color:inherit;text-decoration:none}
 .cen-ficha div{display:flex;justify-content:space-between;padding:12px 0;border-top:1px solid rgba(255,248,237,.5)}
 
 /* ---------- ficha tecnica ---------- */
-.ficha{background:var(--base);color:var(--ink);padding:clamp(110px,16vh,170px) var(--gut) clamp(90px,14vh,150px)}
+.ficha{background:var(--base);color:var(--ink);padding:clamp(90px,13vh,140px) var(--gut) clamp(76px,11vh,120px)}
 .ficha-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(40px,6vw,110px);align-items:start}
 .ficha-marca{font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;line-height:1.5;color:var(--taupe)}
 .ficha-num{font-size:clamp(120px,19vw,300px);font-weight:500;letter-spacing:-.07em;line-height:.85;margin:24px 0 8px -.04em;font-variation-settings:var(--ancho)}
@@ -105,7 +105,7 @@ a{color:inherit;text-decoration:none}
 .et{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--taupe)}
 .va{margin-top:8px;font-size:clamp(17px,1.4vw,21px);font-weight:500;letter-spacing:-.02em;font-variation-settings:var(--ancho)}
 .nota{margin-top:20px;font-size:13px;color:var(--taupe);max-width:52ch;line-height:1.5}
-.ficha-foto{position:relative;aspect-ratio:4/5;overflow:hidden}
+.ficha-foto{position:relative;aspect-ratio:4/5;overflow:hidden;width:100%;max-width:480px;justify-self:end;margin:0}
 .ficha-foto img{width:100%;height:100%;object-fit:cover;will-change:transform}
 .ficha-foto figcaption{position:absolute;left:18px;bottom:16px;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.5)}
 
@@ -205,14 +205,15 @@ footer{background:linear-gradient(rgba(0,0,0,.60),rgba(0,0,0,.65)),url('img/foot
 @media (max-width:480px){.wa-float{width:46px;height:46px;bottom:calc(18px + env(safe-area-inset-bottom));right:calc(18px + env(safe-area-inset-right))}}
 
 /* ---------- ubicacion con Google Maps (del proyecto viejo) ---------- */
-.location{background:#FFFFFF;padding:120px 0 0}
-.loc-head{display:flex;flex-direction:column;align-items:flex-start;text-align:left;max-width:1190px;margin:0 auto 40px;padding:0 52px;box-sizing:content-box}
-.loc-head .s-label{display:block;font-family:'Jost',system-ui,sans-serif;font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--verde);margin:0 0 16px}
-.loc-head .s-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(42px,5.4vw,80px);font-weight:400;line-height:1.02;letter-spacing:-.01em;color:var(--verde);margin:0}
+/* franja del mapa con las proporciones de Casa Panza: compacta, centrada, fondo claro */
+.location{background:#F8F7F5;padding:48px 0 0;border-top:1px solid rgba(0,194,146,.12)}
+.loc-head{text-align:center;max-width:1300px;margin:0 auto;padding:0 56px;box-sizing:border-box}
+.loc-head .s-label{display:block;font-family:'Jost',system-ui,sans-serif;font-size:11px;font-weight:600;letter-spacing:.38em;text-transform:uppercase;line-height:1.7;color:var(--verde);margin:0 0 28px}
+.loc-head .s-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(38px,5vw,58px);font-weight:400;line-height:1.08;color:#1A1A1A;margin:0}
 .loc-map-wrap{position:relative;width:100%;height:460px;overflow:hidden;background:#F1FAF7}
 .loc-map-wrap iframe{width:100%;height:100%;border:0;display:block;filter:grayscale(10%) contrast(1.02) brightness(.98)}
-@media (max-width:1024px){.location{padding-top:96px}.loc-head{padding:0 40px}}
-@media (max-width:768px){.location{padding-top:72px}.loc-head{padding:0 20px;margin-bottom:28px}.loc-head .s-title{font-size:clamp(36px,10vw,48px)}.loc-map-wrap{height:340px}}
+@media (max-width:1024px){.location{padding-top:40px}.loc-head{padding:0 40px}}
+@media (max-width:768px){.location{padding-top:41px}.loc-head{padding:0 20px}.loc-head .s-label{margin-bottom:18px}.loc-head .s-title{font-size:30px}.loc-map-wrap{height:340px}}
 @media (max-width:480px){.loc-map-wrap{height:260px}}
 
 /* ---------- pantalla de carga (traida del proyecto viejo): el logo se construye palito a palito ---------- */
@@ -506,7 +507,7 @@ setTimeout(function(){
   var o = {v: 0}, cuenta = document.getElementById('cuenta');
   gsap.to(o, {v: 10, duration: 1.4, ease: 'power3.out', onUpdate: function(){ cuenta.textContent = Math.round(o.v); },
     scrollTrigger: {trigger: '.ficha', start: 'top 70%', once: true}});
-  gsap.fromTo('#fichaFoto', {scale: 1.15, yPercent: -4}, {yPercent: 4, ease: 'none', scrollTrigger: {trigger: '.ficha-foto', start: 'top bottom', end: 'bottom top', scrub: true}});
+  gsap.fromTo('#fichaFoto', {scale: 1.06, yPercent: -2}, {yPercent: 2, ease: 'none', scrollTrigger: {trigger: '.ficha-foto', start: 'top bottom', end: 'bottom top', scrub: true}});
   gsap.fromTo('#pedirFoto', {scale: 1.2}, {scale: 1, ease: 'none', scrollTrigger: {trigger: '.pedir', start: 'top bottom', end: 'bottom bottom', scrub: true}});
 
   /* nav y boton cambian de tinta sobre lo claro; el boton se guarda al llegar a reservar */
