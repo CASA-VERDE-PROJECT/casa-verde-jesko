@@ -67,7 +67,7 @@ a{color:inherit;text-decoration:none}
 
 /* ---------- hero: la pared con el ventanal ---------- */
 .hero{height:680vh;position:relative}
-.escena{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
+.escena{position:sticky;top:0;height:100vh;height:100lvh;overflow:hidden}
 .cabina{position:absolute;inset:0;z-index:0;background:#1c1b1a}
 .mar{position:absolute;inset:0;z-index:1;overflow:hidden}
 /* una sola foto alta: el cielo con la gaviota arriba y la casa abajo; la camara baja de una a otra */
@@ -85,7 +85,7 @@ a{color:inherit;text-decoration:none}
    1 palabras grandes  2 la lancha sube enorme y pasa sobre ellas  3 se achica al centro
    4 salen las palabras y entra la ficha  5 la foto se vuelve plano */
 .flota{position:relative;height:620vh;color:var(--ink)}
-.flota-escena{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:#fff8ed}
+.flota-escena{position:sticky;top:0;height:100vh;height:100lvh;overflow:hidden;background:#fff8ed}
 .flota-fondo{position:absolute;inset:0;background:linear-gradient(180deg,#7d7370 0%,#a69c95 38%,#e9e1d6 78%,#fff8ed 100%);opacity:0}
 .flota-palabra{position:absolute;top:40%;transform:translateY(-50%);font-size:clamp(46px,7.4vw,124px);font-weight:500;letter-spacing:-.05em;line-height:1;font-variation-settings:var(--ancho);z-index:1}
 .flota-palabra.izq{left:var(--gut)}
@@ -165,7 +165,7 @@ a{color:inherit;text-decoration:none}
 
 /* ---------- cuartos: las cartas pasan sobre la llave, como las de Mana sobre la lata ---------- */
 .cuartos{position:relative;height:460vh;background:#fff8ed;color:var(--ink)}
-.cuartos-escena{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
+.cuartos-escena{position:sticky;top:0;height:100vh;height:100lvh;overflow:hidden}
 .cuartos-cab{position:absolute;left:0;right:0;top:clamp(76px,10vh,104px);text-align:center;z-index:1}
 .cuartos-cab h2{font-size:clamp(34px,4.4vw,72px);font-weight:500;letter-spacing:-.045em;line-height:.98;font-variation-settings:var(--ancho)}
 .cuartos-cab p{margin-top:16px;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--taupe)}
@@ -400,12 +400,12 @@ html.js footer:not(.bg-on){background:#0f1615}
   .manifiesto .pie{flex-direction:column;gap:6px}
   .flota-logo.chico .fl-word{letter-spacing:.3em;text-indent:.3em}
   /* cuartos: la carta se apoya sobre el llavero y nunca toca el titulo; foto mas baja */
-  .carta{top:auto;bottom:15vh;margin-top:0;width:min(400px,80vw);margin-left:calc(min(400px,80vw) / -2)}
+  .carta{top:auto;bottom:max(15vh,116px);margin-top:0;width:min(400px,80vw);margin-left:calc(min(400px,80vw) / -2)}
   .carta-cinta{padding:12px 18px;font-size:16px}
   .carta-cuerpo{padding:16px 14px 14px}
   .carta-cuerpo img{aspect-ratio:16/9;object-fit:cover}
   .carta-datos{margin-top:12px}
-  .llave{height:min(18vh,150px);bottom:-2vh;margin-left:calc(min(18vh,150px) * -.4103)}
+  .llave{height:min(16vh,128px);bottom:4px;margin-left:calc(min(16vh,128px) * -.4103)}
 }
 @media (max-width:860px) and (max-height:620px){
   .carta-cuerpo img{aspect-ratio:2/1}
@@ -414,7 +414,10 @@ html.js footer:not(.bg-on){background:#0f1615}
 /* telefono: los flotantes se apartan donde ya hay botones de WhatsApp e Instagram (reserva y pie) */
 @media (max-width:768px){
   .ig-float,.wa-float{transition:opacity .35s,transform .35s cubic-bezier(.25,.1,.25,1)}
-  body.sin-flotantes .ig-float,body.sin-flotantes .wa-float{opacity:0;pointer-events:none;transform:translateY(14px)}
+  body.sin-flotantes .ig-float,body.sin-flotantes .wa-float,body.en-cuartos .ig-float,body.en-cuartos .wa-float{opacity:0;pointer-events:none;transform:translateY(14px)}
+  /* mini galeria: el contador va arriba, lejos de los botones flotantes */
+  .ficha-foto figcaption{top:16px;flex-direction:column-reverse;justify-content:space-between;align-items:flex-start}
+  .ficha-foto .fs-num{align-self:flex-end}
 }
 /* telefono acostado (pantalla muy baja): se aligera cada escena para que nada se monte */
 @media (max-width:960px) and (max-height:500px) and (orientation:landscape){
@@ -435,6 +438,34 @@ html.js footer:not(.bg-on){background:#0f1615}
   .flota-izq{width:64%}
   .flota-modelo{font-size:30px;margin-top:6px}
   .flota-datos{grid-template-columns:1fr 1fr;gap:8px 18px;padding-top:10px}
+}
+/* computadora: la carta se apoya justo encima del llavero (la argolla toca el borde de la carta, sin tapar el texto) */
+@media (min-width:861px){
+  .carta{top:auto;bottom:calc(min(22vh,210px) - 14px);margin-top:0}
+  .llave{height:min(22vh,210px);bottom:-14px;margin-left:calc(min(22vh,210px) * -.4103)}
+}
+@media (min-width:861px) and (max-height:960px){
+  .cuartos-cab{top:100px}
+  .cuartos-cab h2{font-size:clamp(30px,3.6vw,56px)}
+  .cuartos-cab p{margin-top:10px}
+  .carta-cuerpo img{aspect-ratio:2/1;object-fit:cover}
+}
+@media (min-width:861px) and (max-height:780px){
+  .carta-cuerpo img{aspect-ratio:3/1}
+}
+@media (min-width:861px) and (max-height:680px){
+  .carta-incluye{display:none}
+}
+/* las escenas fijas miden la pantalla grande (sin barra del navegador) para que nunca quede una franja negra abajo;
+   lo que va pegado abajo sube lo que ocupa la barra cuando se ve */
+:root{--barra:0px}
+@supports (height:100lvh){:root{--barra:calc(100lvh - 100svh)}}
+@media (max-width:860px) and (orientation:portrait){
+  .meta{bottom:calc(150px + var(--barra))}
+  .carta{bottom:calc(max(15vh,116px) + var(--barra))}
+  .llave{bottom:calc(4px + var(--barra))}
+  .flota-ficha{padding-bottom:calc(96px + var(--barra))}
+  .flota-bote{top:50svh}
 }
 </style>
 </head>
@@ -750,6 +781,8 @@ setTimeout(function(){
     return;
   }
   gsap.registerPlugin(ScrollTrigger);
+  /* telefono: la barra del navegador que aparece y se esconde no recalcula las animaciones (evita saltos al hacer scroll) */
+  ScrollTrigger.config({ignoreMobileResize: true});
 
   /* scroll suave (con la rueda y el trackpad; en el telefono queda el nativo) */
   if(window.Lenis){
@@ -813,7 +846,8 @@ setTimeout(function(){
       var q = gsap.utils.clamp(0, 1, (p - .40) / .22);
       q = q * q * (3 - 2 * q);
       /* en telefono la foto se recorta a los lados: se centra en la parte verde y la sala de la casa */
-      gsap.set(marFoto, {xPercent: innerWidth <= 860 ? -41 : -50, x: 0, transformOrigin: '50% 0%', scale: 1.18 - .18 * s,
+      /* telefono: el cielo se centra en la gaviota y la luna; al bajar a la casa se pasa al encuadre de la casa */
+      gsap.set(marFoto, {xPercent: innerWidth <= 860 ? -49 + 8 * q : -50, x: 0, transformOrigin: '50% 0%', scale: 1.18 - .18 * s,
         y: -q * Math.max(0, marFoto.offsetHeight - innerHeight)});
       /* ya frente a la casa: se acerca un poco y cae la tarde, luego la noche */
       var ss = function(a, b){ var t = gsap.utils.clamp(0, 1, (p - a) / (b - a)); return t * t * (3 - 2 * t); };
@@ -827,7 +861,9 @@ setTimeout(function(){
     }
   });
   var re;
-  addEventListener('resize', function(){ clearTimeout(re); re = setTimeout(function(){ medir(); ScrollTrigger.refresh(); }, 120); });
+  /* solo se recalcula si cambia el ancho (girar el telefono, cambiar la ventana), no por la barra del navegador */
+  var anchoPrev = innerWidth;
+  addEventListener('resize', function(){ if(innerWidth === anchoPrev) return; anchoPrev = innerWidth; clearTimeout(re); re = setTimeout(function(){ medir(); ScrollTrigger.refresh(); }, 120); });
 
   /* lancha: la misma secuencia del avion de Jesko, atada al scroll */
   var bote = document.getElementById('flotaBote');
@@ -874,7 +910,8 @@ setTimeout(function(){
       var sc = big + (1 - big) * achica;
       gsap.set(bote, {xPercent: movil() ? 0 : -50, yPercent: -50, y: (y - (1 - achica) * 20) + 'vh', scale: sc, transformOrigin: '50% 30%'});
       fondo.style.opacity = tramo(p, .1, .46);
-      var sale = tramo(p, .5, .64);
+      /* en el telefono las palabras se van mientras sube la lancha, para que no queden debajo de ella */
+      var sale = movil() ? tramo(p, .1, .26) : tramo(p, .5, .64);
       palabras.forEach(function(el){ el.style.opacity = 1 - sale; el.style.filter = 'blur(' + (sale * 14) + 'px)'; });
       ficha.style.opacity = tramo(p, .6, .74);
       bote.style.setProperty('--corte', (114 - tramo(p, .76, .96) * 128) + '%');
@@ -915,7 +952,7 @@ setTimeout(function(){
     pintarCuartos(0);
     /* el boton flotante de reservar se aparta para que se vea la llave */
     ScrollTrigger.create({trigger: '.cuartos', start: 'top 40%', end: 'bottom 60%',
-      onToggle: function(self){ document.getElementById('reservarBtn').classList.toggle('guardado', self.isActive); }});
+      onToggle: function(self){ document.getElementById('reservarBtn').classList.toggle('guardado', self.isActive); document.body.classList.toggle('en-cuartos', self.isActive); }});
     ScrollTrigger.create({trigger: '.cuartos', start: 'top top', end: 'bottom bottom', scrub: 1,
       onUpdate: function(self){ pintarCuartos(self.progress); }});
   }
@@ -946,9 +983,15 @@ setTimeout(function(){
   var nav = document.querySelector('.nav'), btn = document.getElementById('reservarBtn');
   /* se mira si alguna seccion clara esta bajo el menu (con dos vecinas, el orden de los avisos no importa) */
   var claras = ['.flota', '.cuartos', '.manifiesto', '.ficha', '.espacios', '.location'].map(function(sel){
-    return ScrollTrigger.create({trigger: sel, start: 'top 46%', end: 'bottom 46%', onToggle: function(){
+    /* el color cambia justo cuando la seccion pasa por debajo del menu */
+    return ScrollTrigger.create({trigger: sel, start: function(){ return 'top ' + nav.offsetHeight / 2 + 'px'; }, end: function(){ return 'bottom ' + nav.offsetHeight / 2 + 'px'; }, onToggle: function(){
       var on = claras.some(function(t){ return t && t.isActive; });
-      nav.classList.toggle('tinta', on); btn.classList.toggle('tinta', on); }});
+      nav.classList.toggle('tinta', on); }});
+  });
+  /* el boton de reservar mira lo que tiene detras abajo, no lo que hay bajo el menu */
+  var clarasBtn = ['.flota', '.cuartos', '.manifiesto', '.ficha', '.espacios', '.location'].map(function(sel){
+    return ScrollTrigger.create({trigger: sel, start: 'top bottom-=60', end: 'bottom bottom-=60', onToggle: function(){
+      btn.classList.toggle('tinta', clarasBtn.some(function(t){ return t && t.isActive; })); }});
   });
   ScrollTrigger.create({trigger: '.pedir', start: 'top 70%', end: function(){ return document.documentElement.scrollHeight + 2000; },
     onToggle: function(self){ btn.classList.toggle('guardado', self.isActive); }});
