@@ -467,6 +467,16 @@ html.js footer:not(.bg-on){background:#0f1615}
   .flota-ficha{padding-bottom:calc(96px + var(--barra))}
   .flota-bote{top:50svh}
 }
+/* portada: las frases van nitidas y caben a los lados de la ventana sin montarse en ella;
+   el hueco lateral se calcula con el ancho de la ventana (62svh de alto, proporcion 965/1649) */
+.frase .difusa{filter:none;opacity:1;color:rgba(255,248,237,.8)}
+@media (min-width:861px){
+  :root{--hueco:calc((100vw - 36.28svh) / 2 - var(--gut) - 28px)}
+  .frase{font-size:min(104px,calc(var(--hueco) / 8.1))}
+  .meta>div:first-child{max-width:var(--hueco)}
+  /* lo de abajo a la derecha no queda bajo el boton de Instagram */
+  .meta-der{width:min(430px,calc(var(--hueco) - max(0px,100px - var(--gut))));margin-right:max(0px,calc(100px - var(--gut)))}
+}
 </style>
 </head>
 <body>
