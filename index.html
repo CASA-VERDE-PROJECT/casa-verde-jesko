@@ -44,12 +44,11 @@ a{color:inherit;text-decoration:none}
 
 /* ---------- boton fijo ---------- */
 .reservar{position:fixed;z-index:70;left:50%;bottom:30px;transform:translateX(-50%);display:flex;align-items:center;gap:8px;transition:opacity .35s,transform .35s}
-.reservar span{background:var(--base);color:var(--ink);box-shadow:0 6px 26px rgba(0,0,0,.22);transition:background .4s,color .4s,transform .35s cubic-bezier(.2,.7,.3,1)}
+.reservar>span{background:var(--base);color:var(--ink);box-shadow:0 6px 26px rgba(0,0,0,.22);transition:background .4s,color .4s}
 .reservar .pill{border-radius:999px;padding:15px 30px;font-size:15px;font-weight:600}
 .reservar .ico{width:46px;height:46px;border-radius:50%;display:grid;place-items:center}
 .reservar .ico svg{width:18px;height:18px}
-.reservar:hover span{transform:translateY(-3px)}
-.reservar.tinta span{background:var(--ink);color:var(--base)}
+.reservar.tinta>span{background:var(--ink);color:var(--base)}
 .reservar.guardado{opacity:0;pointer-events:none;transform:translateX(-50%) translateY(14px)}
 
 /* ---------- hero: la pared con el ventanal ---------- */
@@ -212,11 +211,30 @@ a{color:inherit;text-decoration:none}
 .pedir h2{font-size:clamp(46px,7vw,124px);font-weight:500;letter-spacing:-.055em;line-height:.9;font-variation-settings:var(--ancho)}
 .pedir-fila{display:grid;grid-template-columns:1fr auto;gap:30px;align-items:end;margin-top:44px;padding-top:22px;border-top:1px solid rgba(255,248,237,.4)}
 .pedir-fila p{font-size:15px;line-height:1.55;max-width:46ch;color:rgba(255,248,237,.86)}
-.btn{display:inline-flex;align-items:center;gap:16px;background:var(--base);color:var(--ink);border-radius:999px;padding:17px 30px;font-size:15px;font-weight:600;transition:background .3s,color .3s}
-.btn:hover{background:var(--verde)}
+.btn{display:inline-flex;align-items:center;gap:16px;background:var(--base);color:var(--ink);border-radius:999px;padding:17px 30px;font-size:15px;font-weight:600;transition:color .45s}
 .pedir-btns{display:flex;flex-wrap:wrap;gap:12px}
 .btn-linea{background:transparent;color:var(--base);box-shadow:inset 0 0 0 1px rgba(255,248,237,.7)}
-.btn-linea:hover{background:var(--base);color:var(--ink)}
+/* ---------- efectos de botones (como Caraqueña Studio, sin la flecha) ----------
+   relleno que sube con borde curvo, texto que rueda hacia arriba, iman con el mouse y leve presion al hacer clic */
+.btn,.reservar .pill,.reservar .ico{position:relative;overflow:hidden;isolation:isolate}
+.btn::before,.reservar .pill::before,.reservar .ico::before{content:"";position:absolute;inset:0;z-index:-1;background:#00694f;transform:translateY(101%);border-radius:50% 50% 0 0;transition:transform .6s cubic-bezier(.7,0,.2,1),border-radius .6s cubic-bezier(.7,0,.2,1)}
+.btn-linea::before{background:var(--base)}
+.btn:active,.reservar:active .pill,.reservar:active .ico{scale:.96}
+.btn,.reservar .pill,.reservar .ico{transition:background .4s,color .45s,scale .25s ease}
+.roll{position:relative;display:inline-block;overflow:hidden;line-height:1.2;vertical-align:bottom}
+.roll>span{display:block;transition:transform .55s cubic-bezier(.7,0,.2,1)}
+.roll>span+span{position:absolute;left:0;top:100%}
+/* menu: el texto rueda y una raya verde crece de izquierda a derecha */
+.nav-links a,.nav-der a{position:relative;display:inline-block;padding:6px 0}
+.nav-gal{position:relative}
+.nav-links a::after,.nav-der a::after,.nav-gal::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--verde);transform:scaleX(0);transform-origin:right;transition:transform .45s cubic-bezier(.7,0,.2,1)}
+@media (hover:hover){
+  .btn:hover,.reservar:hover .pill,.reservar:hover .ico{color:#fff}
+  .btn-linea:hover{color:var(--ink)}
+  .btn:hover::before,.reservar:hover .pill::before,.reservar:hover .ico::before{transform:translateY(0);border-radius:0}
+  .btn:hover .roll>span,.reservar:hover .roll>span,.nav a:hover .roll>span{transform:translateY(-100%)}
+  .nav-links a:hover::after,.nav-der a:hover::after,.nav-gal:hover::after{transform:scaleX(1);transform-origin:left}
+}
 @media (max-width:600px){.pedir-btns{gap:10px}.pedir-btns .btn{padding:15px 20px;gap:10px;font-size:14px}}
 
 /* ---------- telefono ---------- */
@@ -775,6 +793,28 @@ setTimeout(function(){
   els.forEach(function(e){ io.observe(e); });
   /* respaldo: cuando la pagina ya cargo, se piden igual (por si se salta directo con un enlace) */
   addEventListener('load', function(){ setTimeout(function(){ els.forEach(function(e){ e.classList.add('bg-on'); }); }, 3000); });
+})();
+</script>
+<script>
+/* botones: texto que rueda (se duplica la palabra) e iman con el mouse, como en Caraqueña Studio */
+(function(){
+  document.querySelectorAll('.nav-links a, .nav-der a, .nav-gal, .btn, .reservar .pill').forEach(function(el){
+    var t = [].find.call(el.childNodes, function(n){ return n.nodeType === 3 && n.textContent.trim(); });
+    if(!t) return;
+    var txt = t.textContent.trim(), r = document.createElement('span');
+    r.className = 'roll';
+    r.innerHTML = '<span></span><span aria-hidden="true"></span>';
+    r.firstChild.textContent = txt; r.lastChild.textContent = txt;
+    el.replaceChild(r, t);
+  });
+  if(!window.gsap || !matchMedia('(hover: hover) and (pointer: fine)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.querySelectorAll('.nav-links a, .nav-der a, .btn, .reservar .pill, .reservar .ico').forEach(function(el){
+    el.addEventListener('mousemove', function(e){
+      var b = el.getBoundingClientRect();
+      gsap.to(el, {x: (e.clientX - b.left - b.width / 2) * .12, y: (e.clientY - b.top - b.height / 2) * .18, duration: .6, ease: 'power3.out'});
+    });
+    el.addEventListener('mouseleave', function(){ gsap.to(el, {x: 0, y: 0, duration: .7, ease: 'power3.out'}); });
+  });
 })();
 </script>
 </body>
