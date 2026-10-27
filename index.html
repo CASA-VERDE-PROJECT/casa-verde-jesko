@@ -427,6 +427,7 @@ setTimeout(function(){
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
 <script>
 (function(){
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -443,6 +444,21 @@ setTimeout(function(){
     return;
   }
   gsap.registerPlugin(ScrollTrigger);
+
+  /* scroll suave (con la rueda y el trackpad; en el telefono queda el nativo) */
+  if(window.Lenis){
+    var lenis = new Lenis({duration: 1.35, easing: function(t){ return Math.min(1, 1.001 - Math.pow(2, -10 * t)); }});
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(function(t){ lenis.raf(t * 1000); });
+    gsap.ticker.lagSmoothing(0);
+    document.querySelectorAll('a[href^="#"]').forEach(function(a){
+      a.addEventListener('click', function(e){
+        var id = a.getAttribute('href'), el = id.length > 1 && document.querySelector(id);
+        if(!el && id !== '#top') return;
+        e.preventDefault(); lenis.scrollTo(id === '#top' ? 0 : el);
+      });
+    });
+  }
 
   /* geometria del hueco medida del canal alfa de cada imagen (fraccion de la imagen) */
   /* ventana recortada (965x1649): vano 831x1466 en +69+107 */
@@ -481,7 +497,7 @@ setTimeout(function(){
   medir(); pintar(0);
 
   ScrollTrigger.create({
-    trigger: '.hero', start: 'top top', end: 'bottom bottom', scrub: .6,
+    trigger: '.hero', start: 'top top', end: 'bottom bottom', scrub: 1.2,
     onUpdate: function(self){
       var p = self.progress;
       var a = gsap.utils.clamp(0, 1, (p - .04) / .32);
@@ -494,10 +510,11 @@ setTimeout(function(){
       gsap.set(marFoto, {xPercent: innerWidth <= 860 ? -41 : -50, x: 0, transformOrigin: '50% 0%', scale: 1.18 - .18 * s,
         y: -q * Math.max(0, marFoto.offsetHeight - innerHeight)});
       /* ya frente a la casa: se acerca un poco y cae la tarde, luego la noche */
-      var z = gsap.utils.clamp(0, 1, (p - .60) / .12);
+      var ss = function(a, b){ var t = gsap.utils.clamp(0, 1, (p - a) / (b - a)); return t * t * (3 - 2 * t); };
+      var z = gsap.utils.clamp(0, 1, (p - .58) / .16);
       gsap.set(marZoom, {scale: 1 + (innerWidth <= 860 ? .26 : .13) * z * z * (3 - 2 * z)});
-      gsap.set(capaTarde, {opacity: gsap.utils.clamp(0, 1, (p - .72) / .1)});
-      gsap.set(capaNoche, {opacity: gsap.utils.clamp(0, 1, (p - .85) / .1)});
+      gsap.set(capaTarde, {opacity: ss(.68, .84)});
+      gsap.set(capaNoche, {opacity: ss(.80, .97)});
       var sale = gsap.utils.clamp(0, 1, (p - .03) / .26);
       gsap.set(tipo, {opacity: 1 - sale, filter: 'blur(' + (sale * 18) + 'px)'});
       gsap.set(meta, {opacity: 1 - sale, y: sale * 26});
