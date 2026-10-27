@@ -1117,7 +1117,9 @@ setTimeout(function(){
   }
   grupos.forEach(function(g){
     g.querySelectorAll('a').forEach(function(a){
+      /* con mouseover y mousemove la pildora reaparece aunque el puntero ya estuviera encima (por ejemplo, despues de hacer scroll) */
       a.addEventListener('mouseenter', function(){ hover = a; colocar(); });
+      a.addEventListener('mousemove', function(){ if(hover !== a){ hover = a; colocar(); } });
       a.addEventListener('focus', function(){ hover = a; colocar(); });
       a.addEventListener('blur', function(){ hover = null; colocar(); });
     });
@@ -1137,7 +1139,8 @@ setTimeout(function(){
     }, {rootMargin: '-45% 0px -50% 0px'});
     secs.forEach(function(s){ if(s) io.observe(s); });
   }
-  addEventListener('scroll', function(){ if(hover){ hover = null; colocar(); } }, {passive: true});
+  /* al hacer scroll solo se suelta si el puntero ya no esta sobre el enlace */
+  addEventListener('scroll', function(){ if(hover && !hover.matches(':hover')){ hover = null; colocar(); } }, {passive: true});
   addEventListener('resize', colocar);
 })();
 </script>
