@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..700&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="img/ventana.jpg">
+<script>document.documentElement.classList.add('js')</script>
 <link href="fonts/fonts.css" rel="stylesheet">
 <style>
 :root{
@@ -165,7 +166,7 @@ a{color:inherit;text-decoration:none}
   .frase .difusa{filter:none}
 }
 /* ---------- footer (traido del proyecto viejo, tal cual) ---------- */
-footer{background:linear-gradient(rgba(0,0,0,.60),rgba(0,0,0,.65)),url('IMG_0861.JPG') center center/cover no-repeat;color:#FFFFFF;padding:52px 24px 32px;text-align:center;font-family:'Jost',system-ui,sans-serif}
+footer{background:linear-gradient(rgba(0,0,0,.60),rgba(0,0,0,.65)),url('img/footer-fondo.jpg') center center/cover no-repeat;color:#FFFFFF;padding:52px 24px 32px;text-align:center;font-family:'Jost',system-ui,sans-serif}
 .foot-in{max-width:800px;margin:0 auto}
 .foot-logo{margin-bottom:2px}
 .foot-logo img{height:80px;width:auto;display:block;filter:invert(1);margin:0 auto}
@@ -226,6 +227,10 @@ footer{background:linear-gradient(rgba(0,0,0,.60),rgba(0,0,0,.65)),url('IMG_0861
 /* el texto no se puede seleccionar (pedido del usuario); los campos de formulario si */
 html{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 input,textarea,select{-webkit-user-select:text;user-select:text}
+
+/* fondos de las secciones de abajo: se piden al acercarse (ver script "fondos diferidos") */
+html.js .cen-foto:not(.bg-on),html.js .pedir-foto:not(.bg-on){background-image:none}
+html.js footer:not(.bg-on){background:#0f1615}
 </style>
 </head>
 <body>
@@ -377,7 +382,7 @@ setTimeout(function(){
 <footer>
   <div class="foot-in">
     <div class="foot-logo">
-      <img src="logo.png" alt="Casa Verde">
+      <img src="logo.png" alt="Casa Verde" width="800" height="500" loading="lazy" decoding="async">
     </div>
     <p class="foot-sub">Gran Roque · Los Roques · Venezuela</p>
     <div class="foot-div" aria-hidden="true"></div>
@@ -530,6 +535,19 @@ setTimeout(function(){
     .to(trazos, {strokeDashoffset: 0, duration: 1.4, stagger: .06, ease: 'power2.inOut'}, .1)
     .from('.pre-word', {opacity: 0, letterSpacing: '.9em', duration: .7, ease: 'power2.out'}, 1.5)
     .to(pre, {yPercent: -100, duration: .75, ease: 'power4.inOut'}, 2.55);
+})();
+</script>
+<script>
+/* fondos diferidos: la foto de la lancha, la de reserva y la del footer se piden poco antes de llegar */
+(function(){
+  var els = document.querySelectorAll('.cen-foto, .pedir-foto, footer');
+  if (!('IntersectionObserver' in window)) { els.forEach(function(e){ e.classList.add('bg-on'); }); return; }
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('bg-on'); io.unobserve(e.target); } });
+  }, { rootMargin: '1200px 0px' });
+  els.forEach(function(e){ io.observe(e); });
+  /* respaldo: cuando la pagina ya cargo, se piden igual (por si se salta directo con un enlace) */
+  addEventListener('load', function(){ setTimeout(function(){ els.forEach(function(e){ e.classList.add('bg-on'); }); }, 3000); });
 })();
 </script>
 </body>
