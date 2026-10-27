@@ -123,9 +123,6 @@ a{color:inherit;text-decoration:none}
 .frase.izq{left:var(--gut);top:15vh}
 .frase.der{right:var(--gut);top:56vh;text-align:right}
 .frase .difusa{display:block;filter:blur(7px);opacity:.8}
-/* palabras de la portada: cada letra sube desde una mascara; la linea difusa "respira" */
-.frase .ln{display:block;overflow:hidden;padding:0 .04em .14em;margin:0 -.04em -.14em}
-.frase .ch{display:inline-block;will-change:transform}
 .meta{position:absolute;z-index:5;left:0;right:0;bottom:100px;display:grid;grid-template-columns:1fr 1fr;gap:40px;padding:0 var(--gut);align-items:end}
 .meta h2{font-size:clamp(18px,1.6vw,26px);font-weight:600;line-height:1.16;letter-spacing:-.02em;font-variation-settings:var(--ancho)}
 .regla{width:38px;height:1px;background:rgba(255,248,237,.5);margin:20px 0 18px}
@@ -659,58 +656,9 @@ setTimeout(function(){
       gsap.set(capaNoche, {opacity: ss(.80, .97)});
       var sale = gsap.utils.clamp(0, 1, (p - .03) / .26);
       gsap.set(tipo, {opacity: 1 - sale, filter: 'blur(' + (sale * 18) + 'px)'});
-      gsap.set('.frase.izq', {xPercent: -sale * 14}); gsap.set('.frase.der', {xPercent: sale * 14});
       gsap.set(meta, {opacity: 1 - sale, y: sale * 26});
     }
   });
-
-  /* entrada premium de las palabras de la portada: letras que suben con giro, la linea difusa se enfoca
-     desde muy borrosa y abierta, y el bloque de abajo se dibuja (reglas que crecen, texto que sube) */
-  (function(){
-    var frases = gsap.utils.toArray('.frase');
-    frases.forEach(function(f){
-      var t = f.firstChild;
-      if(!t || t.nodeType !== 3) return;
-      var dd = f.querySelector('.difusa');
-      if(f.tagName === 'H1') f.setAttribute('aria-label', t.textContent.trim() + ' ' + (dd ? dd.textContent : ''));
-      var ln = document.createElement('span'); ln.className = 'ln'; ln.setAttribute('aria-hidden', 'true');
-      ln.innerHTML = t.textContent.trim().split('').map(function(c){ return '<span class="ch">' + c + '</span>'; }).join('');
-      f.replaceChild(ln, t);
-      var d = f.querySelector('.difusa'); if(d && f.tagName === 'H1') d.setAttribute('aria-hidden', 'true');
-    });
-    var izq = document.querySelector('.frase.izq'), der = document.querySelector('.frase.der');
-    var tl = gsap.timeline({paused: true, defaults: {ease: 'power4.out'}});
-    [izq, der].forEach(function(f, k){
-      if(!f || getComputedStyle(f).display === 'none') return;
-      var o = k * .28;
-      tl.from(f.querySelectorAll('.ch'), {yPercent: 118, rotate: 7, transformOrigin: '0% 100%', duration: 1.25, stagger: .038}, o)
-        .from(f.querySelector('.difusa'), {opacity: 0, filter: 'blur(26px)', letterSpacing: '.28em', y: 14, duration: 1.8, ease: 'power3.out', clearProps: 'letterSpacing,y'}, o + .35);
-    });
-    tl.from('.meta h2', {y: 26, opacity: 0, duration: 1.1, ease: 'power3.out'}, .55)
-      .from('.meta .regla', {scaleX: 0, transformOrigin: '0% 50%', duration: 1, ease: 'power3.inOut'}, .75)
-      .from('.meta p', {y: 18, opacity: 0, duration: 1, ease: 'power3.out'}, .85)
-      .from('.meta-linea', {scaleX: 0, transformOrigin: '100% 50%', duration: 1.2, ease: 'power3.inOut'}, .7)
-      .from('.meta-pie span', {y: 12, opacity: 0, duration: .9, stagger: .1, ease: 'power3.out'}, 1);
-    /* ya quietas, la linea difusa respira entre desenfoque y foco (solo escritorio) */
-    if(innerWidth > 860) tl.add(function(){
-      gsap.to('.frase .difusa', {filter: 'blur(3px)', opacity: .95, duration: 3.4, ease: 'sine.inOut', yoyo: true, repeat: -1, stagger: 1.1});
-    });
-    var hecho = false;
-    window.cvHeroIntro = function(){ if(hecho) return; hecho = true; tl.play(0); };
-    if(!document.getElementById('preloader')) window.cvHeroIntro();
-    setTimeout(window.cvHeroIntro, 4300);   /* respaldo, igual que el de la pantalla de carga */
-
-    /* con el mouse, las dos frases se mueven apenas en sentidos opuestos (profundidad) */
-    if(matchMedia('(hover: hover) and (pointer: fine)').matches && izq && der){
-      var qx = [gsap.quickTo(izq, 'x', {duration: 1.2, ease: 'power3.out'}), gsap.quickTo(der, 'x', {duration: 1.2, ease: 'power3.out'})];
-      var qy = [gsap.quickTo(izq, 'y', {duration: 1.2, ease: 'power3.out'}), gsap.quickTo(der, 'y', {duration: 1.2, ease: 'power3.out'})];
-      addEventListener('mousemove', function(e){
-        if(scrollY > innerHeight) return;
-        var mx = e.clientX / innerWidth - .5, my = e.clientY / innerHeight - .5;
-        qx[0](mx * -18); qy[0](my * -10); qx[1](mx * 18); qy[1](my * 10);
-      }, {passive: true});
-    }
-  })();
   var re;
   addEventListener('resize', function(){ clearTimeout(re); re = setTimeout(function(){ medir(); ScrollTrigger.refresh(); }, 120); });
 
@@ -805,7 +753,7 @@ setTimeout(function(){
 (function(){
   var pre = document.getElementById('preloader');
   if(!pre) return;
-  if(!window.gsap || matchMedia('(prefers-reduced-motion: reduce)').matches){ pre.remove(); if(window.cvHeroIntro) window.cvHeroIntro(); return; }
+  if(!window.gsap || matchMedia('(prefers-reduced-motion: reduce)').matches){ pre.remove(); return; }
   document.body.style.overflow = 'hidden';
   var trazos = pre.querySelectorAll('svg path');
   trazos.forEach(function(p){ var L = p.getTotalLength(); p.style.strokeDasharray = L; p.style.strokeDashoffset = L; });
@@ -813,8 +761,7 @@ setTimeout(function(){
     .fromTo('.pre-stage', {rotateX: 34, rotateY: -16, scale: .86, transformPerspective: 900}, {rotateX: 0, rotateY: 0, scale: 1, duration: 2.1, ease: 'power2.inOut'}, 0)
     .to(trazos, {strokeDashoffset: 0, duration: 1.4, stagger: .06, ease: 'power2.inOut'}, .1)
     .from('.pre-word', {opacity: 0, letterSpacing: '.9em', duration: .7, ease: 'power2.out'}, 1.5)
-    .to(pre, {yPercent: -100, duration: .75, ease: 'power4.inOut'}, 2.55)
-    .call(function(){ if(window.cvHeroIntro) window.cvHeroIntro(); }, null, 2.75);
+    .to(pre, {yPercent: -100, duration: .75, ease: 'power4.inOut'}, 2.55);
 })();
 </script>
 <script>
