@@ -232,6 +232,12 @@
       transition: transform .35s var(--ease);
     }
     .ig-float:hover { transform: scale(1.08); }
+    /* la misma onda que en la página principal, en los dos botones */
+    .wa-float::before { content: ''; position: absolute; inset: -5px; border-radius: 50%; background: rgba(0,194,146,.3); animation: waPulse 2.6s ease-out infinite; }
+    .ig-float { animation: igPulse 2.6s ease-out infinite; }
+    @keyframes igPulse { 0% { box-shadow: 0 6px 22px rgba(0,0,0,.25), 0 0 0 0 rgba(0,194,146,.45); } 100% { box-shadow: 0 6px 22px rgba(0,0,0,.25), 0 0 0 22px rgba(0,194,146,0); } }
+    @keyframes waPulse { 0% { transform: scale(1); opacity: .8; } 100% { transform: scale(1.65); opacity: 0; } }
+    @media (prefers-reduced-motion: reduce) { .wa-float::before { animation: none; opacity: 0; } .ig-float { animation: none; } }
 
     [data-t] { transition: opacity .22s ease; }
     .switching [data-t] { opacity: 0 !important; }
