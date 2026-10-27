@@ -390,6 +390,52 @@ input,textarea,select{-webkit-user-select:text;user-select:text}
 /* fondos de las secciones de abajo: se piden al acercarse (ver script "fondos diferidos") */
 html.js .cen-foto:not(.bg-on),html.js .pedir-foto:not(.bg-on){background-image:none}
 html.js footer:not(.bg-on){background:#0f1615}
+/* ---------- ajustes finos para telefono ---------- */
+.reservar .pill{white-space:nowrap}
+@media (max-width:860px){
+  /* portada: el bloque de abajo sube para no quedar bajo los botones flotantes */
+  .meta{bottom:150px}
+  .meta-pie{flex-direction:column;gap:6px}
+  .meta-pie span:last-child{text-align:left}
+  .manifiesto .pie{flex-direction:column;gap:6px}
+  .flota-logo.chico .fl-word{letter-spacing:.3em;text-indent:.3em}
+  /* cuartos: la carta se apoya sobre el llavero y nunca toca el titulo; foto mas baja */
+  .carta{top:auto;bottom:15vh;margin-top:0;width:min(400px,80vw);margin-left:calc(min(400px,80vw) / -2)}
+  .carta-cinta{padding:12px 18px;font-size:16px}
+  .carta-cuerpo{padding:16px 14px 14px}
+  .carta-cuerpo img{aspect-ratio:16/9;object-fit:cover}
+  .carta-datos{margin-top:12px}
+  .llave{height:min(18vh,150px);bottom:-2vh;margin-left:calc(min(18vh,150px) * -.4103)}
+}
+@media (max-width:860px) and (max-height:620px){
+  .carta-cuerpo img{aspect-ratio:2/1}
+  .carta-incluye li:last-child{display:none}
+}
+/* telefono: los flotantes se apartan donde ya hay botones de WhatsApp e Instagram (reserva y pie) */
+@media (max-width:768px){
+  .ig-float,.wa-float{transition:opacity .35s,transform .35s cubic-bezier(.25,.1,.25,1)}
+  body.sin-flotantes .ig-float,body.sin-flotantes .wa-float{opacity:0;pointer-events:none;transform:translateY(14px)}
+}
+/* telefono acostado (pantalla muy baja): se aligera cada escena para que nada se monte */
+@media (max-width:960px) and (max-height:500px) and (orientation:landscape){
+  .meta{bottom:24px;grid-template-columns:1fr 1fr;gap:24px;align-items:end}
+  .meta p,.meta .regla{display:none}
+  .meta-der{justify-self:end;width:min(360px,40vw);margin-right:64px}
+  .cuartos-cab{top:64px}
+  .cuartos-cab h2{font-size:26px}
+  .cuartos-cab h2 br{display:none}
+  .cuartos-cab p{display:none}
+  .carta{bottom:12vh;width:min(360px,52vw);margin-left:calc(min(360px,52vw) / -2)}
+  .carta-cuerpo img{display:none}
+  .carta-cinta{padding:9px 16px;font-size:14px}
+  .carta-cuerpo{padding:14px 12px 12px}
+  .carta-incluye li:last-child{display:list-item}
+  .llave{height:24vh;bottom:-4vh;margin-left:calc(24vh * -.4103)}
+  .flota-ficha{padding:76px 20px 20px}
+  .flota-izq{width:64%}
+  .flota-modelo{font-size:30px;margin-top:6px}
+  .flota-datos{grid-template-columns:1fr 1fr;gap:8px 18px;padding-top:10px}
+}
 </style>
 </head>
 <body>
@@ -538,7 +584,7 @@ setTimeout(function(){
   <section class="cuartos" id="cuartos" aria-labelledby="t-cuartos">
     <div class="cuartos-escena">
       <div class="cuartos-cab">
-        <h2 id="t-cuartos">Tres cuartos,<br>una sola llave</h2>
+        <h2 id="t-cuartos">Tres cuartos, <br>una sola llave</h2>
         <p>Hasta 10 huéspedes en la casa</p>
       </div>
       <article class="carta" data-i="0">
@@ -839,7 +885,7 @@ setTimeout(function(){
         flVerdes.forEach(function(t){ t.style.fill = 'rgba(0,194,146,' + tramo(p, .92, .99) * .9 + ')'; });
         gsap.set(flStage, {rotateX: 34 * (1 - dib), rotateY: -16 * (1 - dib), scale: .86 + .14 * dib, transformPerspective: 900});
         var w = tramo(p, .9, .99);
-        flWord.style.opacity = w; flWord.style.letterSpacing = (.9 - .4 * w) + 'em';
+        flWord.style.opacity = w; flWord.style.letterSpacing = (movil() ? .55 - .27 * w : .9 - .4 * w) + 'em';
       }
     };
     pintarFlota(0);
@@ -898,9 +944,11 @@ setTimeout(function(){
 
   /* nav y boton cambian de tinta sobre lo claro; el boton se guarda al llegar a reservar */
   var nav = document.querySelector('.nav'), btn = document.getElementById('reservarBtn');
-  ['.flota', '.cuartos', '.manifiesto', '.ficha', '.espacios', '.location'].forEach(function(sel){
-    ScrollTrigger.create({trigger: sel, start: 'top 46%', end: 'bottom 46%', onToggle: function(self){
-      nav.classList.toggle('tinta', self.isActive); btn.classList.toggle('tinta', self.isActive); }});
+  /* se mira si alguna seccion clara esta bajo el menu (con dos vecinas, el orden de los avisos no importa) */
+  var claras = ['.flota', '.cuartos', '.manifiesto', '.ficha', '.espacios', '.location'].map(function(sel){
+    return ScrollTrigger.create({trigger: sel, start: 'top 46%', end: 'bottom 46%', onToggle: function(){
+      var on = claras.some(function(t){ return t && t.isActive; });
+      nav.classList.toggle('tinta', on); btn.classList.toggle('tinta', on); }});
   });
   ScrollTrigger.create({trigger: '.pedir', start: 'top 70%', end: function(){ return document.documentElement.scrollHeight + 2000; },
     onToggle: function(self){ btn.classList.toggle('guardado', self.isActive); }});
@@ -1026,6 +1074,18 @@ setTimeout(function(){
     var io = new IntersectionObserver(function(es){ if(es[0].isIntersecting){ cargar(1); cargar(-1); io.disconnect(); } }, {rootMargin: '400px 0px'});
     io.observe(fig);
   }
+})();
+</script>
+<script>
+/* telefono: los botones flotantes se esconden sobre la reserva y el pie, que ya tienen WhatsApp e Instagram */
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  var vistos = new Set();
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting) vistos.add(e.target); else vistos.delete(e.target); });
+    document.body.classList.toggle('sin-flotantes', vistos.size > 0);
+  }, {rootMargin: '0px 0px -40% 0px'});
+  document.querySelectorAll('.pedir, footer').forEach(function(el){ io.observe(el); });
 })();
 </script>
 </body>
