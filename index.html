@@ -137,6 +137,28 @@ a{color:inherit;text-decoration:none}
 .manifiesto .pal{display:inline-block;opacity:.12;filter:blur(6px)}
 .manifiesto .pie{display:flex;justify-content:space-between;gap:20px;margin-top:clamp(60px,10vh,110px);padding-top:18px;border-top:1px solid rgba(49,39,38,.2);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--taupe)}
 
+/* ---------- cuartos: las cartas pasan sobre la llave, como las de Mana sobre la lata ---------- */
+.cuartos{position:relative;height:460vh;background:#fff8ed;color:var(--ink)}
+.cuartos-escena{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
+.cuartos-cab{position:absolute;left:0;right:0;top:clamp(96px,14vh,140px);text-align:center;z-index:1}
+.cuartos-cab h2{font-size:clamp(34px,4.4vw,72px);font-weight:500;letter-spacing:-.045em;line-height:.98;font-variation-settings:var(--ancho)}
+.cuartos-cab p{margin-top:16px;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--taupe)}
+.carta{position:absolute;left:50%;top:calc(50% + 6vh);width:min(380px,78vw);margin-left:calc(min(380px,78vw) / -2);margin-top:-190px;z-index:3;will-change:transform}
+.carta-cinta{position:relative;z-index:2;background:#00694f;color:#fff;border-radius:18px;padding:16px 22px;text-align:center;font-size:clamp(18px,1.7vw,24px);font-weight:500;letter-spacing:.02em;text-transform:uppercase;font-variation-settings:var(--ancho);transform:rotate(-2deg);box-shadow:0 10px 30px rgba(0,60,45,.18)}
+.carta-cuerpo{background:#fff;border-radius:20px;margin-top:-12px;padding:22px 18px 18px;box-shadow:0 30px 60px rgba(49,39,38,.14)}
+.carta-cuerpo img{width:100%;height:auto;border-radius:12px;display:block}
+.carta-datos{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+.carta-datos div{display:flex;flex-direction:column;gap:4px}
+.carta-datos .va{font-size:14px;font-weight:600;letter-spacing:-.01em}
+.carta-datos .personas{color:#00694f}
+.llave{position:absolute;left:50%;bottom:-7vh;height:min(34vh,320px);width:auto;transform-origin:50% 4%;margin-left:calc(min(34vh,320px) * -.0861);z-index:4;filter:drop-shadow(0 18px 24px rgba(49,39,38,.25));will-change:transform}
+@media (max-width:860px){
+  .cuartos{height:420vh}
+  .carta{margin-top:-170px}
+  .carta-datos{gap:6px}
+  .carta-datos .va{font-size:12px}
+  .llave{height:min(24vh,200px);bottom:-5vh;margin-left:calc(min(24vh,200px) * -.0861)}
+}
 /* ---------- cenital ---------- */
 .cenital{height:220vh;position:relative;background:var(--ink-deep)}
 .cenital .escena{display:grid;place-items:center}
@@ -328,7 +350,7 @@ setTimeout(function(){
 </script>
 
 <nav class="nav" aria-label="Principal">
-  <div class="nav-links"><a href="#casa">La casa</a><a href="#lancha">Lancha</a><a href="#espacios">Espacios</a><a href="galeria.html">Galería</a></div>
+  <div class="nav-links"><a href="#casa">La casa</a><a href="#la-lancha">Lancha</a><a href="#espacios">Espacios</a><a href="galeria.html">Galería</a></div>
   <a class="nav-mark" href="#top"><img src="img/logo-casa-verde.png" alt="Casa Verde"></a>
   <div class="nav-der"><span>Gran Roque, Los Roques</span><a href="#reservar">Reservar</a></div>
   <a class="nav-gal" href="galeria.html">Galería</a>
@@ -409,13 +431,34 @@ setTimeout(function(){
     <div class="pie"><span>Casa Verde</span><span>Una casa de La Capital del Cielo</span></div>
   </section>
 
-  <section class="cenital" id="lancha" aria-label="La lancha de la casa">
-    <div class="escena">
-      <div class="cen-foto" id="cenFoto" role="img" aria-label="Vista desde arriba de la lancha sobre agua turquesa"></div>
-      <div class="palabra izq">Lancha</div>
-      <div class="palabra der">propia</div>
-      <div class="cen-sub">150 HP,<br>capitán y marinero,<br>a tu ritmo</div>
-      <div class="cen-ficha"><div><span>Capitán</span><span>Incluido</span></div><div><span>Marinero</span><span>Incluido</span></div></div>
+  <section class="cuartos" id="cuartos" aria-labelledby="t-cuartos">
+    <div class="cuartos-escena">
+      <div class="cuartos-cab">
+        <h2 id="t-cuartos">Tres cuartos,<br>una sola llave</h2>
+        <p>Hasta 10 huéspedes en la casa</p>
+      </div>
+      <article class="carta" data-i="0">
+        <div class="carta-cinta">Cuarto principal</div>
+        <div class="carta-cuerpo">
+          <img src="img/cuartos/cuarto-1.jpg" width="900" height="700" alt="Cuarto principal con cabecero azul, cama grande y televisor" loading="lazy">
+          <div class="carta-datos"><div><span class="et">Cama</span><span class="va">Matrimonial</span></div><div><span class="et">Baño</span><span class="va">Privado</span></div><div><span class="et">Personas</span><span class="va personas" data-cuarto="1">Por confirmar</span></div></div>
+        </div>
+      </article>
+      <article class="carta" data-i="1">
+        <div class="carta-cinta">Cuarto dos</div>
+        <div class="carta-cuerpo">
+          <img src="img/cuartos/cuarto-2.jpg" width="900" height="700" alt="Cuarto con cabecero verde agua y cojines de langosta" loading="lazy">
+          <div class="carta-datos"><div><span class="et">Cama</span><span class="va">Matrimonial</span></div><div><span class="et">Aire</span><span class="va">Acondicionado</span></div><div><span class="et">Personas</span><span class="va personas" data-cuarto="2">Por confirmar</span></div></div>
+        </div>
+      </article>
+      <article class="carta" data-i="2">
+        <div class="carta-cinta">Cuarto tres</div>
+        <div class="carta-cuerpo">
+          <img src="img/cuartos/cuarto-3.jpg" width="900" height="700" alt="Cuarto con litera blanca" loading="lazy">
+          <div class="carta-datos"><div><span class="et">Cama</span><span class="va">Litera</span></div><div><span class="et">Aire</span><span class="va">Acondicionado</span></div><div><span class="et">Personas</span><span class="va personas" data-cuarto="3">Por confirmar</span></div></div>
+        </div>
+      </article>
+      <img class="llave" id="llave" src="img/llave.webp" width="155" height="900" alt="" aria-hidden="true">
     </div>
   </section>
 
@@ -637,6 +680,33 @@ setTimeout(function(){
       onUpdate: function(self){ pintarFlota(self.progress); }});
   }
 
+  /* cuartos: cada carta entra por la derecha girando, pasa por el centro sobre la llave y sale por la izquierda */
+  var cartas = gsap.utils.toArray('.carta'), llave = document.getElementById('llave');
+  if(cartas.length){
+    var paso = function(p, a, b){ var t = gsap.utils.clamp(0, 1, (p - a) / (b - a)); return t * t * (3 - 2 * t); };
+    var pintarCuartos = function(p){
+      var n = cartas.length, tramoC = 1 / n;
+      cartas.forEach(function(c, i){
+        var a = i * tramoC, entra = paso(p, a - tramoC * .55, a + tramoC * .35), sale = paso(p, a + tramoC * .75, a + tramoC * 1.45);
+        if(i === n - 1) sale = 0;            /* el ultimo cuarto se queda */
+        var fuera = (innerWidth / 2 + c.offsetWidth * .75) / innerWidth * 100;
+        var x = (1 - entra) * fuera - sale * fuera, r = (1 - entra) * 14 - sale * 12 + (entra * (1 - sale)) * (i % 2 ? 2 : -2);
+        gsap.set(c, {x: x + 'vw', y: (1 - entra) * 8 + sale * 6 + 'vh', rotation: r, zIndex: 3 + i});
+      });
+      /* la llave se mece cada vez que pasa una carta y al final gira, como si abriera */
+      var meneo = Math.sin(p * n * Math.PI * 2) * 7 * (1 - paso(p, .82, .95));
+      /* al final gira un cuarto de vuelta, como cuando la llave abre la puerta */
+      var abre = paso(p, .86, 1);
+      gsap.set(llave, {rotation: meneo, scaleX: Math.cos(abre * Math.PI / 2) * .85 + .15, y: -abre * 30});
+    };
+    pintarCuartos(0);
+    /* el boton flotante de reservar se aparta para que se vea la llave */
+    ScrollTrigger.create({trigger: '.cuartos', start: 'top 40%', end: 'bottom 60%',
+      onToggle: function(self){ document.getElementById('reservarBtn').classList.toggle('guardado', self.isActive); }});
+    ScrollTrigger.create({trigger: '.cuartos', start: 'top top', end: 'bottom bottom', scrub: 1,
+      onUpdate: function(self){ pintarCuartos(self.progress); }});
+  }
+
   /* manifiesto: sale del desenfoque palabra por palabra */
   var mt = document.getElementById('manif');
   mt.innerHTML = mt.textContent.trim().split(/\s+/).map(function(w){ return '<span class="pal">' + w + '</span>'; }).join(' ');
@@ -661,7 +731,7 @@ setTimeout(function(){
 
   /* nav y boton cambian de tinta sobre lo claro; el boton se guarda al llegar a reservar */
   var nav = document.querySelector('.nav'), btn = document.getElementById('reservarBtn');
-  ['.flota', '.manifiesto', '.ficha', '.espacios', '.location'].forEach(function(sel){
+  ['.flota', '.cuartos', '.manifiesto', '.ficha', '.espacios', '.location'].forEach(function(sel){
     ScrollTrigger.create({trigger: sel, start: 'top 46%', end: 'bottom 46%', onToggle: function(self){
       nav.classList.toggle('tinta', self.isActive); btn.classList.toggle('tinta', self.isActive); }});
   });
