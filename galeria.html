@@ -192,14 +192,14 @@
     /* efectos de botones como Caraqueña Studio (sin flecha): relleno que sube con borde curvo y texto que rueda.
        El duplicado del texto es una sombra, así sobrevive al cambio de idioma */
     .foot-back { position: relative; overflow: hidden; isolation: isolate; transition: color .45s, border-color .45s, scale .25s ease; }
-    .foot-back::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--verde-dk); transform: translateY(101%); border-radius: 50% 50% 0 0; transition: transform .6s cubic-bezier(.7,0,.2,1), border-radius .6s cubic-bezier(.7,0,.2,1); }
+    .foot-back::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--verde); transform: translateY(101%); border-radius: 50% 50% 0 0; transition: transform .6s cubic-bezier(.7,0,.2,1), border-radius .6s cubic-bezier(.7,0,.2,1); }
     .foot-back:active { scale: .96; }
     .roll { display: inline-block; overflow: hidden; line-height: 1.3; vertical-align: bottom; }
     .roll > span { display: block; text-shadow: 0 1.3em currentColor; transition: transform .55s cubic-bezier(.7,0,.2,1); }
     .bar-back { position: relative; padding: 6px 0; }
     .bar-back::after { content: ""; position: absolute; left: 25px; right: 0; bottom: 0; height: 1px; background: var(--verde); transform: scaleX(0); transform-origin: right; transition: transform .45s cubic-bezier(.7,0,.2,1); }
     @media (hover: hover) {
-      .foot-back:hover { border-color: var(--verde-dk); }
+      .foot-back:hover { border-color: var(--verde); }
       .foot-back:hover::before { transform: translateY(0); border-radius: 0; }
       .foot-back:hover .roll > span, .bar-back:hover .roll > span { transform: translateY(-1.3em); }
       .bar-back:hover::after { transform: scaleX(1); transform-origin: left; }
@@ -559,7 +559,7 @@ input,textarea,select{-webkit-user-select:text;user-select:text}
 <footer>
   <img src="logo.png" alt="Casa Verde">
   <p>Gran Roque · Los Roques · Venezuela</p>
-  <a href="index.html" class="foot-back"><span class="roll"><span data-t="back_home">← Volver a la página principal</span></span></a>
+  <a href="index.html" class="foot-back"><span class="roll"><span data-t="back_home">Volver a la página principal</span></span></a>
   <ul class="foot-legal">
     <li><a href="terminos.html" data-t="foot_terms">Términos y condiciones</a></li>
     <li><a href="privacidad.html" data-t="foot_priv">Privacidad</a></li>
@@ -589,7 +589,7 @@ const T = {
   lbl:       { es:'Galería',               en:'Gallery' },
   title:     { es:'Así se vive <em>el paraíso</em>', en:'This is how <em>paradise</em> feels' },
   hint:      { es:'Desliza para explorar', en:'Scroll to explore' },
-  back_home: { es:'← Volver a la página principal', en:'← Back to the main page' },
+  back_home: { es:'Volver a la página principal', en:'Back to the main page' },
   q1:  { es:'Blanco como la arena,<br><em>verde como el mar</em>', en:'White as the sand,<br><em>green as the sea</em>' },
   q2:  { es:'Y al final del día,<br><em>el cielo hace el resto</em>', en:'And at the end of the day,<br><em>the sky does the rest</em>' },
   n01: { es:'Terraza desde la playa', en:'Terrace from the beach' },

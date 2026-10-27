@@ -216,11 +216,10 @@ a{color:inherit;text-decoration:none}
 .btn-linea{background:transparent;color:var(--base);box-shadow:inset 0 0 0 1px rgba(255,248,237,.7)}
 /* ---------- efectos de botones (como Caraqueña Studio, sin la flecha) ----------
    relleno que sube con borde curvo, texto que rueda hacia arriba, iman con el mouse y leve presion al hacer clic */
-.btn,.reservar .pill,.reservar .ico{position:relative;overflow:hidden;isolation:isolate}
-.btn::before,.reservar .pill::before,.reservar .ico::before{content:"";position:absolute;inset:0;z-index:-1;background:#00694f;transform:translateY(101%);border-radius:50% 50% 0 0;transition:transform .6s cubic-bezier(.7,0,.2,1),border-radius .6s cubic-bezier(.7,0,.2,1)}
-.btn-linea::before{background:var(--base)}
-.btn:active,.reservar:active .pill,.reservar:active .ico{scale:.96}
-.btn,.reservar .pill,.reservar .ico{transition:background .4s,color .45s,scale .25s ease}
+.btn,.reservar .pill{position:relative;overflow:hidden;isolation:isolate}
+.btn::before,.reservar .pill::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--verde);transform:translateY(101%);border-radius:50% 50% 0 0;transition:transform .6s cubic-bezier(.7,0,.2,1),border-radius .6s cubic-bezier(.7,0,.2,1)}
+.btn:active,.reservar:active .pill{scale:.96}
+.btn,.reservar .pill{transition:background .4s,color .45s,scale .25s ease}
 .roll{position:relative;display:inline-block;overflow:hidden;line-height:1.2;vertical-align:bottom}
 .roll>span{display:block;transition:transform .55s cubic-bezier(.7,0,.2,1)}
 .roll>span+span{position:absolute;left:0;top:100%}
@@ -229,9 +228,8 @@ a{color:inherit;text-decoration:none}
 .nav-gal{position:relative}
 .nav-links a::after,.nav-der a::after,.nav-gal::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--verde);transform:scaleX(0);transform-origin:right;transition:transform .45s cubic-bezier(.7,0,.2,1)}
 @media (hover:hover){
-  .btn:hover,.reservar:hover .pill,.reservar:hover .ico{color:#fff}
-  .btn-linea:hover{color:var(--ink)}
-  .btn:hover::before,.reservar:hover .pill::before,.reservar:hover .ico::before{transform:translateY(0);border-radius:0}
+  .btn:hover,.reservar:hover .pill{color:#fff}
+  .btn:hover::before,.reservar:hover .pill::before{transform:translateY(0);border-radius:0}
   .btn:hover .roll>span,.reservar:hover .roll>span,.nav a:hover .roll>span{transform:translateY(-100%)}
   .nav-links a:hover::after,.nav-der a:hover::after,.nav-gal:hover::after{transform:scaleX(1);transform-origin:left}
 }
@@ -380,7 +378,6 @@ setTimeout(function(){
 
 <a class="reservar" id="reservarBtn" href="https://wa.me/584123030330?text=Hola%2C%20quiero%20informaci%C3%B3n%20para%20reservar%20Casa%20Verde." target="_blank" rel="noopener">
   <span class="pill">Reservar Casa Verde</span>
-  <span class="ico" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 14 14 6M7 6h7v7"/></svg></span>
 </a>
 
 <main id="top">
@@ -524,8 +521,8 @@ setTimeout(function(){
     <div class="pedir-fila">
       <p>Escríbenos por WhatsApp con tus fechas y cuántos son, y te respondemos con disponibilidad.</p>
       <div class="pedir-btns">
-        <a class="btn" href="https://wa.me/584123030330?text=Hola%2C%20quiero%20informaci%C3%B3n%20para%20reservar%20Casa%20Verde." target="_blank" rel="noopener">Escribir por WhatsApp <span aria-hidden="true">&#8599;</span></a>
-        <a class="btn btn-linea" href="galeria.html">Galería <span aria-hidden="true">&#8599;</span></a>
+        <a class="btn" href="https://wa.me/584123030330?text=Hola%2C%20quiero%20informaci%C3%B3n%20para%20reservar%20Casa%20Verde." target="_blank" rel="noopener">Escribir por WhatsApp</a>
+        <a class="btn btn-linea" href="galeria.html">Galería</a>
       </div>
     </div>
   </section>
@@ -808,7 +805,7 @@ setTimeout(function(){
     el.replaceChild(r, t);
   });
   if(!window.gsap || !matchMedia('(hover: hover) and (pointer: fine)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  document.querySelectorAll('.nav-links a, .nav-der a, .btn, .reservar .pill, .reservar .ico').forEach(function(el){
+  document.querySelectorAll('.nav-links a, .nav-der a, .btn, .reservar .pill').forEach(function(el){
     el.addEventListener('mousemove', function(e){
       var b = el.getBoundingClientRect();
       gsap.to(el, {x: (e.clientX - b.left - b.width / 2) * .12, y: (e.clientY - b.top - b.height / 2) * .18, duration: .6, ease: 'power3.out'});
