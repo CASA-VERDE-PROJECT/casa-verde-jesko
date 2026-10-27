@@ -201,8 +201,25 @@ a{color:inherit;text-decoration:none}
 .va{margin-top:8px;font-size:clamp(17px,1.4vw,21px);font-weight:500;letter-spacing:-.02em;font-variation-settings:var(--ancho)}
 .nota{margin-top:20px;font-size:13px;color:var(--taupe);max-width:52ch;line-height:1.5}
 .ficha-foto{position:relative;aspect-ratio:4/5;overflow:hidden;width:100%;max-width:480px;justify-self:end;margin:0}
-.ficha-foto img{width:100%;height:100%;object-fit:cover;will-change:transform}
-.ficha-foto figcaption{position:absolute;left:18px;bottom:16px;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.5)}
+.fs-pista{position:absolute;inset:0;will-change:transform}
+/* cada foto se ve completa; detras, la misma foto desenfocada llena el marco */
+.fs-slide{position:absolute;inset:0;opacity:0;transition:opacity .7s ease;background:#2a2321}
+.fs-slide.on{opacity:1;z-index:1}
+.fs-slide img{position:absolute;inset:0;width:100%;height:100%}
+.fs-fondo{object-fit:cover;filter:blur(22px) brightness(.8);transform:scale(1.15)}
+.fs-img{object-fit:contain;transform:scale(1.04);transition:transform 1.1s cubic-bezier(.2,.7,.3,1)}
+.fs-slide:first-child .fs-img{object-fit:cover}
+.fs-slide.on .fs-img{transform:scale(1)}
+.ficha-foto figcaption{position:absolute;z-index:3;left:18px;right:18px;bottom:16px;display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.5);pointer-events:none}
+.fs-num{font-variant-numeric:tabular-nums;letter-spacing:.1em;opacity:.85}
+.fs-num b{font-weight:700}
+.fs-flecha{position:absolute;z-index:3;top:50%;width:46px;height:46px;margin-top:-23px;border:0;border-radius:50%;background:rgba(255,248,237,.9);color:var(--ink);display:grid;place-items:center;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.18);transition:background .3s,color .3s,scale .25s ease}
+.fs-flecha svg{width:18px;height:18px}
+.fs-flecha.prev{left:14px}
+.fs-flecha.next{right:14px}
+.fs-flecha:active{scale:.92}
+@media (hover:hover){.fs-flecha:hover{background:var(--verde);color:#fff}}
+@media (max-width:600px){.fs-flecha{width:40px;height:40px;margin-top:-20px}}
 
 /* ---------- espacios ---------- */
 .espacios{background:var(--base);color:var(--ink);padding:0 0 clamp(100px,16vh,170px)}
@@ -553,7 +570,25 @@ setTimeout(function(){
         </div>
         <p class="nota">El chef cocina para ti; la comida es un paquete aparte. No incluye propinas.</p>
       </div>
-      <figure class="ficha-foto"><img id="fichaFoto" src="img/cv-05.jpg" alt="Sala a doble altura con techo de madera y mezzanina" loading="lazy"><figcaption>Doble altura</figcaption></figure>
+      <!-- mini galeria: la sala y los cuartos, con flechas (y deslizando en el telefono) -->
+      <figure class="ficha-foto" aria-roledescription="carrusel" aria-label="Fotos de la sala y los cuartos">
+        <div class="fs-pista">
+          <div class="fs-slide on" data-cap="Doble altura"><img class="fs-fondo" src="img/cv-05.jpg" alt="" aria-hidden="true"><img class="fs-img" src="img/cv-05.jpg" alt="Sala a doble altura con techo de madera y mezzanina" id="fichaFoto" loading="lazy"></div>
+          <div class="fs-slide" data-cap="El camino al mar"><img class="fs-fondo" data-src="img/gal/pasillo-pergola.jpeg" alt="" aria-hidden="true"><img class="fs-img" data-src="img/gal/pasillo-pergola.jpeg" alt="Pasillo con pérgola hacia el mar"></div>
+          <div class="fs-slide" data-cap="Sala frente al mar"><img class="fs-fondo" data-src="img/gal/nuevas/cv-03.jpeg" alt="" aria-hidden="true"><img class="fs-img" data-src="img/gal/nuevas/cv-03.jpeg" alt="Sala frente al mar"></div>
+          <div class="fs-slide" data-cap="Sala de estar"><img class="fs-fondo" data-src="img/gal/nuevas/cv-04.jpeg" alt="" aria-hidden="true"><img class="fs-img" data-src="img/gal/nuevas/cv-04.jpeg" alt="Sala de estar"></div>
+          <div class="fs-slide" data-cap="Ventanal al mar"><img class="fs-fondo" data-src="img/gal/fotos2/sala-ventanal-lancha.jpg" alt="" aria-hidden="true"><img class="fs-img" data-src="img/gal/fotos2/sala-ventanal-lancha.jpg" alt="Ventanal de la sala con la lancha al fondo"></div>
+          <div class="fs-slide" data-cap="Vista al cerro"><img class="fs-fondo" data-src="img/gal/fotos2/sala-puffs-cerro.jpg" alt="" aria-hidden="true"><img class="fs-img" data-src="img/gal/fotos2/sala-puffs-cerro.jpg" alt="Sala con puffs y vista al cerro"></div>
+          <div class="fs-slide" data-cap="Mesa frente al mar"><img class="fs-fondo" data-src="img/gal/nuevas/cv-21.jpeg" alt="" aria-hidden="true"><img class="fs-img" data-src="img/gal/nuevas/cv-21.jpeg" alt="Mesa frente al mar"></div>
+          <div class="fs-slide" data-cap="Habitación azul"><img class="fs-fondo" data-src="img/gal/fotos2/habitacion-azul-amplia.jpg" alt="" aria-hidden="true"><img class="fs-img" data-src="img/gal/fotos2/habitacion-azul-amplia.jpg" alt="Habitación azul"></div>
+          <div class="fs-slide" data-cap="Habitación con baño"><img class="fs-fondo" data-src="img/gal/fotos2/habitacion-azul-bano.jpg" alt="" aria-hidden="true"><img class="fs-img" data-src="img/gal/fotos2/habitacion-azul-bano.jpg" alt="Habitación azul con baño"></div>
+          <div class="fs-slide" data-cap="Ventana al jardín"><img class="fs-fondo" data-src="img/gal/fotos2/habitacion-azul-ventana.jpg" alt="" aria-hidden="true"><img class="fs-img" data-src="img/gal/fotos2/habitacion-azul-ventana.jpg" alt="Habitación con ventana al jardín"></div>
+          <div class="fs-slide" data-cap="Bote privado"><img class="fs-fondo" data-src="img/gal/nuevas/cv-13.jpeg" alt="" aria-hidden="true"><img class="fs-img" data-src="img/gal/nuevas/cv-13.jpeg" alt="Bote privado"></div>
+        </div>
+        <figcaption><span class="fs-cap">Doble altura</span><span class="fs-num"><b>01</b> / 11</span></figcaption>
+        <button class="fs-flecha prev" type="button" aria-label="Foto anterior"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12.5 4 6.5 10l6 6"/></svg></button>
+        <button class="fs-flecha next" type="button" aria-label="Foto siguiente"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4l6 6-6 6"/></svg></button>
+      </figure>
     </div>
   </section>
 
@@ -579,7 +614,7 @@ setTimeout(function(){
       <p>Escríbenos por WhatsApp con tus fechas y cuántos son, y te respondemos con disponibilidad.</p>
       <div class="pedir-btns">
         <a class="btn" href="https://wa.me/584123030330?text=Hola%2C%20quiero%20informaci%C3%B3n%20para%20reservar%20Casa%20Verde." target="_blank" rel="noopener">Escribir por WhatsApp</a>
-        <a class="btn btn-linea" href="galeria.html">Galería</a>
+        <a class="btn btn-linea" href="galeria.html">Galería completa</a>
       </div>
     </div>
   </section>
@@ -844,7 +879,7 @@ setTimeout(function(){
   var o = {v: 0}, cuenta = document.getElementById('cuenta');
   gsap.to(o, {v: 10, duration: 1.4, ease: 'power3.out', onUpdate: function(){ cuenta.textContent = Math.round(o.v); },
     scrollTrigger: {trigger: '.ficha', start: 'top 70%', once: true}});
-  gsap.fromTo('#fichaFoto', {scale: 1.06, yPercent: -2}, {yPercent: 2, ease: 'none', scrollTrigger: {trigger: '.ficha-foto', start: 'top bottom', end: 'bottom top', scrub: true}});
+  gsap.fromTo('.fs-pista', {scale: 1.06, yPercent: -2}, {yPercent: 2, ease: 'none', scrollTrigger: {trigger: '.ficha-foto', start: 'top bottom', end: 'bottom top', scrub: true}});
   gsap.fromTo('#pedirFoto', {scale: 1.2}, {scale: 1, ease: 'none', scrollTrigger: {trigger: '.pedir', start: 'top bottom', end: 'bottom bottom', scrub: true}});
 
   /* nav y boton cambian de tinta sobre lo claro; el boton se guarda al llegar a reservar */
@@ -951,6 +986,32 @@ setTimeout(function(){
   }
   addEventListener('scroll', function(){ if(hover){ hover = null; colocar(); } }, {passive: true});
   addEventListener('resize', colocar);
+})();
+</script>
+<script>
+/* mini galeria de la ficha: flechas, teclado y deslizar; las fotos se piden solo cuando hacen falta */
+(function(){
+  var fig = document.querySelector('.ficha-foto');
+  if(!fig) return;
+  var ss = [].slice.call(fig.querySelectorAll('.fs-slide')), cap = fig.querySelector('.fs-cap'), num = fig.querySelector('.fs-num b'), i = 0;
+  function cargar(k){ var s = ss[(k + ss.length) % ss.length]; s.querySelectorAll('img[data-src]').forEach(function(im){ im.src = im.dataset.src; im.removeAttribute('data-src'); }); }
+  function ir(k){
+    i = (k + ss.length) % ss.length;
+    ss.forEach(function(s, j){ s.classList.toggle('on', j === i); });
+    cap.textContent = ss[i].dataset.cap; num.textContent = String(i + 1).padStart(2, '0');
+    cargar(i + 1); cargar(i - 1);
+  }
+  fig.querySelector('.prev').addEventListener('click', function(){ cargar(i - 1); ir(i - 1); });
+  fig.querySelector('.next').addEventListener('click', function(){ cargar(i + 1); ir(i + 1); });
+  fig.addEventListener('keydown', function(e){ if(e.key === 'ArrowLeft') ir(i - 1); if(e.key === 'ArrowRight') ir(i + 1); });
+  var x0 = null;
+  fig.addEventListener('touchstart', function(e){ x0 = e.touches[0].clientX; }, {passive: true});
+  fig.addEventListener('touchend', function(e){ if(x0 === null) return; var dx = e.changedTouches[0].clientX - x0; if(Math.abs(dx) > 40) ir(i + (dx < 0 ? 1 : -1)); x0 = null; });
+  /* la siguiente foto se precarga cuando la ficha se acerca */
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(es){ if(es[0].isIntersecting){ cargar(1); cargar(-1); io.disconnect(); } }, {rootMargin: '400px 0px'});
+    io.observe(fig);
+  }
 })();
 </script>
 </body>
