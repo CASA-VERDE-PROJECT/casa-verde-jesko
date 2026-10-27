@@ -240,6 +240,8 @@
     @media (prefers-reduced-motion: reduce) { .wa-float::before { animation: none; opacity: 0; } .ig-float { animation: none; } }
 
     [data-t] { transition: opacity .22s ease; }
+    /* foco visible al navegar con teclado */
+    :focus-visible { outline: 2px solid var(--verde); outline-offset: 3px; }
     .switching [data-t] { opacity: 0 !important; }
 
     /* ─── Sin GSAP o reduced-motion: fluye en vertical ───────── */
