@@ -477,6 +477,18 @@ html.js footer:not(.bg-on){background:#0f1615}
   /* lo de abajo a la derecha no queda bajo el boton de Instagram */
   .meta-der{width:min(430px,calc(var(--hueco) - max(0px,100px - var(--gut))));margin-right:max(0px,calc(100px - var(--gut)))}
 }
+/* espacios: la primera ficha respeta el margen y una guia dice que se puede deslizar a los lados */
+.carril{scroll-padding-inline:var(--gut)}
+.carril::after{content:"";flex:none;width:1px}
+.carril-guia{display:flex;align-items:center;gap:14px;padding:22px var(--gut) 0;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--taupe)}
+.cg-num{font-variant-numeric:tabular-nums}
+.cg-num b{color:var(--ink)}
+.cg-barra{flex:1;height:1px;background:rgba(49,39,38,.18);position:relative;overflow:hidden}
+.cg-barra i{position:absolute;left:0;top:0;bottom:0;width:100%;background:var(--verde);transform-origin:left;transform:scaleX(.17);transition:transform .3s ease}
+.cg-hint::after{content:" \2192";display:inline-block;animation:cgHint 1.6s ease-in-out infinite}
+@keyframes cgHint{50%{transform:translateX(5px)}}
+@media (prefers-reduced-motion:reduce){.cg-hint::after{animation:none}}
+@media (min-width:861px){.carril-guia{display:none}}
 </style>
 </head>
 <body>
@@ -696,7 +708,7 @@ setTimeout(function(){
   <section class="espacios" id="espacios" aria-labelledby="t-esp">
     <div class="esp-cab">
       <h2 id="t-esp">Los espacios</h2>
-      <p>Arrastra para recorrer la casa, de la sala al muelle.</p>
+      <p>Recorre la casa de lado, de la sala al muelle.</p>
     </div>
     <div class="carril" id="carril">
       <article class="esp"><div class="f"><img src="img/cv-03.jpg" alt="Sala con muebles azules y ventanales al mar" loading="lazy"></div><div class="pie"><h3>La sala</h3><span>01</span></div><p>Muebles hechos para la casa y el mar en cada ventanal.</p></article>
@@ -706,6 +718,7 @@ setTimeout(function(){
       <article class="esp"><div class="f"><img src="img/cv-40.jpg" alt="Puerta abierta hacia el mar y las lanchas" loading="lazy"></div><div class="pie"><h3>Al mar</h3><span>05</span></div><p>De la puerta al agua hay unos pasos.</p></article>
       <article class="esp"><div class="f"><img src="img/cv-14.jpg" alt="Lancha de la casa al atardecer" loading="lazy"></div><div class="pie"><h3>La lancha</h3><span>06</span></div><p>Lista para salir a los cayos cuando digas.</p></article>
     </div>
+    <div class="carril-guia" aria-hidden="true"><span class="cg-num"><b>01</b> / 06</span><span class="cg-barra"><i></i></span><span class="cg-hint">Desliza</span></div>
   </section>
 
   <section class="pedir" id="reservar" aria-labelledby="t-res">
@@ -784,6 +797,19 @@ setTimeout(function(){
   carril.addEventListener('pointerdown', function(e){ if(e.pointerType !== 'mouse') return; down = true; sx = e.clientX; sl = carril.scrollLeft; carril.classList.add('agarrado'); });
   addEventListener('pointermove', function(e){ if(down) carril.scrollLeft = sl - (e.clientX - sx); });
   addEventListener('pointerup', function(){ if(!down) return; down = false; carril.classList.remove('agarrado'); });
+  /* guia del telefono: ficha actual y barra de avance; la pista "Desliza" se va al primer movimiento */
+  var fichasEsp = carril.querySelectorAll('.esp'), cgNum = document.querySelector('.cg-num'), cgBar = document.querySelector('.cg-barra i'), cgHint = document.querySelector('.cg-hint');
+  if(cgNum){
+    cgNum.lastChild.textContent = ' / ' + String(fichasEsp.length).padStart(2, '0');
+    var guia = function(){
+      var max = carril.scrollWidth - carril.clientWidth, f = max > 0 ? carril.scrollLeft / max : 0;
+      var k = Math.round(f * (fichasEsp.length - 1));
+      cgNum.firstChild.textContent = String(k + 1).padStart(2, '0');
+      cgBar.style.transform = 'scaleX(' + ((k + 1) / fichasEsp.length) + ')';
+      if(carril.scrollLeft > 10) cgHint.style.opacity = 0;
+    };
+    carril.addEventListener('scroll', guia, {passive: true}); guia();
+  }
 
   if(!window.gsap || reduce){
     document.querySelectorAll('.manifiesto .pal').forEach(function(p){ p.style.opacity = 1; });
