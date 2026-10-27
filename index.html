@@ -489,6 +489,16 @@ html.js footer:not(.bg-on){background:#0f1615}
 @keyframes cgHint{50%{transform:translateX(5px)}}
 @media (prefers-reduced-motion:reduce){.cg-hint::after{animation:none}}
 @media (min-width:861px){.carril-guia{display:none}}
+/* PC: linea bajo los espacios con una barra verde que se arrastra para recorrerlos */
+.carril-riel{display:none}
+@media (min-width:861px){
+  .carril-riel{display:block;position:relative;height:26px;margin:26px var(--gut) 0;cursor:pointer;touch-action:none}
+  .carril-riel::before{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(49,39,38,.18)}
+  .cr-barra{position:absolute;top:50%;left:0;height:3px;margin-top:-1.5px;border-radius:3px;background:var(--verde);cursor:grab;transition:height .25s,margin-top .25s}
+  .cr-barra::before{content:"";position:absolute;left:0;right:0;top:-12px;bottom:-12px}
+  .carril-riel:hover .cr-barra,.carril-riel.agarrado .cr-barra{height:5px;margin-top:-2.5px}
+  .carril-riel.agarrado .cr-barra{cursor:grabbing}
+}
 /* Galeria: el unico boton en naranja Caraquena (#f05a25); todo lo demas queda en el verde de Casa Verde */
 :root{--naranja:#f05a25}
 .nav-pill.naranja{background:var(--naranja);box-shadow:0 4px 14px rgba(240,90,37,.3)}
@@ -730,6 +740,7 @@ setTimeout(function(){
       <article class="esp"><div class="f"><img src="img/cv-14.jpg" alt="Lancha de la casa al atardecer" loading="lazy" width="1600" height="1200"></div><div class="pie"><h3>La lancha</h3><span>06</span></div><p>Lista para salir a los cayos cuando digas.</p></article>
     </div>
     <div class="carril-guia" aria-hidden="true"><span class="cg-num"><b>01</b> / 06</span><span class="cg-barra"><i></i></span><span class="cg-hint">Desliza</span></div>
+    <div class="carril-riel" aria-hidden="true"><span class="cr-barra"></span></div>
   </section>
 
   <section class="pedir" id="reservar" aria-labelledby="t-res">
@@ -820,6 +831,41 @@ setTimeout(function(){
       if(carril.scrollLeft > 10) cgHint.style.opacity = 0;
     };
     carril.addEventListener('scroll', guia, {passive: true}); guia();
+  }
+  /* PC: la barra de la linea refleja la parte visible del carril y se arrastra (o se hace clic en la linea) */
+  var riel = document.querySelector('.carril-riel'), rb = riel && riel.firstChild;
+  if(riel){
+    var rielPos = function(){
+      var max = carril.scrollWidth - carril.clientWidth, w = riel.clientWidth, bw = Math.max(60, w * carril.clientWidth / carril.scrollWidth);
+      rb.style.width = bw + 'px';
+      rb.style.transform = 'translateX(' + (max > 0 ? carril.scrollLeft / max * (w - bw) : 0) + 'px)';
+      riel.style.visibility = max > 0 ? '' : 'hidden';
+    };
+    var rDown = false, rx = 0, rsl = 0;
+    var factor = function(){ return (carril.scrollWidth - carril.clientWidth) / Math.max(1, riel.clientWidth - rb.offsetWidth); };
+    riel.addEventListener('pointerdown', function(e){
+      e.preventDefault();
+      riel.classList.add('agarrado'); carril.classList.add('agarrado');
+      if(e.target !== rb){
+        var r = riel.getBoundingClientRect();
+        carril.scrollLeft = (e.clientX - r.left - rb.offsetWidth / 2) * factor();
+      }
+      rDown = true; rx = e.clientX; rsl = carril.scrollLeft;
+      riel.setPointerCapture(e.pointerId);
+    });
+    riel.addEventListener('pointermove', function(e){ if(rDown) carril.scrollLeft = rsl + (e.clientX - rx) * factor(); });
+    /* al soltar se acomoda en la ficha mas cercana y despues vuelve el snap normal */
+    var rT;
+    var rUp = function(){
+      if(!rDown) return; rDown = false; riel.classList.remove('agarrado');
+      var max = carril.scrollWidth - carril.clientWidth, o = fichasEsp[0].offsetLeft, dest = max;
+      if(carril.scrollLeft < max - 2) fichasEsp.forEach(function(f){ var x = Math.min(max, f.offsetLeft - o); if(Math.abs(x - carril.scrollLeft) < Math.abs(dest - carril.scrollLeft)) dest = x; });
+      carril.scrollTo({left: dest, behavior: reduce ? 'auto' : 'smooth'});
+      clearTimeout(rT); rT = setTimeout(function(){ if(!rDown) carril.classList.remove('agarrado'); }, 600);
+    };
+    riel.addEventListener('pointerup', rUp); riel.addEventListener('pointercancel', rUp);
+    carril.addEventListener('scroll', rielPos, {passive: true});
+    addEventListener('resize', rielPos); addEventListener('load', rielPos); rielPos();
   }
 
   if(!window.gsap || reduce){
