@@ -94,13 +94,18 @@ a{color:inherit;text-decoration:none}
 .flota-der .regla{height:1px;background:rgba(49,39,38,.2);margin:clamp(40px,10vh,110px) 0 22px}
 .flota-der .et{color:var(--ink);font-weight:700}
 .flota-der p{margin-top:clamp(22px,4vh,46px);font-size:14px;line-height:1.5}
-.flota-der .flota-logo{width:min(420px,100%);margin:auto 56px 0 0;display:flex;flex-direction:column;align-items:center;gap:18px}
+/* logo que se dibuja al terminar la lancha: lineas negras con detalles en verde Casa Verde.
+   Su tamano y lugar los calcula el script para que nunca toque la lancha ni el texto */
+.flota-logo{position:absolute;left:0;top:0;width:300px;display:flex;flex-direction:column;align-items:center;gap:14px;pointer-events:none}
+.flota-logo.oculto{display:none}
 .fl-stage{width:100%;will-change:transform}
 .fl-stage svg{width:100%;height:auto;overflow:visible;display:block}
-.fl-stage svg *{fill:none;stroke:var(--verde);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.fl-stage svg *{fill:none;stroke:var(--ink-deep);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
 .fl-stage svg .verde{stroke:var(--verde);fill:rgba(0,194,146,0)}
-.flota-der .fl-word{margin:0;font-size:13px;font-weight:600;letter-spacing:.5em;text-indent:.5em;text-transform:uppercase;color:var(--verde)}
-@media (max-height:740px){.flota-der .flota-logo{display:none}}
+.fl-stage svg .fl-v{stroke:var(--verde)}
+.flota-logo .fl-word{margin:0;font-size:13px;font-weight:600;letter-spacing:.5em;text-indent:.5em;text-transform:uppercase;color:var(--ink-deep);white-space:nowrap}
+.flota-logo.chico{gap:8px}
+.flota-logo.chico .fl-word{font-size:10px}
 .flota-bote{position:absolute;left:50%;top:50%;height:calc(100svh - 230px);aspect-ratio:577/2561;margin-top:10px;transform:translate(-50%,-50%);z-index:2;will-change:transform}
 .flota-bote img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
 /* la sombra va en una capa aparte: sombra y mascara en el mismo elemento dibujan un rectangulo */
@@ -459,32 +464,32 @@ setTimeout(function(){
           <div class="regla"></div>
           <div class="et">Sale desde<br>Casa Verde</div>
           <p>Una chimana Beretta con dos Yamaha 150 HP, capitán y marinero, lista para llevarte a los cayos y bancos de arena de Los Roques cuando tú digas.</p>
-          <!-- al terminar la lancha, el logo se dibuja como en la pantalla de carga -->
-          <div class="flota-logo" id="flotaLogo">
-            <div class="fl-stage">
+        </div>
+        <!-- al terminar la lancha, el logo se dibuja como en la pantalla de carga -->
+        <div class="flota-logo" id="flotaLogo">
+          <div class="fl-stage">
             <svg viewBox="30 120 700 290" aria-hidden="true">
-          <path d="M50,388 H710"/>
-          <path d="M95,360 H665"/>
-          <path d="M50,388 L95,360 M710,388 L665,360"/>
-          <path d="M150,360 V224 M150,224 H305 M305,224 V360"/>
-          <path class="verde" d="M180,252 h30 v50 h-30 Z"/>
-          <path class="verde" d="M237,252 h30 v50 h-30 Z"/>
-          <path d="M108,222 L348,178"/>
-          <path d="M112,232 L348,190"/>
-          <path d="M302,146 L648,212"/>
-          <path d="M300,158 L646,222"/>
-          <path d="M352,170 V360"/>
-          <path d="M424,183 V360"/>
-          <path d="M496,197 V360"/>
-          <path d="M556,208 V360"/>
-          <path d="M340,240 H560 M340,262 H560 M340,284 H560"/>
-          <path d="M556,254 H692"/>
-          <path d="M556,264 H692"/>
-          <path d="M668,264 V360"/>
-          </svg>
-            </div>
-            <p class="fl-word">Casa Verde</p>
+              <path class="fl-v" d="M50,388 H710"/>
+              <path d="M95,360 H665"/>
+              <path class="fl-v" d="M50,388 L95,360 M710,388 L665,360"/>
+              <path d="M150,360 V224 M150,224 H305 M305,224 V360"/>
+              <path class="verde" d="M180,252 h30 v50 h-30 Z"/>
+              <path class="verde" d="M237,252 h30 v50 h-30 Z"/>
+              <path d="M108,222 L348,178"/>
+              <path d="M112,232 L348,190"/>
+              <path d="M302,146 L648,212"/>
+              <path d="M300,158 L646,222"/>
+              <path d="M352,170 V360"/>
+              <path d="M424,183 V360"/>
+              <path d="M496,197 V360"/>
+              <path d="M556,208 V360"/>
+              <path d="M340,240 H560 M340,262 H560 M340,284 H560"/>
+              <path d="M556,254 H692"/>
+              <path d="M556,264 H692"/>
+              <path d="M668,264 V360"/>
+            </svg>
           </div>
+          <p class="fl-word">Casa Verde</p>
         </div>
       </div>
       <div class="flota-bote" id="flotaBote">
@@ -739,6 +744,33 @@ setTimeout(function(){
     var flStage = document.querySelector('.fl-stage'), flWord = document.querySelector('.fl-word');
     var flTrazos = flStage ? [].slice.call(flStage.querySelectorAll('path')) : [], flVerdes = flTrazos.filter(function(t){ return t.classList.contains('verde'); });
     flTrazos.forEach(function(t){ t._L = t.getTotalLength(); t.style.strokeDasharray = t._L; t.style.strokeDashoffset = t._L; });
+    var flLogo = document.getElementById('flotaLogo');
+    var colocarLogo = function(){
+      if(!flLogo) return;
+      var F = ficha.getBoundingClientRect(), vw = innerWidth, cel = movil();
+      var bw = bote.offsetWidth, bL = cel ? vw - 20 - bw : vw / 2 - bw / 2, bR = cel ? vw - 20 : vw / 2 + bw / 2;
+      var R = function(sel){ return document.querySelector(sel).getBoundingClientRect(); };
+      var a;
+      if(cel){
+        var iz = R('.flota-izq'), mo = R('.flota-modelo'), da = R('.flota-datos');
+        a = {l: iz.left, r: Math.min(iz.right, bL - 16), t: mo.bottom + 18, b: da.top - 18, lado: 'izq'};
+      } else {
+        var de = R('.flota-der'), pp = R('.flota-der p');
+        a = {l: Math.max(de.left, bR + 36), r: de.right - 56, t: pp.bottom + 28, b: de.bottom, lado: 'der'};
+      }
+      var palabra = cel ? 22 : 32;
+      var w = Math.min(cel ? 220 : 420, a.r - a.l, (a.b - a.t - palabra) * 700 / 290);
+      flLogo.classList.toggle('chico', cel);
+      flLogo.classList.toggle('oculto', w < (cel ? 110 : 160));
+      var h = w * 290 / 700 + palabra;
+      var x = a.lado === 'der' ? a.r - w : a.l, y = cel ? a.t + (a.b - a.t - h) / 2 : a.b - h;
+      flLogo.style.width = w + 'px';
+      flLogo.style.transform = 'translate(' + (x - F.left) + 'px,' + (y - F.top) + 'px)';
+    };
+    colocarLogo();
+    addEventListener('resize', colocarLogo);
+    addEventListener('load', colocarLogo);
+    if(document.fonts) document.fonts.ready.then(colocarLogo);
     var pintarFlota = function(p){
       var sube = tramo(p, .06, .38);            /* entra desde abajo, enorme */
       var achica = tramo(p, .34, .62);          /* se achica hasta su tamano */
