@@ -94,6 +94,13 @@ a{color:inherit;text-decoration:none}
 .flota-der .regla{height:1px;background:rgba(49,39,38,.2);margin:clamp(40px,10vh,110px) 0 22px}
 .flota-der .et{color:var(--ink);font-weight:700}
 .flota-der p{margin-top:clamp(22px,4vh,46px);font-size:14px;line-height:1.5}
+.flota-der .flota-logo{width:min(420px,100%);margin:auto 56px 0 0;display:flex;flex-direction:column;align-items:center;gap:18px}
+.fl-stage{width:100%;will-change:transform}
+.fl-stage svg{width:100%;height:auto;overflow:visible;display:block}
+.fl-stage svg *{fill:none;stroke:var(--verde);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.fl-stage svg .verde{stroke:var(--verde);fill:rgba(0,194,146,0)}
+.flota-der .fl-word{margin:0;font-size:13px;font-weight:600;letter-spacing:.5em;text-indent:.5em;text-transform:uppercase;color:var(--verde)}
+@media (max-height:740px){.flota-der .flota-logo{display:none}}
 .flota-bote{position:absolute;left:50%;top:50%;height:calc(100svh - 230px);aspect-ratio:577/2561;margin-top:10px;transform:translate(-50%,-50%);z-index:2;will-change:transform}
 .flota-bote img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
 /* la sombra va en una capa aparte: sombra y mascara en el mismo elemento dibujan un rectangulo */
@@ -446,6 +453,32 @@ setTimeout(function(){
           <div class="regla"></div>
           <div class="et">Sale desde<br>Casa Verde</div>
           <p>Una chimana Beretta con dos Yamaha 150 HP, capitán y marinero, lista para llevarte a los cayos y bancos de arena de Los Roques cuando tú digas.</p>
+          <!-- al terminar la lancha, el logo se dibuja como en la pantalla de carga -->
+          <div class="flota-logo" id="flotaLogo">
+            <div class="fl-stage">
+            <svg viewBox="30 120 700 290" aria-hidden="true">
+          <path d="M50,388 H710"/>
+          <path d="M95,360 H665"/>
+          <path d="M50,388 L95,360 M710,388 L665,360"/>
+          <path d="M150,360 V224 M150,224 H305 M305,224 V360"/>
+          <path class="verde" d="M180,252 h30 v50 h-30 Z"/>
+          <path class="verde" d="M237,252 h30 v50 h-30 Z"/>
+          <path d="M108,222 L348,178"/>
+          <path d="M112,232 L348,190"/>
+          <path d="M302,146 L648,212"/>
+          <path d="M300,158 L646,222"/>
+          <path d="M352,170 V360"/>
+          <path d="M424,183 V360"/>
+          <path d="M496,197 V360"/>
+          <path d="M556,208 V360"/>
+          <path d="M340,240 H560 M340,262 H560 M340,284 H560"/>
+          <path d="M556,254 H692"/>
+          <path d="M556,264 H692"/>
+          <path d="M668,264 V360"/>
+          </svg>
+            </div>
+            <p class="fl-word">Casa Verde</p>
+          </div>
         </div>
       </div>
       <div class="flota-bote" id="flotaBote">
@@ -694,6 +727,9 @@ setTimeout(function(){
     var fondo = document.getElementById('flotaFondo'), ficha = document.getElementById('flotaFicha');
     var palabras = document.querySelectorAll('.flota-palabra, .flota-sub, .flota-intro');
     var movil = function(){ return innerWidth <= 860; };
+    var flStage = document.querySelector('.fl-stage'), flWord = document.querySelector('.fl-word');
+    var flTrazos = flStage ? [].slice.call(flStage.querySelectorAll('path')) : [], flVerdes = flTrazos.filter(function(t){ return t.classList.contains('verde'); });
+    flTrazos.forEach(function(t){ t._L = t.getTotalLength(); t.style.strokeDasharray = t._L; t.style.strokeDashoffset = t._L; });
     var pintarFlota = function(p){
       var sube = tramo(p, .06, .38);            /* entra desde abajo, enorme */
       var achica = tramo(p, .34, .62);          /* se achica hasta su tamano */
@@ -706,6 +742,15 @@ setTimeout(function(){
       palabras.forEach(function(el){ el.style.opacity = 1 - sale; el.style.filter = 'blur(' + (sale * 14) + 'px)'; });
       ficha.style.opacity = tramo(p, .6, .74);
       bote.style.setProperty('--corte', (114 - tramo(p, .76, .96) * 128) + '%');
+      /* el logo se dibuja trazo a trazo y gira en 3D hasta quedar de frente, como en la pantalla de carga */
+      if(flTrazos.length){
+        var dib = tramo(p, .82, .97), n = flTrazos.length;
+        flTrazos.forEach(function(t, i){ var k = gsap.utils.clamp(0, 1, dib * 1.7 - i / n * .7); t.style.strokeDashoffset = t._L * (1 - k); });
+        flVerdes.forEach(function(t){ t.style.fill = 'rgba(0,194,146,' + tramo(p, .92, .99) * .9 + ')'; });
+        gsap.set(flStage, {rotateX: 34 * (1 - dib), rotateY: -16 * (1 - dib), scale: .86 + .14 * dib, transformPerspective: 900});
+        var w = tramo(p, .9, .99);
+        flWord.style.opacity = w; flWord.style.letterSpacing = (.9 - .4 * w) + 'em';
+      }
     };
     pintarFlota(0);
     ScrollTrigger.create({trigger: '.flota', start: 'top top', end: 'bottom bottom', scrub: 1.2,
