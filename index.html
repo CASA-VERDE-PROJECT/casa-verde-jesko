@@ -227,10 +227,11 @@ a{color:inherit;text-decoration:none}
 /* menu como D&A Lab: una pildora sigue al cursor entre los enlaces (y si no hay cursor, marca la seccion visible);
    un punto verde bajo el enlace de la seccion en la que estas */
 .nav-links,.nav-der{position:relative;margin:0 -14px}
-.nav-links a,.nav-der a{position:relative;z-index:1;display:flex;align-items:center;min-height:40px;padding:0 14px;border-radius:999px;opacity:.82;transition:opacity .3s}
+.nav-links a,.nav-der a{position:relative;z-index:1;display:flex;align-items:center;min-height:40px;padding:0 14px;border-radius:999px;opacity:.82;transition:opacity .3s,color .3s}
 .nav-links a:hover,.nav-der a:hover,.nav-links a:focus-visible,.nav-der a:focus-visible,.nav a[aria-current]{opacity:1}
-.nav-pill{position:absolute;top:0;bottom:0;left:0;border-radius:999px;background:rgba(255,248,237,.16);opacity:0;pointer-events:none;transition:transform .45s cubic-bezier(.2,.8,.2,1),width .45s cubic-bezier(.2,.8,.2,1),opacity .3s,background-color .4s}
-.nav.tinta .nav-pill{background:rgba(49,39,38,.08)}
+.nav-pill{position:absolute;top:0;bottom:0;left:0;border-radius:999px;background:var(--verde);box-shadow:0 4px 14px rgba(0,194,146,.28);opacity:0;pointer-events:none;transition:transform .45s cubic-bezier(.2,.8,.2,1),width .45s cubic-bezier(.2,.8,.2,1),opacity .3s,background-color .4s}
+.nav a.bajo{color:#fff;text-shadow:none;opacity:1}
+.nav a.bajo::after{background:#fff}
 .nav-links a::after,.nav-der a::after{content:"";position:absolute;left:50%;bottom:3px;width:4px;height:4px;border-radius:50%;background:var(--verde);transform:translateX(-50%) scale(0);transition:transform .3s cubic-bezier(.2,.9,.2,1.4)}
 .nav a[aria-current]::after{transform:translateX(-50%) scale(1)}
 @media (hover:hover){
@@ -833,6 +834,7 @@ setTimeout(function(){
         var b = g.getBoundingClientRect(), r = a.getBoundingClientRect();
         p.style.transform = 'translateX(' + (r.left - b.left) + 'px)'; p.style.width = r.width + 'px'; p.style.opacity = 1;
       } else p.style.opacity = 0;
+      g.querySelectorAll('a').forEach(function(x){ x.classList.toggle('bajo', x === a); });
     });
   }
   grupos.forEach(function(g){
