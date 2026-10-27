@@ -489,6 +489,17 @@ html.js footer:not(.bg-on){background:#0f1615}
 @keyframes cgHint{50%{transform:translateX(5px)}}
 @media (prefers-reduced-motion:reduce){.cg-hint::after{animation:none}}
 @media (min-width:861px){.carril-guia{display:none}}
+/* Galeria: el unico boton en naranja Caraquena (#f05a25); todo lo demas queda en el verde de Casa Verde */
+:root{--naranja:#f05a25}
+.nav-pill.naranja{background:var(--naranja);box-shadow:0 4px 14px rgba(240,90,37,.3)}
+.nav a[href="galeria.html"]::after{background:var(--naranja)}
+.nav a.bajo[href="galeria.html"]::after{background:#fff}
+.btn-galeria::before{background:var(--naranja)}
+@media (hover:hover){.btn-galeria:hover{box-shadow:inset 0 0 0 1px var(--naranja)}}
+@media (max-width:860px){
+  .nav-gal{padding:9px 16px;border-radius:999px;background:var(--naranja);color:#fff;text-shadow:none;font-size:11px;box-shadow:0 4px 14px rgba(240,90,37,.3)}
+  .nav-gal::after{display:none}
+}
 </style>
 </head>
 <body>
@@ -728,7 +739,7 @@ setTimeout(function(){
       <p>Escríbenos por WhatsApp con tus fechas y cuántos son, y te respondemos con disponibilidad.</p>
       <div class="pedir-btns">
         <a class="btn" href="https://wa.me/584123030330?text=Hola%2C%20quiero%20informaci%C3%B3n%20para%20reservar%20Casa%20Verde." target="_blank" rel="noopener">Escribir por WhatsApp</a>
-        <a class="btn btn-linea" href="galeria.html">Galería completa</a>
+        <a class="btn btn-linea btn-galeria" href="galeria.html">Galería completa</a>
       </div>
     </div>
   </section>
@@ -1101,6 +1112,7 @@ setTimeout(function(){
         p.style.transform = 'translateX(' + (r.left - b.left) + 'px)'; p.style.width = r.width + 'px'; p.style.opacity = 1;
       } else p.style.opacity = 0;
       g.querySelectorAll('a').forEach(function(x){ x.classList.toggle('bajo', x === a); });
+      p.classList.toggle('naranja', !!(a && g.contains(a) && a.getAttribute('href') === 'galeria.html'));
     });
   }
   grupos.forEach(function(g){
