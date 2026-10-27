@@ -50,11 +50,12 @@ a{color:inherit;text-decoration:none}
 .reservar.guardado{opacity:0;pointer-events:none;transform:translateX(-50%) translateY(14px)}
 
 /* ---------- hero: la pared con el ventanal ---------- */
-.hero{height:320vh;position:relative}
+.hero{height:480vh;position:relative}
 .escena{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
 .cabina{position:absolute;inset:0;z-index:0;background:#1c1b1a}
 .mar{position:absolute;inset:0;z-index:1;overflow:hidden}
-.mar-foto{position:absolute;inset:-12%;background:url('img/cielo.jpg') center 50%/cover;will-change:transform}
+/* una sola foto alta: el cielo con la gaviota arriba y la casa abajo; la camara baja de una a otra */
+.mar-foto{position:absolute;left:50%;top:0;width:max(100vw,calc(185svh * .8408));height:auto;max-width:none;transform:translateX(-50%);will-change:transform}
 /* la ventana recortada sobre un muro gris oscuro parejo; se escala desde el centro del vano */
 .pared{position:absolute;inset:0;z-index:3;background:#1c1b1a;display:grid;place-items:center;transform-origin:var(--hx) var(--hy);will-change:transform,opacity}
 .ventana{height:62svh;width:auto;max-width:none}
@@ -142,7 +143,7 @@ a{color:inherit;text-decoration:none}
   .nav-links,.nav-der{display:none}
   .nav-mark{justify-self:start}
   .nav-gal{display:block;justify-self:end;font-size:12px;letter-spacing:.14em;text-transform:uppercase}
-  .hero{height:290vh}
+  .hero{height:430vh}
   .frase{font-size:clamp(30px,8.6vw,46px)}
   .frase.izq{left:20px;top:11vh}
   .frase.der{display:none}
@@ -285,7 +286,7 @@ setTimeout(function(){
   <section class="hero" aria-label="Casa Verde">
     <div class="escena">
       <div class="cabina"></div>
-      <div class="mar"><div class="mar-foto" id="marFoto"></div></div>
+      <div class="mar"><img class="mar-foto" id="marFoto" src="img/cielo-casa.jpg" width="1584" height="1884" alt="Cielo con una gaviota y la luna sobre la fachada de Casa Verde frente al agua"></div>
       <div class="pared" id="pared"><img class="ventana" id="ventana" src="img/ventana.jpg" width="965" height="1649" alt="Ventana de una habitación con celosías abiertas hacia la playa"></div>
       <div class="tipo" id="tipo">
         <h1 class="frase izq">Despierta<span class="difusa">frente al mar</span></h1>
@@ -474,15 +475,19 @@ setTimeout(function(){
     trigger: '.hero', start: 'top top', end: 'bottom bottom', scrub: .6,
     onUpdate: function(self){
       var p = self.progress;
-      var a = gsap.utils.clamp(0, 1, (p - .1) / .66);
+      var a = gsap.utils.clamp(0, 1, (p - .06) / .44);
       var s = a * a * a * (a * (a * 6 - 15) + 10);     /* smootherstep: arranca y llega suave */
       pintar(s);
-      /* por el ventanal se ve el horizonte; al cruzarlo la vista baja al agua */
-      gsap.set(marFoto, {scale: 1.18 - .18 * s, y: (1 - s) * innerHeight * -.04});
+      /* por la ventana se ve el cielo con la gaviota; ya afuera, la camara baja hasta la casa */
+      var q = gsap.utils.clamp(0, 1, (p - .55) / .38);
+      q = q * q * (3 - 2 * q);
+      /* en telefono la foto se recorta a los lados: se centra en la parte verde y la sala de la casa */
+      gsap.set(marFoto, {xPercent: innerWidth <= 860 ? -41 : -50, x: 0, transformOrigin: '50% 0%', scale: 1.18 - .18 * s,
+        y: -q * Math.max(0, marFoto.offsetHeight - innerHeight)});
       var sale = gsap.utils.clamp(0, 1, (p - .03) / .26);
       gsap.set(tipo, {opacity: 1 - sale, filter: 'blur(' + (sale * 18) + 'px)'});
       gsap.set(meta, {opacity: 1 - sale, y: sale * 26});
-      var m = gsap.utils.clamp(0, 1, (s - .7) / .2) * (1 - gsap.utils.clamp(0, 1, (p - .92) / .08));
+      var m = gsap.utils.clamp(0, 1, (s - .7) / .2) * (1 - gsap.utils.clamp(0, 1, q / .12));
       gsap.set(marca, {opacity: m, letterSpacing: (0.6 - m * 0.26) + 'em'});
     }
   });
