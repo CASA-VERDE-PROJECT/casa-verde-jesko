@@ -217,15 +217,15 @@ a{color:inherit;text-decoration:none}
 .ficha-foto{position:relative;aspect-ratio:4/5;overflow:hidden;width:100%;max-width:480px;justify-self:end;margin:0}
 /* PC: la mini galeria ocupa toda la columna derecha, del alto del texto de la izquierda */
 @media (min-width:861px){.ficha-grid{align-items:stretch}.ficha-foto{max-width:none;aspect-ratio:auto;height:100%;min-height:440px}}
+@media (max-width:860px){.ficha-foto{aspect-ratio:1/1;max-width:none}}
 .fs-pista{position:absolute;inset:0;will-change:transform}
 /* cada foto se ve completa; detras, la misma foto desenfocada llena el marco */
-.fs-slide{position:absolute;inset:0;opacity:0;transition:opacity .7s ease;background:#2a2321}
+/* el marco toma la forma de cada foto (sin recortarla ni agrandarla); el espacio que sobra es la pagina */
+.ficha-foto{overflow:visible}
+.fs-marco{position:absolute;left:0;top:0;width:100%;height:100%;overflow:hidden;transition:width .6s cubic-bezier(.65,0,.35,1),height .6s cubic-bezier(.65,0,.35,1),transform .6s cubic-bezier(.65,0,.35,1)}
+.fs-slide{position:absolute;inset:0;opacity:0;transition:opacity .6s ease}
 .fs-slide.on{opacity:1;z-index:1}
-.fs-slide img{position:absolute;inset:0;width:100%;height:100%}
-.fs-fondo{object-fit:cover;filter:blur(22px) brightness(.8);transform:scale(1.15)}
-.fs-img{object-fit:contain;transform:scale(1.04);transition:transform 1.1s cubic-bezier(.2,.7,.3,1)}
-.fs-slide:first-child .fs-img{object-fit:cover}
-.fs-slide.on .fs-img{transform:scale(1)}
+.fs-slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
 .ficha-foto figcaption{position:absolute;z-index:3;left:18px;right:18px;bottom:16px;display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.5);pointer-events:none}
 .fs-num{font-variant-numeric:tabular-nums;letter-spacing:.1em;opacity:.85}
 .fs-num b{font-weight:700}
@@ -708,22 +708,24 @@ setTimeout(function(){
       </div>
       <!-- mini galeria: la sala y los cuartos, con flechas (y deslizando en el telefono) -->
       <figure class="ficha-foto" aria-roledescription="carrusel" aria-label="Fotos de la sala y los cuartos">
+        <div class="fs-marco">
         <div class="fs-pista">
-          <div class="fs-slide on" data-cap="Doble altura"><img class="fs-fondo" src="img/cv-05.jpg" alt="" aria-hidden="true"><img class="fs-img" src="img/cv-05.jpg" alt="Sala a doble altura con techo de madera y mezzanina" id="fichaFoto" loading="lazy"></div>
-          <div class="fs-slide" data-cap="El camino al mar"><img class="fs-fondo" data-src="img/gal/pasillo-pergola.jpeg" alt="" aria-hidden="true"><img class="fs-img" data-src="img/gal/pasillo-pergola.jpeg" alt="Pasillo con pérgola hacia el mar"></div>
-          <div class="fs-slide" data-cap="Sala frente al mar"><img class="fs-fondo" data-src="img/gal/nuevas/cv-03.jpeg" alt="" aria-hidden="true"><img class="fs-img" data-src="img/gal/nuevas/cv-03.jpeg" alt="Sala frente al mar"></div>
-          <div class="fs-slide" data-cap="Sala de estar"><img class="fs-fondo" data-src="img/gal/nuevas/cv-04.jpeg" alt="" aria-hidden="true"><img class="fs-img" data-src="img/gal/nuevas/cv-04.jpeg" alt="Sala de estar"></div>
-          <div class="fs-slide" data-cap="Ventanal al mar"><img class="fs-fondo" data-src="img/gal/fotos2/sala-ventanal-lancha.jpg" alt="" aria-hidden="true"><img class="fs-img" data-src="img/gal/fotos2/sala-ventanal-lancha.jpg" alt="Ventanal de la sala con la lancha al fondo"></div>
-          <div class="fs-slide" data-cap="Vista al cerro"><img class="fs-fondo" data-src="img/gal/fotos2/sala-puffs-cerro.jpg" alt="" aria-hidden="true"><img class="fs-img" data-src="img/gal/fotos2/sala-puffs-cerro.jpg" alt="Sala con puffs y vista al cerro"></div>
-          <div class="fs-slide" data-cap="Mesa frente al mar"><img class="fs-fondo" data-src="img/gal/nuevas/cv-21.jpeg" alt="" aria-hidden="true"><img class="fs-img" data-src="img/gal/nuevas/cv-21.jpeg" alt="Mesa frente al mar"></div>
-          <div class="fs-slide" data-cap="Habitación azul"><img class="fs-fondo" data-src="img/gal/fotos2/habitacion-azul-amplia.jpg" alt="" aria-hidden="true"><img class="fs-img" data-src="img/gal/fotos2/habitacion-azul-amplia.jpg" alt="Habitación azul"></div>
-          <div class="fs-slide" data-cap="Habitación con baño"><img class="fs-fondo" data-src="img/gal/fotos2/habitacion-azul-bano.jpg" alt="" aria-hidden="true"><img class="fs-img" data-src="img/gal/fotos2/habitacion-azul-bano.jpg" alt="Habitación azul con baño"></div>
-          <div class="fs-slide" data-cap="Ventana al jardín"><img class="fs-fondo" data-src="img/gal/fotos2/habitacion-azul-ventana.jpg" alt="" aria-hidden="true"><img class="fs-img" data-src="img/gal/fotos2/habitacion-azul-ventana.jpg" alt="Habitación con ventana al jardín"></div>
-          <div class="fs-slide" data-cap="Bote privado"><img class="fs-fondo" data-src="img/gal/nuevas/cv-13.jpeg" alt="" aria-hidden="true"><img class="fs-img" data-src="img/gal/nuevas/cv-13.jpeg" alt="Bote privado"></div>
+          <div class="fs-slide on" data-cap="Doble altura"><img class="fs-img" src="img/cv-05.jpg" alt="Sala a doble altura con techo de madera y mezzanina" id="fichaFoto" loading="lazy" width="1200" height="1600"></div>
+          <div class="fs-slide" data-cap="El camino al mar"><img class="fs-img" data-src="img/gal/pasillo-pergola.jpeg" alt="Pasillo con pérgola hacia el mar" width="1650" height="2200"></div>
+          <div class="fs-slide" data-cap="Sala frente al mar"><img class="fs-img" data-src="img/gal/nuevas/cv-03.jpeg" alt="Sala frente al mar" width="2200" height="1650"></div>
+          <div class="fs-slide" data-cap="Sala de estar"><img class="fs-img" data-src="img/gal/nuevas/cv-04.jpeg" alt="Sala de estar" width="2200" height="1650"></div>
+          <div class="fs-slide" data-cap="Ventanal al mar"><img class="fs-img" data-src="img/gal/fotos2/sala-ventanal-lancha.jpg" alt="Ventanal de la sala con la lancha al fondo" width="1920" height="2560"></div>
+          <div class="fs-slide" data-cap="Vista al cerro"><img class="fs-img" data-src="img/gal/fotos2/sala-puffs-cerro.jpg" alt="Sala con puffs y vista al cerro" width="1920" height="2560"></div>
+          <div class="fs-slide" data-cap="Mesa frente al mar"><img class="fs-img" data-src="img/gal/nuevas/cv-21.jpeg" alt="Mesa frente al mar" width="1650" height="2200"></div>
+          <div class="fs-slide" data-cap="Habitación azul"><img class="fs-img" data-src="img/gal/fotos2/habitacion-azul-amplia.jpg" alt="Habitación azul" width="2560" height="1440"></div>
+          <div class="fs-slide" data-cap="Habitación con baño"><img class="fs-img" data-src="img/gal/fotos2/habitacion-azul-bano.jpg" alt="Habitación azul con baño" width="1080" height="608"></div>
+          <div class="fs-slide" data-cap="Ventana al jardín"><img class="fs-img" data-src="img/gal/fotos2/habitacion-azul-ventana.jpg" alt="Habitación con ventana al jardín" width="1440" height="2560"></div>
+          <div class="fs-slide" data-cap="Bote privado"><img class="fs-img" data-src="img/gal/nuevas/cv-13.jpeg" alt="Bote privado" width="1650" height="2200"></div>
         </div>
         <figcaption><span class="fs-cap">Doble altura</span><span class="fs-num"><b>01</b> / 11</span></figcaption>
         <button class="fs-flecha prev" type="button" aria-label="Foto anterior"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12.5 4 6.5 10l6 6"/></svg></button>
         <button class="fs-flecha next" type="button" aria-label="Foto siguiente"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4l6 6-6 6"/></svg></button>
+        </div>
       </figure>
     </div>
   </section>
@@ -1071,7 +1073,6 @@ setTimeout(function(){
   var o = {v: 0}, cuenta = document.getElementById('cuenta');
   gsap.to(o, {v: 10, duration: 1.4, ease: 'power3.out', onUpdate: function(){ cuenta.textContent = Math.round(o.v); },
     scrollTrigger: {trigger: '.ficha', start: 'top 70%', once: true}});
-  gsap.fromTo('.fs-pista', {scale: 1.06, yPercent: -2}, {yPercent: 2, ease: 'none', scrollTrigger: {trigger: '.ficha-foto', start: 'top bottom', end: 'bottom top', scrub: true}});
   gsap.fromTo('#pedirFoto', {scale: 1.2}, {scale: 1, ease: 'none', scrollTrigger: {trigger: '.pedir', start: 'top bottom', end: 'bottom bottom', scrub: true}});
 
   /* nav y boton cambian de tinta sobre lo claro; el boton se guarda al llegar a reservar */
@@ -1204,7 +1205,20 @@ setTimeout(function(){
     ss.forEach(function(s, j){ s.classList.toggle('on', j === i); });
     cap.textContent = ss[i].dataset.cap; num.textContent = String(i + 1).padStart(2, '0');
     cargar(i + 1); cargar(i - 1);
+    marco();
   }
+  /* el marco usa la proporcion real de la foto: en PC pegado a la derecha, en el telefono centrado */
+  var mc = fig.querySelector('.fs-marco');
+  function marco(){
+    var im = ss[i].querySelector('.fs-img'), r = im.getAttribute('width') / im.getAttribute('height');
+    var W = fig.clientWidth, H = fig.clientHeight, w = W, h = W / r;
+    if(h > H){ h = H; w = H * r; }
+    var x = innerWidth > 860 ? W - w : (W - w) / 2;
+    mc.style.width = w + 'px'; mc.style.height = h + 'px';
+    mc.style.transform = 'translate(' + x + 'px,' + (H - h) / 2 + 'px)';
+  }
+  if('ResizeObserver' in window) new ResizeObserver(marco).observe(fig); else addEventListener('resize', marco);
+  marco();
   fig.querySelector('.prev').addEventListener('click', function(){ cargar(i - 1); ir(i - 1); });
   fig.querySelector('.next').addEventListener('click', function(){ cargar(i + 1); ir(i + 1); });
   fig.addEventListener('keydown', function(e){ if(e.key === 'ArrowLeft') ir(i - 1); if(e.key === 'ArrowRight') ir(i + 1); });
