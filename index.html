@@ -1207,13 +1207,13 @@ setTimeout(function(){
     cargar(i + 1); cargar(i - 1);
     marco();
   }
-  /* el marco usa la proporcion real de la foto: en PC pegado a la derecha, en el telefono centrado */
+  /* el marco usa la proporcion real de la foto y queda centrado en su espacio */
   var mc = fig.querySelector('.fs-marco');
   function marco(){
     var im = ss[i].querySelector('.fs-img'), r = im.getAttribute('width') / im.getAttribute('height');
     var W = fig.clientWidth, H = fig.clientHeight, w = W, h = W / r;
     if(h > H){ h = H; w = H * r; }
-    var x = innerWidth > 860 ? W - w : (W - w) / 2;
+    var x = (W - w) / 2;
     mc.style.width = w + 'px'; mc.style.height = h + 'px';
     mc.style.transform = 'translate(' + x + 'px,' + (H - h) / 2 + 'px)';
   }
