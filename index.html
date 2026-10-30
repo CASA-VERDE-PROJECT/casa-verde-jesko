@@ -122,8 +122,11 @@ a{color:inherit;text-decoration:none}
 .flota-logo.chico .fl-word{font-size:10px}
 .flota-bote{position:absolute;left:50%;top:50%;height:calc(100svh - 230px);aspect-ratio:577/2561;margin-top:10px;transform:translate(-50%,-50%);z-index:2;will-change:transform}
 .flota-bote img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
-/* la sombra va en una capa aparte: sombra y mascara en el mismo elemento dibujan un rectangulo */
-.flota-bote .sombra{position:absolute;inset:0;filter:drop-shadow(0 40px 34px rgba(30,22,20,.35))}
+/* la sombra ya viene dibujada en una imagen (antes era un drop-shadow que el telefono recalculaba en cada cuadro
+   al crecer la lancha); la imagen sobresale del bote y se borra con la misma mascara que el render */
+.flota-bote img.sombra{inset:auto;left:-34.84%;top:-7.85%;width:169.67%;height:121.87%;
+  -webkit-mask-image:linear-gradient(180deg,#000 calc(var(--corte,100%) * .8206 - 5.05%),transparent calc(var(--corte,100%) * .8206 + 6.44%));
+          mask-image:linear-gradient(180deg,#000 calc(var(--corte,100%) * .8206 - 5.05%),transparent calc(var(--corte,100%) * .8206 + 6.44%))}
 .flota-bote .render{
   -webkit-mask-image:linear-gradient(180deg,#000 calc(var(--corte,100%) - 14%),transparent var(--corte,100%));
           mask-image:linear-gradient(180deg,#000 calc(var(--corte,100%) - 14%),transparent var(--corte,100%))}
@@ -218,7 +221,7 @@ a{color:inherit;text-decoration:none}
 /* PC: la mini galeria ocupa toda la columna derecha, del alto del texto de la izquierda */
 @media (min-width:861px){.ficha-grid{align-items:stretch}.ficha-foto{max-width:none;aspect-ratio:auto;height:100%;min-height:440px}}
 @media (max-width:860px){.ficha-foto{aspect-ratio:1/1;max-width:none}}
-.fs-pista{position:absolute;inset:0;will-change:transform}
+.fs-pista{position:absolute;inset:0}
 /* cada foto se ve completa; detras, la misma foto desenfocada llena el marco */
 /* el marco toma la forma de cada foto (sin recortarla ni agrandarla); el espacio que sobra es la pagina */
 .ficha-foto{overflow:visible}
@@ -647,7 +650,8 @@ setTimeout(function(){
       </div>
       <div class="flota-bote" id="flotaBote">
         <img class="plano" src="img/lancha-plano.png" width="577" height="2561" alt="Plano de la lancha visto desde arriba">
-        <div class="sombra"><img class="render" src="img/lancha-render.webp" width="577" height="2561" alt="" aria-hidden="true"></div>
+        <img class="sombra" src="img/lancha-sombra.webp" width="490" height="1561" alt="" aria-hidden="true">
+        <img class="render" src="img/lancha-render.webp" width="577" height="2561" alt="" aria-hidden="true">
       </div>
     </div>
   </section>
@@ -963,7 +967,7 @@ setTimeout(function(){
   addEventListener('resize', function(){ if(innerWidth === anchoPrev) return; anchoPrev = innerWidth; clearTimeout(re); re = setTimeout(function(){ medir(); ScrollTrigger.refresh(); }, 120); });
 
   /* lancha: la misma secuencia del avion de Jesko, atada al scroll */
-  var bote = document.getElementById('flotaBote');
+  var bote = document.getElementById('flotaBote'), sombraBote = bote.querySelector('.sombra');
   if(bote){
     var tramo = function(p, a, b){ var t = gsap.utils.clamp(0, 1, (p - a) / (b - a)); return t * t * (3 - 2 * t); };
     var fondo = document.getElementById('flotaFondo'), ficha = document.getElementById('flotaFicha');
@@ -1006,6 +1010,8 @@ setTimeout(function(){
       var y = (1 - sube) * 150 + 0;             /* en vh */
       var sc = big + (1 - big) * achica;
       gsap.set(bote, {xPercent: movil() ? 0 : -50, yPercent: -50, y: (y - (1 - achica) * 20) + 'vh', scale: sc, transformOrigin: '50% 30%'});
+      /* la sombra dibujada crece con la lancha: se aclara en proporcion para que se vea como el drop-shadow de antes */
+      sombraBote.style.opacity = Math.min(1, 1 / sc).toFixed(3);
       fondo.style.opacity = tramo(p, .1, .46);
       /* en el telefono las palabras se van mientras sube la lancha, para que no queden debajo de ella */
       var sale = movil() ? tramo(p, .1, .26) : tramo(p, .5, .64);
