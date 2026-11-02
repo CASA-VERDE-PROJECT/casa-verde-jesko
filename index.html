@@ -230,6 +230,10 @@ a{color:inherit;text-decoration:none}
 /* PC: la mini galeria ocupa toda la columna derecha, del alto del texto de la izquierda */
 @media (min-width:861px){.ficha-grid{align-items:stretch}.ficha-foto{max-width:none;aspect-ratio:auto;height:100%;min-height:440px}}
 @media (max-width:860px){.ficha-foto{aspect-ratio:1/1;max-width:none}}
+/* boton de galeria debajo de la mini galeria */
+.ficha-der{display:flex;flex-direction:column;align-items:center;gap:22px;min-width:0}
+@media (min-width:861px){.ficha-der{justify-self:stretch}.ficha-der .ficha-foto{flex:1}}
+.btn-tinta{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px rgba(49,39,38,.55)}
 .fs-pista{position:absolute;inset:0}
 /* cada foto se ve completa; detras, la misma foto desenfocada llena el marco */
 /* el marco toma la forma de cada foto (sin recortarla ni agrandarla); el espacio que sobra es la pagina */
@@ -581,6 +585,7 @@ setTimeout(function(){
         </div>
         <p class="nota">El chef cocina para ti; la comida es un paquete aparte. No incluye propinas.</p>
       </div>
+      <div class="ficha-der">
       <!-- mini galeria: la sala y los cuartos, con flechas (y deslizando en el telefono) -->
       <figure class="ficha-foto" aria-roledescription="carrusel" aria-label="Fotos de la sala y los cuartos">
         <div class="fs-marco">
@@ -602,6 +607,8 @@ setTimeout(function(){
         <button class="fs-flecha next" type="button" aria-label="Foto siguiente"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4l6 6-6 6"/></svg></button>
         </div>
       </figure>
+        <a class="btn btn-tinta btn-galeria" href="galeria.html">Galería completa</a>
+      </div>
     </div>
   </section>
 
