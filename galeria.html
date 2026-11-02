@@ -77,37 +77,6 @@
       letter-spacing: .3em; text-transform: uppercase; color: rgba(255,255,255,.5);
     }
 
-    /* ─── HERO ───────────────────────────────────────────────── */
-    .gal-hero {
-      position: relative;
-      height: 100vh; height: 100svh; min-height: 580px;
-      background: var(--deep);
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      text-align: center; gap: 28px; padding: 0 24px;
-    }
-    .gal-hero::before {
-      content: ''; position: absolute; inset: 0; pointer-events: none;
-      background: radial-gradient(ellipse at 50% 110%, rgba(0,194,146,.12) 0%, transparent 55%);
-    }
-    .gal-scroll-hint {
-      position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
-      display: flex; flex-direction: column; align-items: center; gap: 12px;
-      font-size: 11px; letter-spacing: .25em; text-transform: uppercase;
-      color: rgba(255,255,255,.5);
-    }
-    .hint-line {
-      width: 1px; height: 60px;
-      background: var(--verde);
-      transform-origin: top;
-      animation: hintPulse 1.8s var(--ease) infinite;
-    }
-    @keyframes hintPulse {
-      0%   { transform: scaleY(0); opacity: 1; }
-      70%  { transform: scaleY(1); opacity: 1; }
-      100% { transform: scaleY(1); opacity: 0; }
-    }
-
     /* ─── GALERÍA HORIZONTAL INMERSIVA ───────────────────────── */
     .gal-h-section { height: 900vh; position: relative; padding: 0 !important; background: var(--deep); overflow: clip; }
     .gal-h-sticky { position: sticky; top: 0; height: 100vh; overflow: clip; display: flex; align-items: center; }
@@ -228,7 +197,6 @@
     .no-gsap .gal-h-sticky { position: static; height: auto; }
     .no-gsap .gal-h-track { flex-wrap: wrap; justify-content: center; padding: 96px 8vw 64px; gap: 32px; }
     .no-gsap .gal-h-item img, .no-gsap .gal-h-item video { width: min(86vw, 560px); height: auto; }
-    .no-gsap .gal-hero { height: auto; min-height: 0; padding: 140px 24px 60px; }
     .no-gsap .gal-h-progress, .no-gsap .gal-cursor { display: none; }
     @media (prefers-reduced-motion: reduce) {
       .gal-h-section { height: auto !important; }
@@ -256,15 +224,6 @@ input,textarea,select{-webkit-user-select:text;user-select:text}
     <button class="lang-btn" data-lc="en" onclick="setLang('en')">EN</button>
   </div>
 </header>
-
-<!-- HERO ──────────────────────────────────────────────────── -->
-<section class="gal-hero">
-  <p class="s-label" data-t="lbl">Galería</p>
-  <div class="gal-scroll-hint">
-    <span data-t="hint">Desliza para explorar</span>
-    <div class="hint-line"></div>
-  </div>
-</section>
 
 <!-- GALERÍA HORIZONTAL INMERSIVA ──────────────────────────── -->
 <section id="galeria" class="gal-h-section" aria-label="Galería">
@@ -533,7 +492,6 @@ const T = {
   foot_refund:{ es:'Cancelación y reembolso', en:'Cancellations and refunds' },
   back:      { es:'Volver',                en:'Back' },
   lbl:       { es:'Galería',               en:'Gallery' },
-  hint:      { es:'Desliza para explorar', en:'Scroll to explore' },
   back_home: { es:'Volver a la página principal', en:'Back to the main page' },
 };
 
@@ -603,8 +561,6 @@ applyLang(lang);
     gsap.ticker.lagSmoothing(0);
   }
 
-  /* Hero: título con clip-path reveal + hint */
-  gsap.from('.gal-scroll-hint', { opacity: 0, duration: 0.8, delay: 0.8 });
 
   var galSection = document.querySelector('.gal-h-section');
   if (!galSection) return;
@@ -682,11 +638,16 @@ applyLang(lang);
     }
   });
 
-  /* Parallax de capas: imagen y caption a velocidades distintas */
+  /* entrada de cada foto */
   galItems.forEach(function(item){
     /* Reveal de máscara: la imagen se descubre de derecha a izquierda al entrar */
     var wrap = item.querySelector('.gal-h-imgwrap');
     gsap.set(wrap, { clipPath: 'inset(0% 0% 0% 100%)' });
+    /* las fotos que ya estan en pantalla al abrir se descubren solas, sin esperar el scroll */
+    if (item.getBoundingClientRect().left < innerWidth * 1.05) {
+      gsap.to(wrap, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.9, ease: 'power3.out', delay: 0.2 });
+      return;
+    }
     gsap.to(wrap, {
       clipPath: 'inset(0% 0% 0% 0%)', duration: 0.8, ease: 'power3.out',
       scrollTrigger: { trigger: item, containerAnimation: galTween, start: 'left 105%', once: true }
