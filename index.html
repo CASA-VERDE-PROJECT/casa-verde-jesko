@@ -271,16 +271,7 @@ a{color:inherit;text-decoration:none}
 .esp p{margin-top:8px;font-size:14px;line-height:1.5;color:var(--taupe);max-width:36ch}
 
 /* ---------- reservar ---------- */
-.pedir{position:relative;min-height:max(100svh,calc(100vw * .7));display:flex;flex-direction:column;justify-content:flex-end;padding:140px var(--gut) 60px;overflow:hidden}
-.pedir-foto{position:absolute;inset:0;background:url('img/fachada.jpg') center 42%/cover;will-change:transform}
-.pedir::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(13,10,9,.18) 0%,rgba(13,10,9,0) 30%,rgba(13,10,9,.1) 55%,rgba(13,10,9,.78) 100%)}
-.pedir>*:not(.pedir-foto){position:relative;z-index:2}
-.pedir h2{font-size:clamp(46px,7vw,124px);font-weight:500;letter-spacing:-.055em;line-height:.9;font-variation-settings:var(--ancho)}
-.pedir-fila{display:grid;grid-template-columns:1fr auto;gap:30px;align-items:end;margin-top:44px;padding-top:22px;border-top:1px solid rgba(255,248,237,.4)}
-.pedir-fila p{font-size:15px;line-height:1.55;max-width:46ch;color:rgba(255,248,237,.86)}
 .btn{display:inline-flex;align-items:center;gap:16px;background:var(--base);color:var(--ink);border-radius:999px;padding:17px 30px;font-size:15px;font-weight:600;transition:color .45s}
-.pedir-btns{display:flex;flex-wrap:wrap;gap:12px}
-.btn-linea{background:transparent;color:var(--base);box-shadow:inset 0 0 0 1px rgba(255,248,237,.7)}
 /* ---------- efectos de botones (como Caraqueña Studio, sin la flecha) ----------
    relleno que sube con borde curvo, texto que rueda hacia arriba, iman con el mouse y leve presion al hacer clic */
 .btn,.reservar .pill{position:relative;overflow:hidden;isolation:isolate}
@@ -306,7 +297,6 @@ a{color:inherit;text-decoration:none}
   .btn:hover::before,.reservar:hover .pill::before{transform:translateY(0);border-radius:0}
   .btn:hover .roll>span,.reservar:hover .roll>span{transform:translateY(-100%)}
 }
-@media (max-width:600px){.pedir-btns{gap:10px}.pedir-btns .btn{padding:15px 20px;gap:10px;font-size:14px}}
 
 /* ---------- telefono ---------- */
 @media (max-width:860px){
@@ -330,8 +320,6 @@ a{color:inherit;text-decoration:none}
   .ficha-grid{grid-template-columns:1fr}
   .esp-cab{flex-direction:column;align-items:flex-start}
   .esp{width:78vw}
-  .pedir-fila{grid-template-columns:1fr}
-  .pedir-foto{background-position:22% 30%}
 }
 @media (prefers-reduced-motion:reduce){
   .manifiesto .pal{opacity:1;filter:none}
@@ -406,7 +394,7 @@ html{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 input,textarea,select{-webkit-user-select:text;user-select:text}
 
 /* fondos de las secciones de abajo: se piden al acercarse (ver script "fondos diferidos") */
-html.js .cen-foto:not(.bg-on),html.js .pedir-foto:not(.bg-on){background-image:none}
+html.js .cen-foto:not(.bg-on){background-image:none}
 html.js footer:not(.bg-on){background:#0f1615}
 /* ---------- ajustes finos para telefono ---------- */
 .reservar .pill{white-space:nowrap}
@@ -529,7 +517,7 @@ setTimeout(function(){
 <nav class="nav" aria-label="Principal">
   <div class="nav-links"><a href="#casa">La casa</a><a href="#espacios">Espacios</a><a href="#la-lancha">Lancha</a><a href="galeria.html">Galería</a></div>
   <a class="nav-mark" href="#top"><img src="img/logo-casa-verde.png" alt="Casa Verde" width="673" height="395"></a>
-  <div class="nav-der"><a href="#reservar">Reservar</a></div>
+  <div class="nav-der"><a href="https://wa.me/584123030330?text=Hola%2C%20quiero%20informaci%C3%B3n%20para%20reservar%20Casa%20Verde." target="_blank" rel="noopener">Reservar</a></div>
   <a class="nav-gal" href="galeria.html">Galería</a>
 </nav>
 
@@ -729,17 +717,6 @@ setTimeout(function(){
     </div>
   </section>
 
-  <section class="pedir" id="reservar" aria-labelledby="t-res">
-    <div class="pedir-foto" id="pedirFoto" role="img" aria-label="Fachada de Casa Verde vista desde el agua"></div>
-    <h2 id="t-res">Reserva<br>Casa Verde</h2>
-    <div class="pedir-fila">
-      <p>Escríbenos por WhatsApp con tus fechas y cuántos son, y te respondemos con disponibilidad.</p>
-      <div class="pedir-btns">
-        <a class="btn" href="https://wa.me/584123030330?text=Hola%2C%20quiero%20informaci%C3%B3n%20para%20reservar%20Casa%20Verde." target="_blank" rel="noopener">Escribir por WhatsApp</a>
-        <a class="btn btn-linea btn-galeria" href="galeria.html">Galería completa</a>
-      </div>
-    </div>
-  </section>
 </main>
 
 <!-- ubicacion con Google Maps (del proyecto viejo) -->
@@ -767,7 +744,7 @@ setTimeout(function(){
       <li><a href="#casa">La Casa</a></li>
       <li><a href="#espacios">Espacios</a></li>
       <li><a href="galeria.html">Galería</a></li>
-      <li><a href="#reservar">Reservar</a></li>
+      <li><a href="https://wa.me/584123030330?text=Hola%2C%20quiero%20informaci%C3%B3n%20para%20reservar%20Casa%20Verde." target="_blank" rel="noopener">Reservar</a></li>
     </ul>
     <div class="foot-socials">
       <a href="https://www.instagram.com/casaverdelosroques" target="_blank" rel="noopener" aria-label="Instagram">
@@ -1030,9 +1007,8 @@ setTimeout(function(){
   var o = {v: 0}, cuenta = document.getElementById('cuenta');
   gsap.to(o, {v: 10, duration: 1.4, ease: 'power3.out', onUpdate: function(){ cuenta.textContent = Math.round(o.v); },
     scrollTrigger: {trigger: '.ficha', start: 'top 70%', once: true}});
-  gsap.fromTo('#pedirFoto', {scale: 1.2}, {scale: 1, ease: 'none', scrollTrigger: {trigger: '.pedir', start: 'top bottom', end: 'bottom bottom', scrub: true}});
 
-  /* nav y boton cambian de tinta sobre lo claro; el boton se guarda al llegar a reservar */
+  /* nav y boton cambian de tinta sobre lo claro; el boton se guarda al llegar al pie */
   var nav = document.querySelector('.nav'), btn = document.getElementById('reservarBtn');
   /* se mira si alguna seccion clara esta bajo el menu (con dos vecinas, el orden de los avisos no importa) */
   var claras = ['.flota', '.cuartos', '.manifiesto', '.ficha', '.espacios', '.location'].map(function(sel){
@@ -1046,7 +1022,7 @@ setTimeout(function(){
     return ScrollTrigger.create({trigger: sel, start: 'top bottom-=60', end: 'bottom bottom-=60', onToggle: function(){
       btn.classList.toggle('tinta', clarasBtn.some(function(t){ return t && t.isActive; })); }});
   });
-  ScrollTrigger.create({trigger: '.pedir', start: 'top 70%', end: function(){ return document.documentElement.scrollHeight + 2000; },
+  ScrollTrigger.create({trigger: 'footer', start: 'top 70%', end: function(){ return document.documentElement.scrollHeight + 2000; },
     onToggle: function(self){ btn.classList.toggle('guardado', self.isActive); }});
 
   addEventListener('load', function(){ medir(); ScrollTrigger.refresh(); });
@@ -1069,9 +1045,9 @@ setTimeout(function(){
 })();
 </script>
 <script>
-/* fondos diferidos: la foto de la lancha, la de reserva y la del footer se piden poco antes de llegar */
+/* fondos diferidos: la foto de la lancha y la del footer se piden poco antes de llegar */
 (function(){
-  var els = document.querySelectorAll('.cen-foto, .pedir-foto, footer');
+  var els = document.querySelectorAll('.cen-foto, footer');
   if (!('IntersectionObserver' in window)) { els.forEach(function(e){ e.classList.add('bg-on'); }); return; }
   var io = new IntersectionObserver(function(es){
     es.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('bg-on'); io.unobserve(e.target); } });
@@ -1203,7 +1179,7 @@ document.querySelectorAll('.carta-fotos').forEach(function(box){
 })();
 </script>
 <script>
-/* telefono: los botones flotantes se esconden sobre la reserva y el pie, que ya tienen WhatsApp e Instagram */
+/* telefono: los botones flotantes se esconden sobre el pie, que ya tiene WhatsApp e Instagram */
 (function(){
   if(!('IntersectionObserver' in window)) return;
   var vistos = new Set();
@@ -1211,7 +1187,7 @@ document.querySelectorAll('.carta-fotos').forEach(function(box){
     es.forEach(function(e){ if(e.isIntersecting) vistos.add(e.target); else vistos.delete(e.target); });
     document.body.classList.toggle('sin-flotantes', vistos.size > 0);
   }, {rootMargin: '0px 0px -40% 0px'});
-  document.querySelectorAll('.pedir, footer').forEach(function(el){ io.observe(el); });
+  document.querySelectorAll('footer').forEach(function(el){ io.observe(el); });
 })();
 </script>
 </body>
