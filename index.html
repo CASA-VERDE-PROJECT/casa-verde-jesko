@@ -171,15 +171,15 @@ a{color:inherit;text-decoration:none}
 .cuartos-cab{text-align:center}
 .cuartos-cab h2{font-size:clamp(34px,4.4vw,72px);font-weight:500;letter-spacing:-.045em;line-height:.98;font-variation-settings:var(--ancho)}
 .cuartos-cab p{margin-top:16px;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--taupe)}
-.cartas{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,2.4vw,36px);max-width:1320px;margin:clamp(48px,6vw,80px) auto 0;align-items:start}
-.carta{min-width:0}
-.carta-cinta{position:relative;z-index:2;background:#00694f;color:#fff;border-radius:18px;padding:16px 22px;text-align:center;font-size:clamp(18px,1.7vw,24px);font-weight:500;letter-spacing:.02em;text-transform:uppercase;font-variation-settings:var(--ancho);transform:rotate(-2deg);box-shadow:0 10px 30px rgba(0,60,45,.18)}
-.carta-cuerpo{background:#fff;border-radius:20px;margin-top:-12px;padding:22px 18px 18px;box-shadow:0 30px 60px rgba(49,39,38,.14)}
-.carta-fotos{position:relative;border-radius:12px;overflow:hidden;background:#f1ece2}
+.cartas{max-width:1320px;margin:clamp(56px,7vw,96px) auto 0}
+.carta{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(28px,5vw,80px);align-items:end;padding:clamp(28px,3.4vw,44px) 0;border-top:1px solid rgba(49,39,38,.18);min-width:0}
+.carta:last-child{border-bottom:1px solid rgba(49,39,38,.18)}
+.carta:nth-child(2) .carta-fotos{order:2}
+.carta-fotos{position:relative;border-radius:4px;overflow:hidden;background:#f1ece2}
 .cf-pista{display:flex;margin:0;padding:0;list-style:none;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;outline:none}
 .cf-pista::-webkit-scrollbar{display:none}
 .cf-pista li{flex:0 0 100%;scroll-snap-align:start;position:relative}
-.cf-pista img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;display:block}
+.cf-pista img{width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;display:block}
 .cf-et{position:absolute;left:10px;top:10px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:rgba(255,255,255,.92);color:#00694f;padding:6px 9px;border-radius:999px}
 .cf-num{position:absolute;right:10px;bottom:10px;font-size:11px;font-weight:600;letter-spacing:.06em;background:rgba(15,35,29,.6);color:#fff;padding:5px 9px;border-radius:999px;font-variant-numeric:tabular-nums;pointer-events:none}
 .cf-num b{font-weight:600}
@@ -188,14 +188,16 @@ a{color:inherit;text-decoration:none}
 .cf-flecha.prev{left:10px}.cf-flecha.next{right:10px}
 .cf-flecha:disabled{opacity:0;pointer-events:none}
 .cf-flecha:focus-visible,.cf-pista:focus-visible{outline:2px solid #00694f;outline-offset:2px}
-.carta-datos{display:grid;grid-template-columns:1.4fr 1fr;gap:10px;margin-top:16px}
-.carta-datos div{display:flex;flex-direction:column;gap:4px}
-.carta-datos .va{font-size:14px;font-weight:600;letter-spacing:-.01em}
-.carta-datos .personas{color:#00694f}
-/* lo que tienen todos los cuartos */
-.carta-incluye{list-style:none;margin:14px 0 0;padding:12px 0 0;border-top:1px solid rgba(49,39,38,.1);display:flex;flex-wrap:wrap;gap:6px}
-.carta-incluye li{font-size:11.5px;font-weight:600;line-height:1;padding:7px 10px;border-radius:999px;background:rgba(0,194,146,.1);color:#00694f}
-@media (max-width:1060px){.cartas{grid-template-columns:minmax(0,520px);justify-content:center;gap:44px}}
+.carta-texto{min-width:0;padding-bottom:4px}
+.carta-num{display:block;font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--taupe);font-variant-numeric:tabular-nums}
+.carta-nombre{margin-top:clamp(14px,2vw,26px);font-size:clamp(32px,3.6vw,60px);font-weight:500;letter-spacing:-.045em;line-height:.96;font-variation-settings:var(--ancho)}
+.carta-datos{margin-top:clamp(26px,4vw,52px);border-top:1px solid rgba(49,39,38,.18)}
+.carta-datos div{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:14px 0;border-bottom:1px solid rgba(49,39,38,.18)}
+.carta-datos .va{font-size:15px;font-weight:600;letter-spacing:-.01em;text-align:right}
+.carta-incluye{list-style:none;margin:16px 0 0;padding:0;font-size:13px;line-height:1.6;color:var(--taupe)}
+.carta-incluye li{display:inline}
+.carta-incluye li+li::before{content:" · "}
+@media (max-width:860px){.carta{grid-template-columns:1fr;gap:22px;align-items:start}.carta:nth-child(2) .carta-fotos{order:0}}
 /* ---------- cenital ---------- */
 .cenital{height:220vh;position:relative;background:var(--ink-deep)}
 .cenital .escena{display:grid;place-items:center}
@@ -606,25 +608,28 @@ setTimeout(function(){
       </div>
     <div class="cartas">
       <article class="carta">
-        <div class="carta-cinta">Cuarto principal</div>
-        <div class="carta-cuerpo">
           <div class="carta-fotos" aria-roledescription="carrusel" aria-label="Fotos del cuarto"><ul class="cf-pista" tabindex="0"><li><img src="img/cuartos/fotos/c1-1.jpg" width="1000" height="750" alt="Cuarto principal con cabecera azul y televisor" loading="lazy" decoding="async"></li><li><img src="img/cuartos/fotos/c1-2.jpg" width="1000" height="750" alt="Cama del cuarto principal y televisor" loading="lazy" decoding="async"></li><li><img src="img/cuartos/fotos/c1-3.jpg" width="1000" height="750" alt="Cabecera azul del cuarto principal" loading="lazy" decoding="async"></li><li><img src="img/cuartos/fotos/c1-4.jpg" width="1000" height="750" alt="Cama del cuarto principal" loading="lazy" decoding="async"></li><li><img src="img/cuartos/fotos/c1-5.jpg" width="1000" height="750" alt="Mesa de noche del cuarto principal" loading="lazy" decoding="async"></li><li><img src="img/cuartos/fotos/c1-6.jpg" width="1000" height="750" alt="Cuarto principal con la puerta del baño" loading="lazy" decoding="async"></li><li><img src="img/cuartos/fotos/c1-7.jpg" width="1000" height="750" alt="Cojines del cuarto principal" loading="lazy" decoding="async"></li><li><img src="img/cuartos/fotos/c1-8.jpg" width="1000" height="750" alt="Toallas Casa Verde en la cama" loading="lazy" decoding="async"></li><li><img src="img/cuartos/fotos/c1-9.jpg" width="1000" height="750" alt="Baño del cuarto principal" loading="lazy" decoding="async"><span class="cf-et">Baño</span></li></ul><span class="cf-num"><b>1</b> / 9</span><button class="cf-flecha prev" type="button" aria-label="Foto anterior"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12.5 4 6.5 10l6 6"/></svg></button><button class="cf-flecha next" type="button" aria-label="Foto siguiente"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4l6 6-6 6"/></svg></button></div>
+        <div class="carta-texto">
+          <span class="carta-num">01</span>
+          <h3 class="carta-nombre">Cuarto principal</h3>
           <div class="carta-datos"><div><span class="et">Camas</span><span class="va">Matrimonial + litera</span></div><div><span class="et">Personas</span><span class="va personas" data-cuarto="1">4 personas</span></div></div>
           <ul class="carta-incluye" aria-label="Incluye"><li>TV</li><li>Baño privado</li><li>Toallas y sábanas: cambio diario</li></ul>
         </div>
       </article>
       <article class="carta">
-        <div class="carta-cinta">Cuarto dos</div>
-        <div class="carta-cuerpo">
           <div class="carta-fotos" aria-roledescription="carrusel" aria-label="Fotos del cuarto"><ul class="cf-pista" tabindex="0"><li><img src="img/cuartos/fotos/c2-1.jpg" width="1000" height="750" alt="Cama del cuarto dos con cabecera azul" loading="lazy" decoding="async"></li><li><img src="img/cuartos/fotos/c2-2.jpg" width="1000" height="750" alt="Litera del cuarto dos" loading="lazy" decoding="async"></li><li><img src="img/cuartos/fotos/c2-3.jpg" width="1000" height="750" alt="Cojines del cuarto dos" loading="lazy" decoding="async"></li><li><img src="img/cuartos/fotos/c2-4.jpg" width="1000" height="750" alt="Ventana del cuarto dos" loading="lazy" decoding="async"></li><li><img src="img/cuartos/fotos/c2-5.jpg" width="1000" height="750" alt="Una pausa para leer en el cuarto dos" loading="lazy" decoding="async"></li></ul><span class="cf-num"><b>1</b> / 5</span><button class="cf-flecha prev" type="button" aria-label="Foto anterior"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12.5 4 6.5 10l6 6"/></svg></button><button class="cf-flecha next" type="button" aria-label="Foto siguiente"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4l6 6-6 6"/></svg></button></div>
+        <div class="carta-texto">
+          <span class="carta-num">02</span>
+          <h3 class="carta-nombre">Cuarto dos</h3>
           <div class="carta-datos"><div><span class="et">Camas</span><span class="va">Matrimonial + litera</span></div><div><span class="et">Personas</span><span class="va personas" data-cuarto="2">4 personas</span></div></div>
           <ul class="carta-incluye" aria-label="Incluye"><li>TV</li><li>Baño privado</li><li>Aire acondicionado</li><li>Toallas y sábanas: cambio diario</li></ul>
         </div>
       </article>
       <article class="carta">
-        <div class="carta-cinta">Cuarto tres</div>
-        <div class="carta-cuerpo">
           <div class="carta-fotos" aria-roledescription="carrusel" aria-label="Fotos del cuarto"><ul class="cf-pista" tabindex="0"><li><img src="img/cuartos/fotos/c3-1.jpg" width="1000" height="750" alt="Cuarto tres con cabecera verde agua" loading="lazy" decoding="async"></li><li><img src="img/cuartos/fotos/c3-2.jpg" width="1000" height="750" alt="Cama del cuarto tres" loading="lazy" decoding="async"></li><li><img src="img/cuartos/fotos/c3-3.jpg" width="1000" height="750" alt="Cojines de langosta del cuarto tres" loading="lazy" decoding="async"></li><li><img src="img/cuartos/fotos/c3-4.jpg" width="1000" height="750" alt="Cabecera verde agua del cuarto tres" loading="lazy" decoding="async"></li><li><img src="img/cuartos/fotos/c3-5.jpg" width="1000" height="750" alt="Detalle de los cojines del cuarto tres" loading="lazy" decoding="async"></li><li><img src="img/cuartos/fotos/c3-6.jpg" width="1000" height="750" alt="Lavamanos del baño del cuarto tres" loading="lazy" decoding="async"><span class="cf-et">Baño</span></li><li><img src="img/cuartos/fotos/c3-7.jpg" width="1000" height="750" alt="Ducha del baño del cuarto tres" loading="lazy" decoding="async"><span class="cf-et">Baño</span></li></ul><span class="cf-num"><b>1</b> / 7</span><button class="cf-flecha prev" type="button" aria-label="Foto anterior"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12.5 4 6.5 10l6 6"/></svg></button><button class="cf-flecha next" type="button" aria-label="Foto siguiente"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4l6 6-6 6"/></svg></button></div>
+        <div class="carta-texto">
+          <span class="carta-num">03</span>
+          <h3 class="carta-nombre">Cuarto tres</h3>
           <div class="carta-datos"><div><span class="et">Camas</span><span class="va">Matrimonial</span></div><div><span class="et">Personas</span><span class="va personas" data-cuarto="3">2 personas</span></div></div>
           <ul class="carta-incluye" aria-label="Incluye"><li>TV</li><li>Baño privado</li><li>Aire acondicionado</li><li>Toallas y sábanas: cambio diario</li></ul>
         </div>
