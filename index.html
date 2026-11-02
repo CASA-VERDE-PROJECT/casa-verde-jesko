@@ -175,10 +175,10 @@ a{color:inherit;text-decoration:none}
 .carta{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(28px,5vw,80px);align-items:end;padding:clamp(28px,3.4vw,44px) 0;border-top:1px solid rgba(49,39,38,.18);min-width:0}
 .carta:last-child{border-bottom:1px solid rgba(49,39,38,.18)}
 .carta:nth-child(2) .carta-fotos{order:2}
-.carta-fotos{position:relative;border-radius:4px;overflow:hidden;background:#f1ece2}
+.carta-fotos{position:relative;border-radius:4px;overflow:hidden;background:transparent}
 .cf-pista{display:flex;margin:0;padding:0;list-style:none;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;outline:none}
 .cf-pista::-webkit-scrollbar{display:none}
-.cf-pista li{flex:0 0 100%;scroll-snap-align:start;position:relative}
+.cf-pista li{flex:0 0 100%;scroll-snap-align:start;position:relative;clip-path:inset(0 1px)}
 .cf-pista img{width:100%;height:auto;aspect-ratio:4/3;object-fit:contain;display:block}
 .cf-et{position:absolute;left:10px;top:10px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:rgba(255,255,255,.92);color:#00694f;padding:6px 9px;border-radius:999px}
 .cf-num{position:absolute;right:10px;bottom:10px;font-size:11px;font-weight:600;letter-spacing:.06em;background:rgba(15,35,29,.6);color:#fff;padding:5px 9px;border-radius:999px;font-variant-numeric:tabular-nums;pointer-events:none}
