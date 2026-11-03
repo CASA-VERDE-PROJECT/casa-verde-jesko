@@ -70,7 +70,9 @@ a{color:inherit;text-decoration:none}
 .hero{height:680vh;position:relative}
 .escena{position:sticky;top:0;height:100vh;height:100lvh;overflow:hidden}
 .cabina{position:absolute;inset:0;z-index:0;background:#1c1b1a}
-.mar{position:absolute;inset:0;z-index:1;overflow:hidden}
+.mar{position:absolute;inset:0;z-index:1;overflow:hidden;transform-origin:0 0;will-change:transform}
+/* el recorte del hueco se hace con transformaciones (la tarjeta grafica lo mueve sola, sin redibujar la foto en cada cuadro) */
+.mar-in{position:absolute;inset:0;transform-origin:0 0;will-change:transform}
 /* una sola foto alta: el cielo con la gaviota arriba y la casa abajo; la camara baja de una a otra */
 .mar-foto{position:absolute;left:50%;top:0;width:max(100vw,calc(185svh * .8326));transform:translateX(-50%);will-change:transform}
 .mar-zoom{position:relative;transform-origin:50% 100%;will-change:transform}
@@ -133,7 +135,7 @@ a{color:inherit;text-decoration:none}
           mask-image:linear-gradient(180deg,#000 calc(var(--corte,100%) - 14%),transparent var(--corte,100%))}
 .flota-bote .plano{opacity:.8}
 @media (max-width:860px){
-  .flota{height:560vh}
+  .flota{height:450vh}
   .flota-palabra{font-size:clamp(34px,11vw,52px);top:30%}
   .flota-palabra.der{top:auto;bottom:24%}
   .flota-sub{top:calc(30% + 34px)}
@@ -310,7 +312,7 @@ a{color:inherit;text-decoration:none}
   .nav-mark{justify-self:start}
   .nav-mark img{height:38px}
   .nav-gal{display:block;justify-self:end;font-size:12px;letter-spacing:.14em;text-transform:uppercase}
-  .hero{height:620vh}
+  .hero{height:500vh}
   .frase{font-size:clamp(30px,8.6vw,46px)}
   .frase.izq{left:20px;top:11vh}
   .frase.der{display:none}
@@ -596,11 +598,11 @@ setTimeout(function(){
   <section class="hero" aria-label="Casa Verde">
     <div class="escena">
       <div class="cabina"></div>
-      <div class="mar"><div class="mar-foto" id="marFoto"><div class="mar-zoom" id="marZoom">
+      <div class="mar" id="marCorte"><div class="mar-in" id="marIn"><div class="mar-foto" id="marFoto"><div class="mar-zoom" id="marZoom">
         <img src="img/cielo-casa.jpg" width="1547" height="1858" alt="Cielo con una gaviota y la luna sobre la fachada de Casa Verde frente al agua">
         <img class="capa" id="capaTarde" src="img/atardecer.jpg" width="1547" height="967" alt="" aria-hidden="true">
         <img class="capa" id="capaNoche" src="img/noche.jpg" width="1547" height="967" alt="" aria-hidden="true">
-      </div></div></div>
+      </div></div></div></div>
       <div class="pared" id="pared"><img class="ventana" id="ventana" src="img/ventana.jpg" width="965" height="1649" alt="Ventana de una habitación con celosías abiertas hacia la playa"></div>
       <div class="tipo" id="tipo">
         <h1 class="frase izq">Despierta<span class="difusa">frente al mar</span></h1>
@@ -984,7 +986,9 @@ setTimeout(function(){
   var marZoom = document.getElementById('marZoom'), capaTarde = document.getElementById('capaTarde'), capaNoche = document.getElementById('capaNoche');
   var tipo = document.getElementById('tipo'), meta = document.getElementById('meta');
   var g = {k0:1, kMax:1, cx:0, cy:0, hw:0, hh:0};
-  var mar = document.querySelector('.mar');
+  /* telefono: la animacion sigue al dedo casi sin retraso y sin desenfoques animados (pesan mucho en la tarjeta grafica) */
+  var tactil = matchMedia('(hover: none)').matches, retraso = tactil ? .35 : 1.2;
+  var mar = document.getElementById('marCorte'), marIn = document.getElementById('marIn');
 
   function medir(){
     var vw = innerWidth, vh = innerHeight;
@@ -1006,13 +1010,20 @@ setTimeout(function(){
     /* el mar solo se ve por el hueco; el recorte va un pelo por dentro del marco */
     var w = g.hw * k * .99, h = g.hh * k * .99, vw = innerWidth, vh = innerHeight;
     var t = g.cy - h, l = g.cx - w, b = vh - (g.cy + h), r = vw - (g.cx + w);
-    mar.style.clipPath = (t <= 0 && l <= 0 && b <= 0 && r <= 0) ? 'none'
-      : 'inset(' + Math.max(0, t) + 'px ' + Math.max(0, r) + 'px ' + Math.max(0, b) + 'px ' + Math.max(0, l) + 'px)';
+    /* mientras la pared esta opaca el mar no se ve: no se dibuja */
+    var oculto = s <= .5;
+    if(oculto !== mar._oculto){ mar.style.visibility = oculto ? 'hidden' : 'visible'; mar._oculto = oculto; }
+    if(oculto) return;
+    if(t <= 0 && l <= 0 && b <= 0 && r <= 0){ mar.style.transform = 'none'; marIn.style.transform = 'none'; return; }
+    /* recorte con transformaciones: el contenedor se encoge al hueco y el contenido se agranda al reves, asi queda igual */
+    var x = Math.max(0, l), y = Math.max(0, t), cw = Math.max(1, vw - x - Math.max(0, r)), ch = Math.max(1, vh - y - Math.max(0, b));
+    mar.style.transform = 'translate(' + x + 'px,' + y + 'px) scale(' + (cw / vw) + ',' + (ch / vh) + ')';
+    marIn.style.transform = 'scale(' + (vw / cw) + ',' + (vh / ch) + ') translate(' + (-x) + 'px,' + (-y) + 'px)';
   }
   medir(); pintar(0);
 
   ScrollTrigger.create({
-    trigger: '.hero', start: 'top top', end: 'bottom bottom', scrub: 1.2,
+    trigger: '.hero', start: 'top top', end: 'bottom bottom', scrub: retraso,
     onUpdate: function(self){
       var p = self.progress;
       var a = gsap.utils.clamp(0, 1, (p - .04) / .32);
@@ -1031,8 +1042,8 @@ setTimeout(function(){
       gsap.set(marZoom, {scale: 1 + (innerWidth <= 860 ? .26 : .13) * z * z * (3 - 2 * z)});
       gsap.set(capaTarde, {opacity: ss(.68, .84)});
       gsap.set(capaNoche, {opacity: ss(.80, .97)});
-      var sale = gsap.utils.clamp(0, 1, (p - .03) / .26);
-      gsap.set(tipo, {opacity: 1 - sale, filter: 'blur(' + (sale * 18) + 'px)'});
+      var sale = gsap.utils.clamp(0, 1, (p - .03) / (tactil ? .14 : .26));
+      gsap.set(tipo, tactil ? {opacity: 1 - sale, y: -sale * 30} : {opacity: 1 - sale, filter: 'blur(' + (sale * 18) + 'px)'});
       gsap.set(meta, {opacity: 1 - sale, y: sale * 26});
     }
   });
@@ -1090,7 +1101,7 @@ setTimeout(function(){
       fondo.style.opacity = tramo(p, .1, .46);
       /* en el telefono las palabras se van mientras sube la lancha, para que no queden debajo de ella */
       var sale = movil() ? tramo(p, .1, .26) : tramo(p, .5, .64);
-      palabras.forEach(function(el){ el.style.opacity = 1 - sale; el.style.filter = 'blur(' + (sale * 14) + 'px)'; });
+      palabras.forEach(function(el){ el.style.opacity = 1 - sale; if(!tactil) el.style.filter = 'blur(' + (sale * 14) + 'px)'; });
       ficha.style.opacity = tramo(p, .6, .74);
       bote.style.setProperty('--corte', (114 - tramo(p, .76, .96) * 128) + '%');
       /* el logo se dibuja trazo a trazo y gira en 3D hasta quedar de frente, como en la pantalla de carga */
@@ -1104,7 +1115,7 @@ setTimeout(function(){
       }
     };
     pintarFlota(0);
-    ScrollTrigger.create({trigger: '.flota', start: 'top top', end: 'bottom bottom', scrub: 1.2,
+    ScrollTrigger.create({trigger: '.flota', start: 'top top', end: 'bottom bottom', scrub: retraso,
       onUpdate: function(self){ pintarFlota(self.progress); }});
   }
 
