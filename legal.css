@@ -1,6 +1,5 @@
 /* Páginas legales de Casa Verde: misma paleta y tipografía que el sitio de Diego
    (crema, tinta cálida, verde de la fachada como único acento). */
-@import url('https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..700&display=swap');
 
 :root {
   --ink: #312726; --ink-deep: #16120f; --base: #fff8ed; --paper: #fffdf8;
@@ -112,10 +111,13 @@ td strong { color: var(--verde-dk); }
   .lg-content > p:first-child { font-size: 17px; }
   h2 { margin-top: 48px; padding-top: 24px; gap: 12px; }
   th, td { padding: 12px 14px; }
-  /* que la tabla no se salga de la pantalla: los titulos pueden partirse y, si aun no cabe, se desliza de lado */
-  table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  th { white-space: normal; letter-spacing: .08em; }
-  th, td { padding: 10px 10px; }
+  /* telefono: cada fila de la tabla se vuelve una tarjeta con su titulo encima de cada dato, sin desbordar ni deslizar de lado */
+  table, tbody, tr, td { display: block; width: 100%; }
+  thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  tr { border-bottom: 1px solid var(--hair); padding: 6px 0; }
+  tr:last-child { border-bottom: 0; }
+  td { border-bottom: 0; padding: 6px 0; }
+  td[data-label]::before { content: attr(data-label); display: block; margin-bottom: 2px; font-size: 10.5px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--ink); }
   /* enlaces del pie con area de toque de al menos 24px */
   .lg-foot a { display: inline-block; padding: 5px 0; margin: -5px 0; }
   .lg-box { padding: 18px 20px; }
