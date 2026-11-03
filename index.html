@@ -239,18 +239,21 @@ a{color:inherit;text-decoration:none}
 /* cada foto se ve completa; detras, la misma foto desenfocada llena el marco */
 /* el marco toma la forma de cada foto (sin recortarla ni agrandarla); el espacio que sobra es la pagina */
 .ficha-foto{overflow:visible}
-.fs-marco{position:absolute;left:0;top:0;width:100%;height:100%;overflow:hidden;transition:width .6s cubic-bezier(.65,0,.35,1),height .6s cubic-bezier(.65,0,.35,1),transform .6s cubic-bezier(.65,0,.35,1)}
+/* el marco no cambia de tamano (eso trababa el telefono al pasar de vertical a horizontal): cada foto queda quieta en su tamano
+   y solo se anima el recorte (clip-path) y la posicion de textos y flechas (--x, --y: margen hasta la foto) */
+.fs-marco{position:absolute;inset:0}
+.fs-pista{-webkit-clip-path:inset(0);clip-path:inset(0);transition:clip-path .6s cubic-bezier(.65,0,.35,1),-webkit-clip-path .6s cubic-bezier(.65,0,.35,1)}
 .fs-slide{position:absolute;inset:0;opacity:0;transition:opacity .6s ease}
 .fs-slide.on{opacity:1;z-index:1}
-/* cover: quieto el marco tiene la forma exacta de la foto (no se recorta nada); mientras cambia de forma, las dos fotos llenan el mismo marco en vez de verse dos cuadros encimados */
-.fs-slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.ficha-foto figcaption{position:absolute;z-index:3;left:18px;right:18px;bottom:16px;display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.5);pointer-events:none}
+.fs-slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.ficha-foto figcaption{position:absolute;z-index:3;left:calc(var(--x,0px) + 18px);right:calc(var(--x,0px) + 18px);bottom:calc(var(--y,0px) + 16px);transition:left .6s cubic-bezier(.65,0,.35,1),right .6s cubic-bezier(.65,0,.35,1),top .6s cubic-bezier(.65,0,.35,1),bottom .6s cubic-bezier(.65,0,.35,1);display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.5);pointer-events:none}
 .fs-num{font-variant-numeric:tabular-nums;letter-spacing:.1em;opacity:.85}
 .fs-num b{font-weight:700}
 .fs-flecha{position:absolute;z-index:3;top:50%;width:46px;height:46px;margin-top:-23px;border:0;border-radius:50%;background:rgba(255,248,237,.9);color:var(--ink);display:grid;place-items:center;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.18);transition:background .3s,color .3s,scale .25s ease}
 .fs-flecha svg{width:18px;height:18px}
-.fs-flecha.prev{left:14px}
-.fs-flecha.next{right:14px}
+.fs-flecha.prev{left:calc(var(--x,0px) + 14px)}
+.fs-flecha.next{right:calc(var(--x,0px) + 14px)}
+.fs-flecha{transition:background .3s,color .3s,scale .25s ease,left .6s cubic-bezier(.65,0,.35,1),right .6s cubic-bezier(.65,0,.35,1)}
 .fs-flecha:active{scale:.92}
 @media (hover:hover){.fs-flecha:hover{background:var(--verde);color:#fff}}
 @media (max-width:600px){.fs-flecha{width:40px;height:40px;margin-top:-20px}}
@@ -470,7 +473,7 @@ html.js footer:not(.bg-on){background:#0f1615}
   .ig-float,.wa-float{transition:opacity .35s,transform .35s cubic-bezier(.25,.1,.25,1)}
   body.sin-flotantes .ig-float,body.sin-flotantes .wa-float{opacity:0;pointer-events:none;transform:translateY(14px)}
   /* mini galeria: el contador va arriba, lejos de los botones flotantes */
-  .ficha-foto figcaption{top:16px;flex-direction:column-reverse;justify-content:space-between;align-items:flex-start}
+  .ficha-foto figcaption{top:calc(var(--y,0px) + 16px);flex-direction:column-reverse;justify-content:space-between;align-items:flex-start}
   .ficha-foto .fs-num{align-self:flex-end}
 }
 /* telefono acostado (pantalla muy baja): se aligera cada escena para que nada se monte */
@@ -1259,21 +1262,39 @@ document.querySelectorAll('.carta-fotos').forEach(function(box){
   var ss = [].slice.call(fig.querySelectorAll('.fs-slide')), cap = fig.querySelector('.fs-cap'), num = fig.querySelector('.fs-num b'), i = 0;
   function cargar(k){ var s = ss[(k + ss.length) % ss.length]; s.querySelectorAll('img[data-src]').forEach(function(im){ im.src = im.dataset.src; im.removeAttribute('data-src'); }); }
   function ir(k){
+    var a = i;
     i = (k + ss.length) % ss.length;
+    morph(a, i);
     ss.forEach(function(s, j){ s.classList.toggle('on', j === i); });
     cap.textContent = ss[i].dataset.cap; num.textContent = String(i + 1).padStart(2, '0');
     cargar(i + 1); cargar(i - 1);
     marco();
   }
   /* el marco usa la proporcion real de la foto y queda centrado en su espacio */
-  var mc = fig.querySelector('.fs-marco');
-  function marco(){
-    var im = ss[i].querySelector('.fs-img'), r = im.getAttribute('width') / im.getAttribute('height');
-    var W = fig.clientWidth, H = fig.clientHeight, w = W, h = W / r;
+  var mc = fig.querySelector('.fs-marco'), pi = fig.querySelector('.fs-pista');
+  function caja(im){
+    var r = im.getAttribute('width') / im.getAttribute('height'), W = fig.clientWidth, H = fig.clientHeight, w = W, h = W / r;
     if(h > H){ h = H; w = H * r; }
-    var x = (W - w) / 2;
-    mc.style.width = w + 'px'; mc.style.height = h + 'px';
-    mc.style.transform = 'translate(' + x + 'px,' + (H - h) / 2 + 'px)';
+    return {x: (W - w) / 2, y: (H - h) / 2, w: w, h: h};
+  }
+  /* mientras el recorte pasa de una forma a otra, las dos fotos se agrandan (transform, que el telefono mueve sin trabarse)
+     lo justo para llenar el recorte: se ve un solo marco que cambia de forma, nunca dos cuadros encimados */
+  var EASE = 'transform .6s cubic-bezier(.65,0,.35,1)', quieta = {};
+  function morph(a, b){
+    if(a === b || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var ia = ss[a].querySelector('.fs-img'), ib = ss[b].querySelector('.fs-img'), A = caja(ia), B = caja(ib);
+    clearTimeout(quieta[b]);
+    ib.style.transition = 'none'; ib.style.transform = 'scale(' + Math.max(A.w / B.w, A.h / B.h) + ')';
+    ib.offsetWidth;
+    ib.style.transition = EASE; ib.style.transform = '';
+    ia.style.transition = EASE; ia.style.transform = 'scale(' + Math.max(B.w / A.w, B.h / A.h) + ')';
+    clearTimeout(quieta[a]);
+    quieta[a] = setTimeout(function(){ ia.style.transition = 'none'; ia.style.transform = ''; }, 650);
+  }
+  function marco(){
+    var c = caja(ss[i].querySelector('.fs-img')), k = 'inset(' + c.y + 'px ' + c.x + 'px)';
+    pi.style.webkitClipPath = k; pi.style.clipPath = k;
+    mc.style.setProperty('--x', c.x + 'px'); mc.style.setProperty('--y', c.y + 'px');
   }
   if('ResizeObserver' in window) new ResizeObserver(marco).observe(fig); else addEventListener('resize', marco);
   marco();
