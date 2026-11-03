@@ -104,15 +104,14 @@
       height: 1px; background: rgba(255,255,255,.15);
     }
     .gal-h-bar { height: 100%; width: 0%; background: var(--verde); box-shadow: 0 0 12px rgba(0,194,146,.6); }
-    /* flechas para pasar las fotos en el telefono (el deslizar y el scroll siguen funcionando) */
-    .gal-flechas { display: none; }
-    @media (max-width: 768px) {
-      .gal-flechas { display: flex; gap: 14px; position: absolute; left: 50%; bottom: 64px; transform: translateX(-50%); z-index: 3; }
-      .gal-flecha { width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(255,255,255,.35); background: rgba(0,0,0,.18); color: #fff; display: grid; place-items: center; cursor: pointer; transition: opacity .25s var(--ease), border-color .25s var(--ease); }
-      .gal-flecha:active { border-color: var(--verde); }
-      .gal-flecha:disabled { opacity: .25; }
-      .gal-flecha svg { width: 18px; height: 18px; }
-    }
+    /* flechas para pasar las fotos en PC y telefono (el scroll, el arrastre y el deslizar siguen funcionando) */
+    .gal-flechas { display: flex; gap: 14px; position: absolute; left: 50%; bottom: 64px; transform: translateX(-50%); z-index: 3; }
+    .gal-flecha { width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(255,255,255,.35); background: rgba(0,0,0,.18); color: #fff; display: grid; place-items: center; cursor: pointer; transition: opacity .25s var(--ease), border-color .25s var(--ease), background .25s var(--ease); }
+    .gal-h-sticky.cursor-hidden .gal-flecha { cursor: pointer; }
+    .gal-flecha:active { border-color: var(--verde); }
+    @media (hover: hover) { .gal-flecha:not(:disabled):hover { border-color: var(--verde); background: rgba(0,194,146,.12); } }
+    .gal-flecha:disabled { opacity: .25; cursor: default; }
+    .gal-flecha svg { width: 18px; height: 18px; }
     .no-gsap .gal-flechas { display: none; }
     @media (max-width: 768px) {
       body footer { padding-bottom: 150px; } /* que los botones flotantes no tapen 'Volver' */
@@ -625,6 +624,15 @@ applyLang(lang);
   var galTween = gsap.to(galTrack, {
     x: function(){ return Math.min(0, -(galTrack.scrollWidth - window.innerWidth + 120)); },
     ease: 'none',
+    /* el numero es el de la foto que esta en el centro (se actualiza mientras la fila se mueve) */
+    onUpdate: function(){
+      var cx = window.innerWidth / 2, idx = 1, dmin = Infinity;
+      galItems.forEach(function(item, i){
+        var r = item.getBoundingClientRect(), d = Math.abs(r.left + r.width / 2 - cx);
+        if (d < dmin) { dmin = d; idx = i + 1; }
+      });
+      setCounter(String(idx).padStart(2, '0'));
+    },
     scrollTrigger: {
       trigger: galSection,
       start: 'top top',
@@ -633,8 +641,6 @@ applyLang(lang);
       invalidateOnRefresh: true,
       onUpdate: function(self){
         galBar.style.width = (self.progress * 100) + '%';
-        var idx = Math.min(galItems.length, Math.max(1, Math.round(self.progress * galItems.length) + 1));
-        setCounter(String(idx).padStart(2, '0'));
         if (!isTouch) updateFocus();
       }
     }
@@ -716,7 +722,7 @@ applyLang(lang);
     }, { passive: true });
   }
 
-  /* flechas (telefono): llevan a la foto anterior o siguiente, centrada; el scroll y el deslizar siguen igual */
+  /* flechas (PC y telefono): llevan a la foto anterior o siguiente, centrada; el scroll y el deslizar siguen igual */
   var flechaAnt = galSection.querySelector('.gal-ant'), flechaSig = galSection.querySelector('.gal-sig');
   function posFoto(i){
     var st = galTween.scrollTrigger, rango = st.end - st.start;
@@ -787,8 +793,14 @@ applyLang(lang);
     /* arrastre horizontal → scroll vertical equivalente, con momentum al soltar */
     var dragging = false, startX = 0, startScroll = 0;
     var velo = 0, lastMoveX = 0, lastMoveT = 0;
+    /* sobre las flechas: cursor normal, sin el cursor de arrastre */
+    var flechasBox = galSection.querySelector('.gal-flechas');
+    if (flechasBox) {
+      flechasBox.addEventListener('mouseenter', function(){ cursor.classList.remove('active'); });
+      flechasBox.addEventListener('mouseleave', function(){ if (inGal) cursor.classList.add('active'); });
+    }
     sticky.addEventListener('pointerdown', function(e){
-      if (!inGal) return;
+      if (!inGal || e.target.closest('.gal-flechas')) return;
       dragging = true;
       startX = e.clientX; startScroll = window.scrollY;
       velo = 0; lastMoveX = e.clientX; lastMoveT = performance.now();
