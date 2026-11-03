@@ -532,8 +532,9 @@ html.js footer:not(.bg-on){background:#0f1615}
   .cr-barra::after{content:"";position:absolute;left:50%;top:50%;width:22px;height:22px;margin:-11px 0 0 -11px;border-radius:50%;background:var(--verde);border:3px solid #fff;box-shadow:0 2px 10px rgba(49,39,38,.28);box-sizing:border-box;transition:transform .25s}
   .carril-riel:hover .cr-barra::after,.carril-riel.agarrado .cr-barra::after{transform:scale(1.18)}
 }
-/* telefono: velo oscuro detras del texto del inicio para que se lea sobre la foto de la ventana */
-@media (max-width:768px){.meta::before{content:"";position:absolute;z-index:-1;left:0;right:0;top:-70px;bottom:-60px;background:linear-gradient(to top,rgba(24,21,20,0),rgba(24,21,20,.86) 24%,rgba(24,21,20,.7) 62%,rgba(24,21,20,0));pointer-events:none}}
+/* telefono: sombra marcada en el texto del inicio para que se lea sobre la foto de la ventana sin oscurecer el mar */
+@media (max-width:768px){.meta h2,.meta p,.meta-pie{text-shadow:0 1px 3px rgba(0,0,0,.75),0 0 14px rgba(0,0,0,.6),0 0 30px rgba(0,0,0,.45)}}
+@media (max-width:860px){.manifiesto .pal{filter:none}}
 /* Galeria: el unico boton en naranja Caraquena (#f05a25); todo lo demas queda en el verde de Casa Verde */
 :root{--naranja:#f05a25}
 .nav-pill.naranja{background:var(--naranja);box-shadow:0 4px 14px rgba(240,90,37,.3)}
@@ -1122,8 +1123,12 @@ setTimeout(function(){
   /* manifiesto: sale del desenfoque palabra por palabra */
   var mt = document.getElementById('manif');
   mt.innerHTML = mt.textContent.trim().split(/\s+/).map(function(w){ return '<span class="pal">' + w + '</span>'; }).join(' ');
-  gsap.to(mt.querySelectorAll('.pal'), {opacity: 1, filter: 'blur(0px)', ease: 'none', stagger: .05,
-    scrollTrigger: {trigger: mt, start: 'top 82%', end: 'bottom 45%', scrub: .5}});
+  /* telefono: las palabras terminan de aparecer cuando el parrafo esta entero en pantalla (antes las ultimas seguian
+     transparentes mientras se leia) y solo cambia la opacidad, sin desenfoque */
+  var celManif = matchMedia('(max-width: 860px)').matches;
+  gsap.to(mt.querySelectorAll('.pal'), celManif
+    ? {opacity: 1, ease: 'none', stagger: .05, scrollTrigger: {trigger: mt, start: 'top 100%', end: 'bottom 88%', scrub: .35}}
+    : {opacity: 1, filter: 'blur(0px)', ease: 'none', stagger: .05, scrollTrigger: {trigger: mt, start: 'top 82%', end: 'bottom 45%', scrub: .5}});
 
   /* cenital: la toma se acerca y las dos palabras se cierran hacia la lancha */
   gsap.utils.toArray('.cenital').forEach(function(sec){
