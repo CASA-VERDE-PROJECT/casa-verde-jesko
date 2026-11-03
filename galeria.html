@@ -104,6 +104,16 @@
       height: 1px; background: rgba(255,255,255,.15);
     }
     .gal-h-bar { height: 100%; width: 0%; background: var(--verde); box-shadow: 0 0 12px rgba(0,194,146,.6); }
+    /* flechas para pasar las fotos en el telefono (el deslizar y el scroll siguen funcionando) */
+    .gal-flechas { display: none; }
+    @media (max-width: 768px) {
+      .gal-flechas { display: flex; gap: 14px; position: absolute; left: 50%; bottom: 64px; transform: translateX(-50%); z-index: 3; }
+      .gal-flecha { width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(255,255,255,.35); background: rgba(0,0,0,.18); color: #fff; display: grid; place-items: center; cursor: pointer; transition: opacity .25s var(--ease), border-color .25s var(--ease); }
+      .gal-flecha:active { border-color: var(--verde); }
+      .gal-flecha:disabled { opacity: .25; }
+      .gal-flecha svg { width: 18px; height: 18px; }
+    }
+    .no-gsap .gal-flechas { display: none; }
     @media (max-width: 768px) {
       body footer { padding-bottom: 150px; } /* que los botones flotantes no tapen 'Volver' */
       .gal-h-section { height: 1150vh; } /* paseo más lento y sereno en móvil */
@@ -453,6 +463,10 @@ input,textarea,select{-webkit-user-select:text;user-select:text}
         <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-18.jpeg" style="--ar:0.7500" width="1650" height="2200" alt="Atardecer en Los Roques — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
     </div>
+    <div class="gal-flechas">
+      <button type="button" class="gal-flecha gal-ant" aria-label="Foto anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <button type="button" class="gal-flecha gal-sig" aria-label="Foto siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+    </div>
     <div class="gal-h-progress"><div class="gal-h-bar"></div></div>
   </div>
 </section>
@@ -700,6 +714,46 @@ applyLang(lang);
       }
       tActive = false; tHoriz = false;
     }, { passive: true });
+  }
+
+  /* flechas (telefono): llevan a la foto anterior o siguiente, centrada; el scroll y el deslizar siguen igual */
+  var flechaAnt = galSection.querySelector('.gal-ant'), flechaSig = galSection.querySelector('.gal-sig');
+  function posFoto(i){
+    var st = galTween.scrollTrigger, rango = st.end - st.start;
+    var maxX = Math.max(1, galTrack.scrollWidth - window.innerWidth + 120);
+    var tr = galTrack.getBoundingClientRect(), x0 = tr.left - gsap.getProperty(galTrack, 'x');
+    var r = galItems[i].getBoundingClientRect();
+    var q = gsap.utils.clamp(0, 1, -(window.innerWidth / 2 - x0 - (r.left + r.width / 2 - tr.left)) / maxX);
+    return st.start + q * rango;
+  }
+  function fotoActual(){
+    var cx = window.innerWidth / 2, best = 0, bestDist = Infinity;
+    galItems.forEach(function(item, i){
+      var r = item.getBoundingClientRect(), d = Math.abs(r.left + r.width / 2 - cx);
+      if (d < bestDist) { bestDist = d; best = i; }
+    });
+    return best;
+  }
+  var destinoFlecha = -1;
+  function irA(paso){
+    var base = destinoFlecha >= 0 ? destinoFlecha : fotoActual();
+    var i = Math.max(0, Math.min(galItems.length - 1, base + paso));
+    destinoFlecha = i;
+    var y = posFoto(i);
+    var listo = function(){ destinoFlecha = -1; };
+    if (window.lenis) window.lenis.scrollTo(y, { duration: 0.7, onComplete: listo, easing: function(t){ return t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; } });
+    else { window.scrollTo({ top: y, behavior: 'smooth' }); setTimeout(listo, 700); }
+  }
+  function estadoFlechas(){
+    var i = fotoActual();
+    flechaAnt.disabled = i <= 0;
+    flechaSig.disabled = i >= galItems.length - 1;
+  }
+  if (flechaAnt && flechaSig) {
+    flechaAnt.addEventListener('click', function(){ irA(-1); });
+    flechaSig.addEventListener('click', function(){ irA(1); });
+    window.addEventListener('scroll', function(){ requestAnimationFrame(estadoFlechas); }, { passive: true });
+    estadoFlechas();
   }
 
   /* Cursor drag elegante + arrastre con momentum (solo desktop) */
