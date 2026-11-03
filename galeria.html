@@ -106,8 +106,8 @@
     .gal-h-bar { height: 100%; width: 0%; background: var(--verde); box-shadow: 0 0 12px rgba(0,194,146,.6); }
     /* flechas para pasar las fotos en PC y telefono (el scroll, el arrastre y el deslizar siguen funcionando) */
     .gal-flechas { display: flex; gap: 14px; position: absolute; left: 50%; bottom: 64px; transform: translateX(-50%); z-index: 3; }
-    .gal-flecha { width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(255,255,255,.35); background: rgba(0,0,0,.18); color: #fff; display: grid; place-items: center; cursor: pointer; transition: opacity .25s var(--ease), border-color .25s var(--ease), background .25s var(--ease); }
-    .gal-h-sticky.cursor-hidden .gal-flecha { cursor: pointer; }
+    .gal-flecha { width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(255,255,255,.35); background: rgba(0,0,0,.18); color: #fff; display: grid; place-items: center; cursor: default; transition: opacity .25s var(--ease), border-color .25s var(--ease), background .25s var(--ease); }
+    .gal-h-sticky.cursor-hidden .gal-flecha { cursor: default; }
     .gal-flecha:active { border-color: var(--verde); }
     @media (hover: hover) { .gal-flecha:not(:disabled):hover { border-color: var(--verde); background: rgba(0,194,146,.12); } }
     .gal-flecha:disabled { opacity: .25; cursor: default; }
