@@ -131,7 +131,9 @@
     }
     .gal-cursor.active { opacity: 1; transform: translate(-50%, -50%) scale(1); }
     .gal-cursor.grabbing { transform: translate(-50%, -50%) scale(2.2); opacity: .7; }
-    .gal-h-sticky.cursor-hidden { cursor: none; }
+    /* cursor: siempre la flecha normal (pedido del usuario); el punto verde queda apagado */
+    .gal-h-sticky.cursor-hidden { cursor: default; }
+    .gal-cursor { display: none; }
 
     /* ─── FOOTER ─────────────────────────────────────────────── */
     footer {

@@ -184,7 +184,7 @@ a{color:inherit;text-decoration:none}
 .cf-et{position:absolute;left:10px;top:10px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:rgba(255,255,255,.92);color:#00694f;padding:6px 9px;border-radius:999px}
 .cf-num{position:absolute;right:10px;bottom:10px;font-size:11px;font-weight:600;letter-spacing:.06em;background:rgba(15,35,29,.6);color:#fff;padding:5px 9px;border-radius:999px;font-variant-numeric:tabular-nums;pointer-events:none}
 .cf-num b{font-weight:600}
-.cf-flecha{position:absolute;top:50%;width:38px;height:38px;margin-top:-19px;border:0;border-radius:50%;background:rgba(255,255,255,.92);color:var(--ink);display:grid;place-items:center;cursor:pointer;box-shadow:0 4px 14px rgba(49,39,38,.18);transition:opacity .25s}
+.cf-flecha{position:absolute;top:50%;width:38px;height:38px;margin-top:-19px;border:0;border-radius:50%;background:rgba(255,255,255,.92);color:var(--ink);display:grid;place-items:center;cursor:default;box-shadow:0 4px 14px rgba(49,39,38,.18);transition:opacity .25s}
 .cf-flecha svg{width:18px;height:18px}
 .cf-flecha.prev{left:10px}.cf-flecha.next{right:10px}
 .cf-flecha:disabled{opacity:0;pointer-events:none}
@@ -249,7 +249,7 @@ a{color:inherit;text-decoration:none}
 .ficha-foto figcaption{position:absolute;z-index:3;left:calc(var(--x,0px) + 18px);right:calc(var(--x,0px) + 18px);bottom:calc(var(--y,0px) + 16px);transition:left .6s cubic-bezier(.65,0,.35,1),right .6s cubic-bezier(.65,0,.35,1),top .6s cubic-bezier(.65,0,.35,1),bottom .6s cubic-bezier(.65,0,.35,1);display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.5);pointer-events:none}
 .fs-num{font-variant-numeric:tabular-nums;letter-spacing:.1em;opacity:.85}
 .fs-num b{font-weight:700}
-.fs-flecha{position:absolute;z-index:3;top:50%;width:46px;height:46px;margin-top:-23px;border:0;border-radius:50%;background:rgba(255,248,237,.9);color:var(--ink);display:grid;place-items:center;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.18);transition:background .3s,color .3s,scale .25s ease}
+.fs-flecha{position:absolute;z-index:3;top:50%;width:46px;height:46px;margin-top:-23px;border:0;border-radius:50%;background:rgba(255,248,237,.9);color:var(--ink);display:grid;place-items:center;cursor:default;box-shadow:0 6px 20px rgba(0,0,0,.18);transition:background .3s,color .3s,scale .25s ease}
 .fs-flecha svg{width:18px;height:18px}
 .fs-flecha.prev{left:calc(var(--x,0px) + 14px)}
 .fs-flecha.next{right:calc(var(--x,0px) + 14px)}
@@ -263,9 +263,9 @@ a{color:inherit;text-decoration:none}
 .esp-cab{display:flex;justify-content:space-between;align-items:end;gap:30px;padding:0 var(--gut) 36px;border-top:1px solid rgba(49,39,38,.2);padding-top:clamp(60px,9vh,100px)}
 .esp-cab h2{font-size:clamp(40px,5.6vw,92px);font-weight:500;letter-spacing:-.05em;line-height:.95;font-variation-settings:var(--ancho)}
 .esp-cab p{max-width:34ch;font-size:14px;line-height:1.55;color:var(--taupe)}
-.carril{display:flex;gap:18px;overflow-x:auto;padding:0 var(--gut);scroll-snap-type:x mandatory;scrollbar-width:none;cursor:grab}
+.carril{display:flex;gap:18px;overflow-x:auto;padding:0 var(--gut);scroll-snap-type:x mandatory;scrollbar-width:none;cursor:default}
 .carril::-webkit-scrollbar{display:none}
-.carril.agarrado{cursor:grabbing;scroll-snap-type:none}
+.carril.agarrado{cursor:default;scroll-snap-type:none}
 .esp{flex:none;width:clamp(260px,30vw,460px);scroll-snap-align:start}
 .esp .f{aspect-ratio:4/5;overflow:hidden;background:#e9e0d2}
 .esp img{width:100%;height:100%;object-fit:cover;pointer-events:none;transition:transform 1.2s cubic-bezier(.2,.7,.3,1)}
@@ -520,12 +520,12 @@ html.js footer:not(.bg-on){background:#0f1615}
 /* PC: linea bajo los espacios con una barra verde que se arrastra para recorrerlos */
 .carril-riel{display:none}
 @media (min-width:861px){
-  .carril-riel{display:block;position:relative;height:26px;margin:26px var(--gut) 0;cursor:pointer;touch-action:none}
+  .carril-riel{display:block;position:relative;height:26px;margin:26px var(--gut) 0;cursor:default;touch-action:none}
   .carril-riel::before{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(49,39,38,.18)}
-  .cr-barra{position:absolute;top:50%;left:0;height:3px;margin-top:-1.5px;border-radius:3px;background:var(--verde);cursor:grab;transition:height .25s,margin-top .25s}
+  .cr-barra{position:absolute;top:50%;left:0;height:3px;margin-top:-1.5px;border-radius:3px;background:var(--verde);cursor:default;transition:height .25s,margin-top .25s}
   .cr-barra::before{content:"";position:absolute;left:0;right:0;top:-12px;bottom:-12px}
   .carril-riel:hover .cr-barra,.carril-riel.agarrado .cr-barra{height:5px;margin-top:-2.5px}
-  .carril-riel.agarrado .cr-barra{cursor:grabbing}
+  .carril-riel.agarrado .cr-barra{cursor:default}
 }
 /* Galeria: el unico boton en naranja Caraquena (#f05a25); todo lo demas queda en el verde de Casa Verde */
 :root{--naranja:#f05a25}
