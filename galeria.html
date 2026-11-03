@@ -80,7 +80,7 @@
 
     /* ─── GALERÍA HORIZONTAL INMERSIVA ───────────────────────── */
     .gal-h-section { height: 900vh; position: relative; padding: 0 !important; background: var(--deep); overflow: clip; }
-    .gal-h-sticky { position: sticky; top: 0; height: 100vh; overflow: clip; display: flex; align-items: center; }
+    .gal-h-sticky { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: clip; /* svh: el alto que se ve con la barra de Safari abajo; con 100vh las flechas quedaban detras de ella */ display: flex; align-items: center; }
     .gal-h-header {
       position: absolute; top: calc(var(--nav-h) + 22px); left: 4vw; right: 4vw; z-index: 3;
       display: flex; justify-content: space-between; align-items: center;
@@ -101,12 +101,12 @@
       will-change: transform, filter;
     }
     .gal-h-progress {
-      position: absolute; bottom: 32px; left: 4vw; right: 4vw;
+      position: absolute; bottom: calc(32px + env(safe-area-inset-bottom)); left: 4vw; right: 4vw;
       height: 1px; background: rgba(255,255,255,.15);
     }
     .gal-h-bar { height: 100%; width: 0%; background: var(--verde); box-shadow: 0 0 12px rgba(0,194,146,.6); }
     /* flechas para pasar las fotos en PC y telefono (el scroll, el arrastre y el deslizar siguen funcionando) */
-    .gal-flechas { display: flex; gap: 14px; position: absolute; left: 50%; bottom: 64px; transform: translateX(-50%); z-index: 3; }
+    .gal-flechas { display: flex; gap: 14px; position: absolute; left: 50%; bottom: calc(64px + env(safe-area-inset-bottom)); transform: translateX(-50%); z-index: 3; }
     .gal-flecha { width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(255,255,255,.35); background: rgba(0,0,0,.18); color: #fff; display: grid; place-items: center; cursor: default; transition: opacity .25s var(--ease), border-color .25s var(--ease), background .25s var(--ease); }
     .gal-h-sticky.cursor-hidden .gal-flecha { cursor: default; }
     .gal-flecha:active { border-color: var(--verde); }
@@ -118,7 +118,7 @@
       body footer { padding-bottom: 150px; } /* que los botones flotantes no tapen 'Volver' */
       .foot-legal a { display: inline-block; padding: 5px 0; margin: -5px 0; } /* area de toque de al menos 24px */
       .gal-h-section { height: 1150vh; } /* paseo más lento y sereno en móvil */
-      .gal-h-item img, .gal-h-item video { height: min(52vh, calc(86vw / var(--ar, 1.5))); }
+      .gal-h-item img, .gal-h-item video { height: min(52vh, 50svh, calc(86vw / var(--ar, 1.5))); }
     }
 
     /* ─── CURSOR minimalista: punto verde ────────────────────── */
