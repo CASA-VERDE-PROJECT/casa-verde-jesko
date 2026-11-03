@@ -571,8 +571,8 @@ applyLang(lang);
   var galTotal = galSection.querySelector('.gal-total');
   galTotal.textContent = String(galItems.length).padStart(2, '0');
 
-  /* Alto de la sección proporcional a la cantidad de fotos (≈40vh por foto; 52vh en móvil) */
-  var perItem = window.matchMedia('(max-width: 768px)').matches ? 52 : 40;
+  /* Alto de la sección proporcional a la cantidad de fotos (≈54vh por foto en PC, para que cada giro de la rueda avance menos; 52vh en móvil) */
+  var perItem = window.matchMedia('(max-width: 768px)').matches ? 52 : 54;
   galSection.style.height = Math.max(220, (galItems.length + 1) * perItem) + 'vh';
 
   /* Counter con transición: dígito sale arriba, el nuevo entra desde abajo */
@@ -586,20 +586,9 @@ applyLang(lang);
       .fromTo(galCurrent, { yPercent: 110 }, { yPercent: 0, duration: 0.15, ease: 'power2.out' });
   }
 
-  /* Skew sutil por velocidad: peso físico del track */
-  var skewSetter = gsap.quickSetter(galTrack, 'skewX', 'deg');
-  var clampSkew = gsap.utils.clamp(-3, 3);
-  var skewTarget = 0, skewCurrent = 0;
-  if (!isTouch) gsap.ticker.add(function(){
-    skewTarget *= 0.9;
-    skewCurrent += (skewTarget - skewCurrent) * 0.15;
-    if (Math.abs(skewCurrent) < 0.02 && Math.abs(skewTarget) < 0.02) { skewCurrent = 0; }
-    skewSetter(skewCurrent);
-  });
-
   var lastFocus = -1;
   /* sin zoom de recorte: la foto en foco va a su tamaño real y las demas un poco mas chicas */
-  var SCALE_FOCUS = 1, SCALE_REST = 0.94;
+  var SCALE_FOCUS = 1, SCALE_REST = 0.975;
 
   function updateFocus(){
     var cx = window.innerWidth / 2, best = 0, bestDist = Infinity;
@@ -613,8 +602,8 @@ applyLang(lang);
     galItems.forEach(function(item, i){
       gsap.to(item.querySelector('img, video'), {
         scale: i === best ? SCALE_FOCUS : SCALE_REST,
-        filter: i === best ? 'brightness(1)' : 'brightness(0.75)',
-        duration: 0.4, overwrite: 'auto'
+        filter: i === best ? 'brightness(1)' : 'brightness(0.9)',
+        duration: 0.8, ease: 'power2.out', overwrite: 'auto'
       });
     });
   }
@@ -626,13 +615,12 @@ applyLang(lang);
       trigger: galSection,
       start: 'top top',
       end: 'bottom bottom',
-      scrub: isTouch ? 0.5 : 2.4,
+      scrub: isTouch ? 0.5 : 1,
       invalidateOnRefresh: true,
       onUpdate: function(self){
         galBar.style.width = (self.progress * 100) + '%';
         var idx = Math.min(galItems.length, Math.max(1, Math.round(self.progress * galItems.length) + 1));
         setCounter(String(idx).padStart(2, '0'));
-        if (!isTouch) skewTarget = clampSkew(self.getVelocity() / -350);
         if (!isTouch) updateFocus();
       }
     }
@@ -760,6 +748,26 @@ applyLang(lang);
       lastMoveX = e.clientX; lastMoveT = now;
       scrollToYShared(startScroll + (startX - e.clientX) * dragFactorShared() * 0.7);
     });
+    /* acomodo suave: al dejar de hacer scroll, la foto mas cercana se centra sola en medio segundo */
+    var acomodoT = null;
+    function acomodar(){
+      var st = galTween.scrollTrigger, rango = st.end - st.start;
+      if (dragging || !window.lenis || rango <= 0) return;
+      var y = window.lenis.scroll, p = (y - st.start) / rango;
+      if (p <= 0.001 || p >= 0.999) return;
+      var maxX = Math.max(1, galTrack.scrollWidth - window.innerWidth + 120);
+      var tr = galTrack.getBoundingClientRect(), x0 = tr.left - gsap.getProperty(galTrack, 'x');
+      var mejor = null;
+      galItems.forEach(function(item){
+        var r = item.getBoundingClientRect();
+        var q = gsap.utils.clamp(0, 1, -(window.innerWidth / 2 - x0 - (r.left + r.width / 2 - tr.left)) / maxX);
+        if (mejor === null || Math.abs(q - p) < Math.abs(mejor - p)) mejor = q;
+      });
+      var destino = st.start + mejor * rango;
+      if (Math.abs(destino - y) > 2) window.lenis.scrollTo(destino, { duration: 0.6, easing: function(t){ return t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; } });
+    }
+    if (window.lenis) window.lenis.on('scroll', function(){ clearTimeout(acomodoT); acomodoT = setTimeout(acomodar, 220); });
+
     window.addEventListener('pointerup', function(){
       if (!dragging) return;
       dragging = false;
