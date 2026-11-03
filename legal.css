@@ -112,6 +112,12 @@ td strong { color: var(--verde-dk); }
   .lg-content > p:first-child { font-size: 17px; }
   h2 { margin-top: 48px; padding-top: 24px; gap: 12px; }
   th, td { padding: 12px 14px; }
+  /* que la tabla no se salga de la pantalla: los titulos pueden partirse y, si aun no cabe, se desliza de lado */
+  table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  th { white-space: normal; letter-spacing: .08em; }
+  th, td { padding: 10px 10px; }
+  /* enlaces del pie con area de toque de al menos 24px */
+  .lg-foot a { display: inline-block; padding: 5px 0; margin: -5px 0; }
   .lg-box { padding: 18px 20px; }
   .lg-foot ul { flex-direction: column; gap: 14px; }
 }

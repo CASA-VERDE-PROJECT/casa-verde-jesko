@@ -115,6 +115,7 @@
     .no-gsap .gal-flechas { display: none; }
     @media (max-width: 768px) {
       body footer { padding-bottom: 150px; } /* que los botones flotantes no tapen 'Volver' */
+      .foot-legal a { display: inline-block; padding: 5px 0; margin: -5px 0; } /* area de toque de al menos 24px */
       .gal-h-section { height: 1150vh; } /* paseo más lento y sereno en móvil */
       .gal-h-item img, .gal-h-item video { height: min(52vh, calc(86vw / var(--ar, 1.5))); }
     }
@@ -245,223 +246,223 @@ input,textarea,select{-webkit-user-select:text;user-select:text}
     </header>
     <div class="gal-h-track">
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-01.jpeg" style="--ar:1.3333" width="2200" height="1650" alt="Terraza desde la playa — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-01.jpeg" srcset="img/r/gal_nuevas_cv-01-800.webp 800w, img/r/gal_nuevas_cv-01-1400.webp 1400w, img/gal/nuevas/cv-01.jpeg 2200w" sizes="(max-width: 768px) min(calc(52vh * 1.3333), 86vw), min(calc(62vh * 1.3333), 86vw)" style="--ar:1.3333" width="2200" height="1650" alt="Terraza desde la playa — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/fotos2/terraza-exterior.jpg" style="--ar:1.7778" width="2560" height="1440" alt="Terraza y comedor — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/fotos2/terraza-exterior.jpg" srcset="img/r/gal_fotos2_terraza-exterior-800.webp 800w, img/r/gal_fotos2_terraza-exterior-1400.webp 1400w, img/gal/fotos2/terraza-exterior.jpg 2560w" sizes="(max-width: 768px) min(calc(52vh * 1.7778), 86vw), min(calc(62vh * 1.7778), 86vw)" style="--ar:1.7778" width="2560" height="1440" alt="Terraza y comedor — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/fotos3/mesa-bajo-el-deck.jpg" style="--ar:1.3639" width="2200" height="1613" alt="Mesa bajo el deck — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/fotos3/mesa-bajo-el-deck.jpg" srcset="img/r/gal_fotos3_mesa-bajo-el-deck-800.webp 800w, img/r/gal_fotos3_mesa-bajo-el-deck-1400.webp 1400w, img/gal/fotos3/mesa-bajo-el-deck.jpg 2200w" sizes="(max-width: 768px) min(calc(52vh * 1.3639), 86vw), min(calc(62vh * 1.3639), 86vw)" style="--ar:1.3639" width="2200" height="1613" alt="Mesa bajo el deck — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/fotos3/fachada-atardecer.jpg" style="--ar:0.5627" width="1238" height="2200" alt="La fachada al atardecer — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/fotos3/fachada-atardecer.jpg" srcset="img/r/gal_fotos3_fachada-atardecer-800.webp 450w, img/r/gal_fotos3_fachada-atardecer-1400.webp 788w, img/gal/fotos3/fachada-atardecer.jpg 1238w" sizes="(max-width: 768px) min(calc(52vh * 0.5627), 86vw), min(calc(62vh * 0.5627), 86vw)" style="--ar:0.5627" width="1238" height="2200" alt="La fachada al atardecer — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/fotos3/ventana-verde.jpg" style="--ar:0.5618" width="1236" height="2200" alt="Ventana del muro verde — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/fotos3/ventana-verde.jpg" srcset="img/r/gal_fotos3_ventana-verde-800.webp 449w, img/r/gal_fotos3_ventana-verde-1400.webp 787w, img/gal/fotos3/ventana-verde.jpg 1236w" sizes="(max-width: 768px) min(calc(52vh * 0.5618), 86vw), min(calc(62vh * 0.5618), 86vw)" style="--ar:0.5618" width="1236" height="2200" alt="Ventana del muro verde — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/pasillo-pergola.jpeg" style="--ar:0.7500" width="1650" height="2200" alt="El camino al mar — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/pasillo-pergola.jpeg" srcset="img/r/gal_pasillo-pergola-800.webp 600w, img/r/gal_pasillo-pergola-1400.webp 1050w, img/gal/pasillo-pergola.jpeg 1650w" sizes="(max-width: 768px) min(calc(52vh * 0.7500), 86vw), min(calc(62vh * 0.7500), 86vw)" style="--ar:0.7500" width="1650" height="2200" alt="El camino al mar — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-42.jpeg" style="--ar:0.7500" width="1650" height="2200" alt="Entrada lateral — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-42.jpeg" srcset="img/r/gal_nuevas_cv-42-800.webp 600w, img/r/gal_nuevas_cv-42-1400.webp 1050w, img/gal/nuevas/cv-42.jpeg 1650w" sizes="(max-width: 768px) min(calc(52vh * 0.7500), 86vw), min(calc(62vh * 0.7500), 86vw)" style="--ar:0.7500" width="1650" height="2200" alt="Entrada lateral — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/vista-mar-pergola.jpeg" style="--ar:0.7500" width="1650" height="2200" alt="Vista al arrecife — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/vista-mar-pergola.jpeg" srcset="img/r/gal_vista-mar-pergola-800.webp 600w, img/r/gal_vista-mar-pergola-1400.webp 1050w, img/gal/vista-mar-pergola.jpeg 1650w" sizes="(max-width: 768px) min(calc(52vh * 0.7500), 86vw), min(calc(62vh * 0.7500), 86vw)" style="--ar:0.7500" width="1650" height="2200" alt="Vista al arrecife — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-02.jpeg" style="--ar:1.3639" width="2200" height="1613" alt="Camino al muelle — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-02.jpeg" srcset="img/r/gal_nuevas_cv-02-800.webp 800w, img/r/gal_nuevas_cv-02-1400.webp 1400w, img/gal/nuevas/cv-02.jpeg 2200w" sizes="(max-width: 768px) min(calc(52vh * 1.3639), 86vw), min(calc(62vh * 1.3639), 86vw)" style="--ar:1.3639" width="2200" height="1613" alt="Camino al muelle — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item gal-h-video">
         <div class="gal-h-imgwrap"><video src="video/terraza-playa.mp4" poster="video/terraza-playa.jpg" style="--ar:0.5577" width="464" height="832" muted loop playsinline preload="none" aria-label="La terraza frente a la playa — Casa Verde, Los Roques"></video></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/fotos2/entrada-escaleras.jpg" style="--ar:0.5625" width="720" height="1280" alt="La entrada — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/fotos2/entrada-escaleras.jpg" srcset="img/r/gal_fotos2_entrada-escaleras-800.webp 450w, img/r/gal_fotos2_entrada-escaleras-1400.webp 788w, img/gal/fotos2/entrada-escaleras.jpg 720w" sizes="(max-width: 768px) min(calc(52vh * 0.5625), 86vw), min(calc(62vh * 0.5625), 86vw)" style="--ar:0.5625" width="720" height="1280" alt="La entrada — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/fotos3/pasillo-al-mar.jpg" style="--ar:0.5623" width="1237" height="2200" alt="Pasillo hacia el mar — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/fotos3/pasillo-al-mar.jpg" srcset="img/r/gal_fotos3_pasillo-al-mar-800.webp 450w, img/r/gal_fotos3_pasillo-al-mar-1400.webp 787w, img/gal/fotos3/pasillo-al-mar.jpg 1237w" sizes="(max-width: 768px) min(calc(52vh * 0.5623), 86vw), min(calc(62vh * 0.5623), 86vw)" style="--ar:0.5623" width="1237" height="2200" alt="Pasillo hacia el mar — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/fotos3/medios-cascos.jpg" style="--ar:0.5627" width="1238" height="2200" alt="Medios cascos de barco — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/fotos3/medios-cascos.jpg" srcset="img/r/gal_fotos3_medios-cascos-800.webp 450w, img/r/gal_fotos3_medios-cascos-1400.webp 788w, img/gal/fotos3/medios-cascos.jpg 1238w" sizes="(max-width: 768px) min(calc(52vh * 0.5627), 86vw), min(calc(62vh * 0.5627), 86vw)" style="--ar:0.5627" width="1238" height="2200" alt="Medios cascos de barco — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-25.jpeg" style="--ar:0.7500" width="1650" height="2200" alt="Bienvenidos — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-25.jpeg" srcset="img/r/gal_nuevas_cv-25-800.webp 600w, img/r/gal_nuevas_cv-25-1400.webp 1050w, img/gal/nuevas/cv-25.jpeg 1650w" sizes="(max-width: 768px) min(calc(52vh * 0.7500), 86vw), min(calc(62vh * 0.7500), 86vw)" style="--ar:0.7500" width="1650" height="2200" alt="Bienvenidos — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/fotos2/sala-ventilador.jpg" style="--ar:1.7778" width="2560" height="1440" alt="Sala a doble altura — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/fotos2/sala-ventilador.jpg" srcset="img/r/gal_fotos2_sala-ventilador-800.webp 800w, img/r/gal_fotos2_sala-ventilador-1400.webp 1400w, img/gal/fotos2/sala-ventilador.jpg 2560w" sizes="(max-width: 768px) min(calc(52vh * 1.7778), 86vw), min(calc(62vh * 1.7778), 86vw)" style="--ar:1.7778" width="2560" height="1440" alt="Sala a doble altura — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/fotos2/sala-y-barra-desde-arriba.jpg" style="--ar:1.7778" width="2560" height="1440" alt="Sala y barra — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/fotos2/sala-y-barra-desde-arriba.jpg" srcset="img/r/gal_fotos2_sala-y-barra-desde-arriba-800.webp 800w, img/r/gal_fotos2_sala-y-barra-desde-arriba-1400.webp 1400w, img/gal/fotos2/sala-y-barra-desde-arriba.jpg 2560w" sizes="(max-width: 768px) min(calc(52vh * 1.7778), 86vw), min(calc(62vh * 1.7778), 86vw)" style="--ar:1.7778" width="2560" height="1440" alt="Sala y barra — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-43.jpeg" style="--ar:3.3639" width="2200" height="654" alt="Panorámica de la casa — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-43.jpeg" srcset="img/r/gal_nuevas_cv-43-800.webp 800w, img/r/gal_nuevas_cv-43-1400.webp 1400w, img/gal/nuevas/cv-43.jpeg 2200w" sizes="(max-width: 768px) min(calc(52vh * 3.3639), 86vw), min(calc(62vh * 3.3639), 86vw)" style="--ar:3.3639" width="2200" height="654" alt="Panorámica de la casa — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-03.jpeg" style="--ar:1.3333" width="2200" height="1650" alt="Sala frente al mar — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-03.jpeg" srcset="img/r/gal_nuevas_cv-03-800.webp 800w, img/r/gal_nuevas_cv-03-1400.webp 1400w, img/gal/nuevas/cv-03.jpeg 2200w" sizes="(max-width: 768px) min(calc(52vh * 1.3333), 86vw), min(calc(62vh * 1.3333), 86vw)" style="--ar:1.3333" width="2200" height="1650" alt="Sala frente al mar — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-04.jpeg" style="--ar:1.3333" width="2200" height="1650" alt="Sala de estar — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-04.jpeg" srcset="img/r/gal_nuevas_cv-04-800.webp 800w, img/r/gal_nuevas_cv-04-1400.webp 1400w, img/gal/nuevas/cv-04.jpeg 2200w" sizes="(max-width: 768px) min(calc(52vh * 1.3333), 86vw), min(calc(62vh * 1.3333), 86vw)" style="--ar:1.3333" width="2200" height="1650" alt="Sala de estar — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-05.jpeg" style="--ar:0.7500" width="1650" height="2200" alt="Sala principal — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-05.jpeg" srcset="img/r/gal_nuevas_cv-05-800.webp 600w, img/r/gal_nuevas_cv-05-1400.webp 1050w, img/gal/nuevas/cv-05.jpeg 1650w" sizes="(max-width: 768px) min(calc(52vh * 0.7500), 86vw), min(calc(62vh * 0.7500), 86vw)" style="--ar:0.7500" width="1650" height="2200" alt="Sala principal — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/fotos2/sala-ventanal-lancha.jpg" style="--ar:0.7500" width="1920" height="2560" alt="Ventanal al mar — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/fotos2/sala-ventanal-lancha.jpg" srcset="img/r/gal_fotos2_sala-ventanal-lancha-800.webp 600w, img/r/gal_fotos2_sala-ventanal-lancha-1400.webp 1050w, img/gal/fotos2/sala-ventanal-lancha.jpg 1920w" sizes="(max-width: 768px) min(calc(52vh * 0.7500), 86vw), min(calc(62vh * 0.7500), 86vw)" style="--ar:0.7500" width="1920" height="2560" alt="Ventanal al mar — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/fotos2/sala-ventanal-tazas.jpg" style="--ar:0.5625" width="1440" height="2560" alt="Sala frente al mar — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/fotos2/sala-ventanal-tazas.jpg" srcset="img/r/gal_fotos2_sala-ventanal-tazas-800.webp 450w, img/r/gal_fotos2_sala-ventanal-tazas-1400.webp 788w, img/gal/fotos2/sala-ventanal-tazas.jpg 1440w" sizes="(max-width: 768px) min(calc(52vh * 0.5625), 86vw), min(calc(62vh * 0.5625), 86vw)" style="--ar:0.5625" width="1440" height="2560" alt="Sala frente al mar — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/fotos2/sala-puffs-cerro.jpg" style="--ar:0.7500" width="1920" height="2560" alt="Vista al cerro — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/fotos2/sala-puffs-cerro.jpg" srcset="img/r/gal_fotos2_sala-puffs-cerro-800.webp 600w, img/r/gal_fotos2_sala-puffs-cerro-1400.webp 1050w, img/gal/fotos2/sala-puffs-cerro.jpg 1920w" sizes="(max-width: 768px) min(calc(52vh * 0.7500), 86vw), min(calc(62vh * 0.7500), 86vw)" style="--ar:0.7500" width="1920" height="2560" alt="Vista al cerro — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-28.jpeg" style="--ar:0.7500" width="1650" height="2200" alt="Sala con vista al mar — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-28.jpeg" srcset="img/r/gal_nuevas_cv-28-800.webp 600w, img/r/gal_nuevas_cv-28-1400.webp 1050w, img/gal/nuevas/cv-28.jpeg 1650w" sizes="(max-width: 768px) min(calc(52vh * 0.7500), 86vw), min(calc(62vh * 0.7500), 86vw)" style="--ar:0.7500" width="1650" height="2200" alt="Sala con vista al mar — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-29.jpeg" style="--ar:0.7500" width="1650" height="2200" alt="Sala y ventanales — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-29.jpeg" srcset="img/r/gal_nuevas_cv-29-800.webp 600w, img/r/gal_nuevas_cv-29-1400.webp 1050w, img/gal/nuevas/cv-29.jpeg 1650w" sizes="(max-width: 768px) min(calc(52vh * 0.7500), 86vw), min(calc(62vh * 0.7500), 86vw)" style="--ar:0.7500" width="1650" height="2200" alt="Sala y ventanales — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-41.jpeg" style="--ar:0.7500" width="1650" height="2200" alt="Vista desde la sala — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-41.jpeg" srcset="img/r/gal_nuevas_cv-41-800.webp 600w, img/r/gal_nuevas_cv-41-1400.webp 1050w, img/gal/nuevas/cv-41.jpeg 1650w" sizes="(max-width: 768px) min(calc(52vh * 0.7500), 86vw), min(calc(62vh * 0.7500), 86vw)" style="--ar:0.7500" width="1650" height="2200" alt="Vista desde la sala — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/fotos2/puffs-naranja.jpg" style="--ar:0.5625" width="1440" height="2560" alt="Puffs frente al mar — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/fotos2/puffs-naranja.jpg" srcset="img/r/gal_fotos2_puffs-naranja-800.webp 450w, img/r/gal_fotos2_puffs-naranja-1400.webp 788w, img/gal/fotos2/puffs-naranja.jpg 1440w" sizes="(max-width: 768px) min(calc(52vh * 0.5625), 86vw), min(calc(62vh * 0.5625), 86vw)" style="--ar:0.5625" width="1440" height="2560" alt="Puffs frente al mar — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/fotos3/ventana-atardecer.jpg" style="--ar:0.5623" width="1237" height="2200" alt="Ventana al atardecer — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/fotos3/ventana-atardecer.jpg" srcset="img/r/gal_fotos3_ventana-atardecer-800.webp 450w, img/r/gal_fotos3_ventana-atardecer-1400.webp 787w, img/gal/fotos3/ventana-atardecer.jpg 1237w" sizes="(max-width: 768px) min(calc(52vh * 0.5623), 86vw), min(calc(62vh * 0.5623), 86vw)" style="--ar:0.5623" width="1237" height="2200" alt="Ventana al atardecer — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/fotos3/ventanales-anochecer.jpg" style="--ar:0.5627" width="1238" height="2200" alt="Ventanales al anochecer — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/fotos3/ventanales-anochecer.jpg" srcset="img/r/gal_fotos3_ventanales-anochecer-800.webp 450w, img/r/gal_fotos3_ventanales-anochecer-1400.webp 788w, img/gal/fotos3/ventanales-anochecer.jpg 1238w" sizes="(max-width: 768px) min(calc(52vh * 0.5627), 86vw), min(calc(62vh * 0.5627), 86vw)" style="--ar:0.5627" width="1238" height="2200" alt="Ventanales al anochecer — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-40.jpeg" style="--ar:0.7500" width="1650" height="2200" alt="Entrada con vista al mar — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-40.jpeg" srcset="img/r/gal_nuevas_cv-40-800.webp 600w, img/r/gal_nuevas_cv-40-1400.webp 1050w, img/gal/nuevas/cv-40.jpeg 1650w" sizes="(max-width: 768px) min(calc(52vh * 0.7500), 86vw), min(calc(62vh * 0.7500), 86vw)" style="--ar:0.7500" width="1650" height="2200" alt="Entrada con vista al mar — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-23.jpeg" style="--ar:1.3333" width="2200" height="1650" alt="Comedor de la terraza — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-23.jpeg" srcset="img/r/gal_nuevas_cv-23-800.webp 800w, img/r/gal_nuevas_cv-23-1400.webp 1400w, img/gal/nuevas/cv-23.jpeg 2200w" sizes="(max-width: 768px) min(calc(52vh * 1.3333), 86vw), min(calc(62vh * 1.3333), 86vw)" style="--ar:1.3333" width="2200" height="1650" alt="Comedor de la terraza — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-24.jpeg" style="--ar:1.3333" width="2200" height="1650" alt="Vista al cerro de Gran Roque — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-24.jpeg" srcset="img/r/gal_nuevas_cv-24-800.webp 800w, img/r/gal_nuevas_cv-24-1400.webp 1400w, img/gal/nuevas/cv-24.jpeg 2200w" sizes="(max-width: 768px) min(calc(52vh * 1.3333), 86vw), min(calc(62vh * 1.3333), 86vw)" style="--ar:1.3333" width="2200" height="1650" alt="Vista al cerro de Gran Roque — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-21.jpeg" style="--ar:0.7500" width="1650" height="2200" alt="Mesa frente al mar — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-21.jpeg" srcset="img/r/gal_nuevas_cv-21-800.webp 600w, img/r/gal_nuevas_cv-21-1400.webp 1050w, img/gal/nuevas/cv-21.jpeg 1650w" sizes="(max-width: 768px) min(calc(52vh * 0.7500), 86vw), min(calc(62vh * 0.7500), 86vw)" style="--ar:0.7500" width="1650" height="2200" alt="Mesa frente al mar — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-22.jpeg" style="--ar:0.6845" width="1506" height="2200" alt="Mesa servida — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-22.jpeg" srcset="img/r/gal_nuevas_cv-22-800.webp 548w, img/r/gal_nuevas_cv-22-1400.webp 958w, img/gal/nuevas/cv-22.jpeg 1506w" sizes="(max-width: 768px) min(calc(52vh * 0.6845), 86vw), min(calc(62vh * 0.6845), 86vw)" style="--ar:0.6845" width="1506" height="2200" alt="Mesa servida — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/fotos3/cocina-desde-afuera.jpg" style="--ar:0.5623" width="1237" height="2200" alt="La cocina desde afuera — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/fotos3/cocina-desde-afuera.jpg" srcset="img/r/gal_fotos3_cocina-desde-afuera-800.webp 450w, img/r/gal_fotos3_cocina-desde-afuera-1400.webp 787w, img/gal/fotos3/cocina-desde-afuera.jpg 1237w" sizes="(max-width: 768px) min(calc(52vh * 0.5623), 86vw), min(calc(62vh * 0.5623), 86vw)" style="--ar:0.5623" width="1237" height="2200" alt="La cocina desde afuera — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/fotos3/cocina-de-noche.jpg" style="--ar:1.7771" width="2200" height="1238" alt="La cocina de noche — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/fotos3/cocina-de-noche.jpg" srcset="img/r/gal_fotos3_cocina-de-noche-800.webp 800w, img/r/gal_fotos3_cocina-de-noche-1400.webp 1400w, img/gal/fotos3/cocina-de-noche.jpg 2200w" sizes="(max-width: 768px) min(calc(52vh * 1.7771), 86vw), min(calc(62vh * 1.7771), 86vw)" style="--ar:1.7771" width="2200" height="1238" alt="La cocina de noche — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/fotos2/ventana-al-mar.jpg" style="--ar:0.5625" width="1440" height="2560" alt="Ventana al mar — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/fotos2/ventana-al-mar.jpg" srcset="img/r/gal_fotos2_ventana-al-mar-800.webp 450w, img/r/gal_fotos2_ventana-al-mar-1400.webp 788w, img/gal/fotos2/ventana-al-mar.jpg 1440w" sizes="(max-width: 768px) min(calc(52vh * 0.5625), 86vw), min(calc(62vh * 0.5625), 86vw)" style="--ar:0.5625" width="1440" height="2560" alt="Ventana al mar — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item gal-h-video">
         <div class="gal-h-imgwrap"><video src="video/ventana-lanchas.mp4" poster="video/ventana-lanchas.jpg" style="--ar:0.5625" width="576" height="1024" muted loop playsinline preload="none" aria-label="Las lanchas desde la ventana — Casa Verde, Los Roques"></video></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/fotos2/habitacion-azul-amplia.jpg" style="--ar:1.7778" width="2560" height="1440" alt="Cuarto principal — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/fotos2/habitacion-azul-amplia.jpg" srcset="img/r/gal_fotos2_habitacion-azul-amplia-800.webp 800w, img/r/gal_fotos2_habitacion-azul-amplia-1400.webp 1400w, img/gal/fotos2/habitacion-azul-amplia.jpg 2560w" sizes="(max-width: 768px) min(calc(52vh * 1.7778), 86vw), min(calc(62vh * 1.7778), 86vw)" style="--ar:1.7778" width="2560" height="1440" alt="Cuarto principal — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/fotos2/habitacion-azul-bano.jpg" style="--ar:1.7763" width="1080" height="608" alt="Cuarto principal — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/fotos2/habitacion-azul-bano.jpg" srcset="img/r/gal_fotos2_habitacion-azul-bano-800.webp 800w, img/r/gal_fotos2_habitacion-azul-bano-1400.webp 1400w, img/gal/fotos2/habitacion-azul-bano.jpg 1080w" sizes="(max-width: 768px) min(calc(52vh * 1.7763), 86vw), min(calc(62vh * 1.7763), 86vw)" style="--ar:1.7763" width="1080" height="608" alt="Cuarto principal — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-38.jpeg" style="--ar:0.7500" width="1650" height="2200" alt="Cuarto principal — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-38.jpeg" srcset="img/r/gal_nuevas_cv-38-800.webp 600w, img/r/gal_nuevas_cv-38-1400.webp 1050w, img/gal/nuevas/cv-38.jpeg 1650w" sizes="(max-width: 768px) min(calc(52vh * 0.7500), 86vw), min(calc(62vh * 0.7500), 86vw)" style="--ar:0.7500" width="1650" height="2200" alt="Cuarto principal — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-39.jpeg" style="--ar:1.3333" width="2200" height="1650" alt="Cuarto principal — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-39.jpeg" srcset="img/r/gal_nuevas_cv-39-800.webp 800w, img/r/gal_nuevas_cv-39-1400.webp 1400w, img/gal/nuevas/cv-39.jpeg 2200w" sizes="(max-width: 768px) min(calc(52vh * 1.3333), 86vw), min(calc(62vh * 1.3333), 86vw)" style="--ar:1.3333" width="2200" height="1650" alt="Cuarto principal — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-37.jpeg" style="--ar:0.7500" width="1650" height="2200" alt="Cuarto principal — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-37.jpeg" srcset="img/r/gal_nuevas_cv-37-800.webp 600w, img/r/gal_nuevas_cv-37-1400.webp 1050w, img/gal/nuevas/cv-37.jpeg 1650w" sizes="(max-width: 768px) min(calc(52vh * 0.7500), 86vw), min(calc(62vh * 0.7500), 86vw)" style="--ar:0.7500" width="1650" height="2200" alt="Cuarto principal — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/fotos2/cojines-pulpo.jpg" style="--ar:0.5625" width="720" height="1280" alt="Cuarto principal — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/fotos2/cojines-pulpo.jpg" srcset="img/r/gal_fotos2_cojines-pulpo-800.webp 450w, img/r/gal_fotos2_cojines-pulpo-1400.webp 788w, img/gal/fotos2/cojines-pulpo.jpg 720w" sizes="(max-width: 768px) min(calc(52vh * 0.5625), 86vw), min(calc(62vh * 0.5625), 86vw)" style="--ar:0.5625" width="720" height="1280" alt="Cuarto principal — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/fotos2/toallas-casa-verde.jpg" style="--ar:0.5625" width="720" height="1280" alt="Cuarto principal — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/fotos2/toallas-casa-verde.jpg" srcset="img/r/gal_fotos2_toallas-casa-verde-800.webp 450w, img/r/gal_fotos2_toallas-casa-verde-1400.webp 788w, img/gal/fotos2/toallas-casa-verde.jpg 720w" sizes="(max-width: 768px) min(calc(52vh * 0.5625), 86vw), min(calc(62vh * 0.5625), 86vw)" style="--ar:0.5625" width="720" height="1280" alt="Cuarto principal — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-07.jpeg" style="--ar:1.3333" width="2200" height="1650" alt="Cuarto principal — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-07.jpeg" srcset="img/r/gal_nuevas_cv-07-800.webp 800w, img/r/gal_nuevas_cv-07-1400.webp 1400w, img/gal/nuevas/cv-07.jpeg 2200w" sizes="(max-width: 768px) min(calc(52vh * 1.3333), 86vw), min(calc(62vh * 1.3333), 86vw)" style="--ar:1.3333" width="2200" height="1650" alt="Cuarto principal — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-08.jpeg" style="--ar:0.7500" width="1650" height="2200" alt="Baño del cuarto principal — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-08.jpeg" srcset="img/r/gal_nuevas_cv-08-800.webp 600w, img/r/gal_nuevas_cv-08-1400.webp 1050w, img/gal/nuevas/cv-08.jpeg 1650w" sizes="(max-width: 768px) min(calc(52vh * 0.7500), 86vw), min(calc(62vh * 0.7500), 86vw)" style="--ar:0.7500" width="1650" height="2200" alt="Baño del cuarto principal — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/fotos2/cabecera-azul-frente.jpg" style="--ar:0.5625" width="1440" height="2560" alt="Cuarto dos — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/fotos2/cabecera-azul-frente.jpg" srcset="img/r/gal_fotos2_cabecera-azul-frente-800.webp 450w, img/r/gal_fotos2_cabecera-azul-frente-1400.webp 788w, img/gal/fotos2/cabecera-azul-frente.jpg 1440w" sizes="(max-width: 768px) min(calc(52vh * 0.5625), 86vw), min(calc(62vh * 0.5625), 86vw)" style="--ar:0.5625" width="1440" height="2560" alt="Cuarto dos — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-36.jpeg" style="--ar:0.7500" width="1650" height="2200" alt="Cuarto dos — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-36.jpeg" srcset="img/r/gal_nuevas_cv-36-800.webp 600w, img/r/gal_nuevas_cv-36-1400.webp 1050w, img/gal/nuevas/cv-36.jpeg 1650w" sizes="(max-width: 768px) min(calc(52vh * 0.7500), 86vw), min(calc(62vh * 0.7500), 86vw)" style="--ar:0.7500" width="1650" height="2200" alt="Cuarto dos — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/fotos2/habitacion-azul-ventana.jpg" style="--ar:0.5625" width="1440" height="2560" alt="Cuarto dos — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/fotos2/habitacion-azul-ventana.jpg" srcset="img/r/gal_fotos2_habitacion-azul-ventana-800.webp 450w, img/r/gal_fotos2_habitacion-azul-ventana-1400.webp 788w, img/gal/fotos2/habitacion-azul-ventana.jpg 1440w" sizes="(max-width: 768px) min(calc(52vh * 0.5625), 86vw), min(calc(62vh * 0.5625), 86vw)" style="--ar:0.5625" width="1440" height="2560" alt="Cuarto dos — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/fotos2/lectura-en-la-cama.jpg" style="--ar:0.5625" width="1440" height="2560" alt="Cuarto dos — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/fotos2/lectura-en-la-cama.jpg" srcset="img/r/gal_fotos2_lectura-en-la-cama-800.webp 450w, img/r/gal_fotos2_lectura-en-la-cama-1400.webp 788w, img/gal/fotos2/lectura-en-la-cama.jpg 1440w" sizes="(max-width: 768px) min(calc(52vh * 0.5625), 86vw), min(calc(62vh * 0.5625), 86vw)" style="--ar:0.5625" width="1440" height="2560" alt="Cuarto dos — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-06.jpeg" style="--ar:0.7500" width="1650" height="2200" alt="Cuarto dos — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-06.jpeg" srcset="img/r/gal_nuevas_cv-06-800.webp 600w, img/r/gal_nuevas_cv-06-1400.webp 1050w, img/gal/nuevas/cv-06.jpeg 1650w" sizes="(max-width: 768px) min(calc(52vh * 0.7500), 86vw), min(calc(62vh * 0.7500), 86vw)" style="--ar:0.7500" width="1650" height="2200" alt="Cuarto dos — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-11.jpeg" style="--ar:1.3333" width="2200" height="1650" alt="Cuarto tres — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-11.jpeg" srcset="img/r/gal_nuevas_cv-11-800.webp 800w, img/r/gal_nuevas_cv-11-1400.webp 1400w, img/gal/nuevas/cv-11.jpeg 2200w" sizes="(max-width: 768px) min(calc(52vh * 1.3333), 86vw), min(calc(62vh * 1.3333), 86vw)" style="--ar:1.3333" width="2200" height="1650" alt="Cuarto tres — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-33.jpeg" style="--ar:0.7500" width="1650" height="2200" alt="Cuarto tres — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-33.jpeg" srcset="img/r/gal_nuevas_cv-33-800.webp 600w, img/r/gal_nuevas_cv-33-1400.webp 1050w, img/gal/nuevas/cv-33.jpeg 1650w" sizes="(max-width: 768px) min(calc(52vh * 0.7500), 86vw), min(calc(62vh * 0.7500), 86vw)" style="--ar:0.7500" width="1650" height="2200" alt="Cuarto tres — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-34.jpeg" style="--ar:0.7500" width="1650" height="2200" alt="Cuarto tres — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-34.jpeg" srcset="img/r/gal_nuevas_cv-34-800.webp 600w, img/r/gal_nuevas_cv-34-1400.webp 1050w, img/gal/nuevas/cv-34.jpeg 1650w" sizes="(max-width: 768px) min(calc(52vh * 0.7500), 86vw), min(calc(62vh * 0.7500), 86vw)" style="--ar:0.7500" width="1650" height="2200" alt="Cuarto tres — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-35.jpeg" style="--ar:0.7500" width="1650" height="2200" alt="Cuarto tres — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-35.jpeg" srcset="img/r/gal_nuevas_cv-35-800.webp 600w, img/r/gal_nuevas_cv-35-1400.webp 1050w, img/gal/nuevas/cv-35.jpeg 1650w" sizes="(max-width: 768px) min(calc(52vh * 0.7500), 86vw), min(calc(62vh * 0.7500), 86vw)" style="--ar:0.7500" width="1650" height="2200" alt="Cuarto tres — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/fotos2/cojines-langosta.jpg" style="--ar:0.5625" width="1440" height="2560" alt="Cuarto tres — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/fotos2/cojines-langosta.jpg" srcset="img/r/gal_fotos2_cojines-langosta-800.webp 450w, img/r/gal_fotos2_cojines-langosta-1400.webp 788w, img/gal/fotos2/cojines-langosta.jpg 1440w" sizes="(max-width: 768px) min(calc(52vh * 0.5625), 86vw), min(calc(62vh * 0.5625), 86vw)" style="--ar:0.5625" width="1440" height="2560" alt="Cuarto tres — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-09.jpeg" style="--ar:0.7500" width="1650" height="2200" alt="Baño del cuarto tres — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-09.jpeg" srcset="img/r/gal_nuevas_cv-09-800.webp 600w, img/r/gal_nuevas_cv-09-1400.webp 1050w, img/gal/nuevas/cv-09.jpeg 1650w" sizes="(max-width: 768px) min(calc(52vh * 0.7500), 86vw), min(calc(62vh * 0.7500), 86vw)" style="--ar:0.7500" width="1650" height="2200" alt="Baño del cuarto tres — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-10.jpeg" style="--ar:0.7500" width="1650" height="2200" alt="Baño del cuarto tres — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-10.jpeg" srcset="img/r/gal_nuevas_cv-10-800.webp 600w, img/r/gal_nuevas_cv-10-1400.webp 1050w, img/gal/nuevas/cv-10.jpeg 1650w" sizes="(max-width: 768px) min(calc(52vh * 0.7500), 86vw), min(calc(62vh * 0.7500), 86vw)" style="--ar:0.7500" width="1650" height="2200" alt="Baño del cuarto tres — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-26.jpeg" style="--ar:0.6905" width="1519" height="2200" alt="Detalle de la entrada — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-26.jpeg" srcset="img/r/gal_nuevas_cv-26-800.webp 552w, img/r/gal_nuevas_cv-26-1400.webp 967w, img/gal/nuevas/cv-26.jpeg 1519w" sizes="(max-width: 768px) min(calc(52vh * 0.6905), 86vw), min(calc(62vh * 0.6905), 86vw)" style="--ar:0.6905" width="1519" height="2200" alt="Detalle de la entrada — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/fotos2/mosaico-turquesa.jpg" style="--ar:0.7500" width="960" height="1280" alt="Mosaico turquesa — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/fotos2/mosaico-turquesa.jpg" srcset="img/r/gal_fotos2_mosaico-turquesa-800.webp 600w, img/r/gal_fotos2_mosaico-turquesa-1400.webp 1050w, img/gal/fotos2/mosaico-turquesa.jpg 960w" sizes="(max-width: 768px) min(calc(52vh * 0.7500), 86vw), min(calc(62vh * 0.7500), 86vw)" style="--ar:0.7500" width="960" height="1280" alt="Mosaico turquesa — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/fotos2/llaves-cesta.jpg" style="--ar:0.5625" width="720" height="1280" alt="Las llaves de la casa — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/fotos2/llaves-cesta.jpg" srcset="img/r/gal_fotos2_llaves-cesta-800.webp 450w, img/r/gal_fotos2_llaves-cesta-1400.webp 788w, img/gal/fotos2/llaves-cesta.jpg 720w" sizes="(max-width: 768px) min(calc(52vh * 0.5625), 86vw), min(calc(62vh * 0.5625), 86vw)" style="--ar:0.5625" width="720" height="1280" alt="Las llaves de la casa — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/fotos2/figura-banista.jpg" style="--ar:0.5625" width="720" height="1280" alt="Detalle de la habitación — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/fotos2/figura-banista.jpg" srcset="img/r/gal_fotos2_figura-banista-800.webp 450w, img/r/gal_fotos2_figura-banista-1400.webp 788w, img/gal/fotos2/figura-banista.jpg 720w" sizes="(max-width: 768px) min(calc(52vh * 0.5625), 86vw), min(calc(62vh * 0.5625), 86vw)" style="--ar:0.5625" width="720" height="1280" alt="Detalle de la habitación — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/fotos2/estrella-de-mar.jpg" style="--ar:0.5625" width="720" height="1280" alt="Detalle de la sala — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/fotos2/estrella-de-mar.jpg" srcset="img/r/gal_fotos2_estrella-de-mar-800.webp 450w, img/r/gal_fotos2_estrella-de-mar-1400.webp 788w, img/gal/fotos2/estrella-de-mar.jpg 720w" sizes="(max-width: 768px) min(calc(52vh * 0.5625), 86vw), min(calc(62vh * 0.5625), 86vw)" style="--ar:0.5625" width="720" height="1280" alt="Detalle de la sala — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-31.jpeg" style="--ar:0.7500" width="1650" height="2200" alt="Termos Casa Verde — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-31.jpeg" srcset="img/r/gal_nuevas_cv-31-800.webp 600w, img/r/gal_nuevas_cv-31-1400.webp 1050w, img/gal/nuevas/cv-31.jpeg 1650w" sizes="(max-width: 768px) min(calc(52vh * 0.7500), 86vw), min(calc(62vh * 0.7500), 86vw)" style="--ar:0.7500" width="1650" height="2200" alt="Termos Casa Verde — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-27.jpeg" style="--ar:0.7500" width="1650" height="2200" alt="Flores frente al mar — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-27.jpeg" srcset="img/r/gal_nuevas_cv-27-800.webp 600w, img/r/gal_nuevas_cv-27-1400.webp 1050w, img/gal/nuevas/cv-27.jpeg 1650w" sizes="(max-width: 768px) min(calc(52vh * 0.7500), 86vw), min(calc(62vh * 0.7500), 86vw)" style="--ar:0.7500" width="1650" height="2200" alt="Flores frente al mar — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-32.jpeg" style="--ar:0.7500" width="1650" height="2200" alt="Detalle de la sala — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-32.jpeg" srcset="img/r/gal_nuevas_cv-32-800.webp 600w, img/r/gal_nuevas_cv-32-1400.webp 1050w, img/gal/nuevas/cv-32.jpeg 1650w" sizes="(max-width: 768px) min(calc(52vh * 0.7500), 86vw), min(calc(62vh * 0.7500), 86vw)" style="--ar:0.7500" width="1650" height="2200" alt="Detalle de la sala — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-13.jpeg" style="--ar:0.7500" width="1650" height="2200" alt="Bote privado — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-13.jpeg" srcset="img/r/gal_nuevas_cv-13-800.webp 600w, img/r/gal_nuevas_cv-13-1400.webp 1050w, img/gal/nuevas/cv-13.jpeg 1650w" sizes="(max-width: 768px) min(calc(52vh * 0.7500), 86vw), min(calc(62vh * 0.7500), 86vw)" style="--ar:0.7500" width="1650" height="2200" alt="Bote privado — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-14.jpeg" style="--ar:1.3333" width="2200" height="1650" alt="Bote al atardecer — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-14.jpeg" srcset="img/r/gal_nuevas_cv-14-800.webp 800w, img/r/gal_nuevas_cv-14-1400.webp 1400w, img/gal/nuevas/cv-14.jpeg 2200w" sizes="(max-width: 768px) min(calc(52vh * 1.3333), 86vw), min(calc(62vh * 1.3333), 86vw)" style="--ar:1.3333" width="2200" height="1650" alt="Bote al atardecer — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-12.jpeg" style="--ar:0.7500" width="1650" height="2200" alt="Bote privado al atardecer — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-12.jpeg" srcset="img/r/gal_nuevas_cv-12-800.webp 600w, img/r/gal_nuevas_cv-12-1400.webp 1050w, img/gal/nuevas/cv-12.jpeg 1650w" sizes="(max-width: 768px) min(calc(52vh * 0.7500), 86vw), min(calc(62vh * 0.7500), 86vw)" style="--ar:0.7500" width="1650" height="2200" alt="Bote privado al atardecer — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-20.jpeg" style="--ar:0.7500" width="1650" height="2200" alt="Proa al atardecer — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-20.jpeg" srcset="img/r/gal_nuevas_cv-20-800.webp 600w, img/r/gal_nuevas_cv-20-1400.webp 1050w, img/gal/nuevas/cv-20.jpeg 1650w" sizes="(max-width: 768px) min(calc(52vh * 0.7500), 86vw), min(calc(62vh * 0.7500), 86vw)" style="--ar:0.7500" width="1650" height="2200" alt="Proa al atardecer — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-19.jpeg" style="--ar:0.7500" width="1650" height="2200" alt="Bote al atardecer — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-19.jpeg" srcset="img/r/gal_nuevas_cv-19-800.webp 600w, img/r/gal_nuevas_cv-19-1400.webp 1050w, img/gal/nuevas/cv-19.jpeg 1650w" sizes="(max-width: 768px) min(calc(52vh * 0.7500), 86vw), min(calc(62vh * 0.7500), 86vw)" style="--ar:0.7500" width="1650" height="2200" alt="Bote al atardecer — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
       <figure class="gal-h-item">
-        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-18.jpeg" style="--ar:0.7500" width="1650" height="2200" alt="Atardecer en Los Roques — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
+        <div class="gal-h-imgwrap"><img src="img/gal/nuevas/cv-18.jpeg" srcset="img/r/gal_nuevas_cv-18-800.webp 600w, img/r/gal_nuevas_cv-18-1400.webp 1050w, img/gal/nuevas/cv-18.jpeg 1650w" sizes="(max-width: 768px) min(calc(52vh * 0.7500), 86vw), min(calc(62vh * 0.7500), 86vw)" style="--ar:0.7500" width="1650" height="2200" alt="Atardecer en Los Roques — Casa Verde, Los Roques" loading="lazy" decoding="async"></div>
       </figure>
     </div>
     <div class="gal-flechas">

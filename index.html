@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="description" content="Casa Verde — Casa privada de lujo en Gran Roque, Archipiélago Los Roques, Venezuela. Hasta 10 huéspedes, chef privado, bote privado 24/7.">
+<meta name="description" content="Casa Verde — Casa privada de lujo en Gran Roque, Archipiélago Los Roques, Venezuela. Hasta 10 huéspedes, chef privado y lancha propia con capitán.">
 <meta name="theme-color" content="#FFFFFF">
 <title>Casa Verde — Gran Roque, Los Roques</title>
 <meta name="google-site-verification" content="eiN3ylmN_oFxURh_lkQebcBE7tYOWjkmEHDjp-q93es" />
@@ -12,7 +12,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Casa Verde">
 <meta property="og:title" content="Casa Verde — Gran Roque, Los Roques">
-<meta property="og:description" content="Casa privada de lujo en Gran Roque, Archipiélago Los Roques. Hasta 10 huéspedes, chef privado y bote privado 24/7.">
+<meta property="og:description" content="Casa privada de lujo en Gran Roque, Archipiélago Los Roques. Hasta 10 huéspedes, chef privado y lancha propia con capitán.">
 <meta property="og:url" content="https://casaverdelosroques.com/">
 <meta property="og:image" content="https://casaverdelosroques.com/img/og-casa-verde.jpg">
 <meta property="og:image:width" content="1200">
@@ -246,7 +246,7 @@ a{color:inherit;text-decoration:none}
 .fs-slide{position:absolute;inset:0;opacity:0;transition:opacity .6s ease}
 .fs-slide.on{opacity:1;z-index:1}
 .fs-slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
-.ficha-foto figcaption{position:absolute;z-index:3;left:calc(var(--x,0px) + 18px);right:calc(var(--x,0px) + 18px);bottom:calc(var(--y,0px) + 16px);transition:left .6s cubic-bezier(.65,0,.35,1),right .6s cubic-bezier(.65,0,.35,1),top .6s cubic-bezier(.65,0,.35,1),bottom .6s cubic-bezier(.65,0,.35,1);display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.5);pointer-events:none}
+.ficha-foto .fs-pie{position:absolute;z-index:3;left:calc(var(--x,0px) + 18px);right:calc(var(--x,0px) + 18px);bottom:calc(var(--y,0px) + 16px);transition:left .6s cubic-bezier(.65,0,.35,1),right .6s cubic-bezier(.65,0,.35,1),top .6s cubic-bezier(.65,0,.35,1),bottom .6s cubic-bezier(.65,0,.35,1);display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.5);pointer-events:none}
 .fs-num{font-variant-numeric:tabular-nums;letter-spacing:.1em;opacity:.85}
 .fs-num b{font-weight:700}
 .fs-flecha{position:absolute;z-index:3;top:50%;width:46px;height:46px;margin-top:-23px;border:0;border-radius:50%;background:rgba(255,248,237,.9);color:var(--ink);display:grid;place-items:center;cursor:default;box-shadow:0 6px 20px rgba(0,0,0,.18);transition:background .3s,color .3s,scale .25s ease}
@@ -347,11 +347,11 @@ footer{background:linear-gradient(rgba(0,0,0,.60),rgba(0,0,0,.65)),url('img/foot
 .foot-legal{white-space:nowrap}
 .foot-legal a{color:inherit;text-decoration:underline;text-underline-offset:3px}
 @media (hover:hover){.foot-legal a:hover{color:#fff}}
-@media (max-width:768px){footer{padding:44px 24px 150px}.foot-links{gap:18px}}
+@media (max-width:768px){footer{padding:44px 24px 150px}.foot-links{gap:18px}footer .foot-links a,footer .foot-copy a,footer .foot-phone a{display:inline-block;padding:4px 0;margin:-4px 0}}
 @media (max-width:480px){.foot-rights{display:none}.foot-copy{letter-spacing:0;font-size:11.5px;line-height:18px}}
 
 /* ---------- boton flotante de Instagram (del proyecto viejo, permanente) ---------- */
-.ig-float{position:fixed;bottom:calc(102px + env(safe-area-inset-bottom));right:calc(30px + env(safe-area-inset-right));z-index:200;width:56px;height:56px;border-radius:50%;background:#fff;color:var(--verde);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 22px rgba(0,0,0,.16);transition:transform .35s cubic-bezier(.25,.1,.25,1),box-shadow .35s}
+.ig-float{position:fixed;bottom:calc(102px + env(safe-area-inset-bottom));right:calc(18px + env(safe-area-inset-right));z-index:200;width:56px;height:56px;border-radius:50%;background:#fff;color:var(--verde);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 22px rgba(0,0,0,.16);transition:transform .35s cubic-bezier(.25,.1,.25,1),box-shadow .35s}
 @media (hover:hover) and (pointer:fine){
   .ig-float:hover{transform:scale(1.09);box-shadow:0 8px 30px rgba(0,0,0,.24)}
   .foot-links a:hover{color:var(--verde)}
@@ -362,7 +362,7 @@ footer{background:linear-gradient(rgba(0,0,0,.60),rgba(0,0,0,.65)),url('img/foot
 @media (max-width:480px){.ig-float{width:46px;height:46px;bottom:calc(76px + env(safe-area-inset-bottom));right:calc(18px + env(safe-area-inset-right))}}
 
 /* ---------- boton flotante de WhatsApp (del proyecto viejo, permanente) ---------- */
-.wa-float{position:fixed;bottom:calc(30px + env(safe-area-inset-bottom));right:calc(30px + env(safe-area-inset-right));z-index:200;width:56px;height:56px;border-radius:50%;background:var(--verde);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 22px rgba(0,0,0,.18);transition:transform .35s cubic-bezier(.25,.1,.25,1),box-shadow .35s}
+.wa-float{position:fixed;bottom:calc(30px + env(safe-area-inset-bottom));right:calc(18px + env(safe-area-inset-right));z-index:200;width:56px;height:56px;border-radius:50%;background:var(--verde);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 22px rgba(0,0,0,.18);transition:transform .35s cubic-bezier(.25,.1,.25,1),box-shadow .35s}
 .wa-float::before{content:'';position:absolute;inset:-5px;border-radius:50%;background:rgba(0,194,146,.3);animation:waPulse 2.6s ease-out infinite}
 /* Instagram: la misma onda, pero como anillo detras del boton para que el circulo siga blanco */
 .ig-float{animation:igPulse 2.6s ease-out infinite}
@@ -473,7 +473,7 @@ html.js footer:not(.bg-on){background:#0f1615}
   .ig-float,.wa-float{transition:opacity .35s,transform .35s cubic-bezier(.25,.1,.25,1)}
   body.sin-flotantes .ig-float,body.sin-flotantes .wa-float{opacity:0;pointer-events:none;transform:translateY(14px)}
   /* mini galeria: el contador va arriba, lejos de los botones flotantes */
-  .ficha-foto figcaption{top:calc(var(--y,0px) + 16px);flex-direction:column-reverse;justify-content:space-between;align-items:flex-start}
+  .ficha-foto .fs-pie{top:calc(var(--y,0px) + 16px);flex-direction:column-reverse;justify-content:space-between;align-items:flex-start}
   .ficha-foto .fs-num{align-self:flex-end}
 }
 /* telefono acostado (pantalla muy baja): se aligera cada escena para que nada se monte */
@@ -527,6 +527,8 @@ html.js footer:not(.bg-on){background:#0f1615}
   .carril-riel:hover .cr-barra,.carril-riel.agarrado .cr-barra{height:5px;margin-top:-2.5px}
   .carril-riel.agarrado .cr-barra{cursor:default}
 }
+/* telefono: velo oscuro detras del texto del inicio para que se lea sobre la foto de la ventana */
+@media (max-width:768px){.meta::before{content:"";position:absolute;z-index:-1;left:0;right:0;top:-70px;bottom:-60px;background:linear-gradient(to top,rgba(24,21,20,0),rgba(24,21,20,.86) 24%,rgba(24,21,20,.7) 62%,rgba(24,21,20,0));pointer-events:none}}
 /* Galeria: el unico boton en naranja Caraquena (#f05a25); todo lo demas queda en el verde de Casa Verde */
 :root{--naranja:#f05a25}
 .nav-pill.naranja{background:var(--naranja);box-shadow:0 4px 14px rgba(240,90,37,.3)}
@@ -640,19 +642,19 @@ setTimeout(function(){
       <figure class="ficha-foto" aria-roledescription="carrusel" aria-label="Fotos de la sala y los cuartos">
         <div class="fs-marco">
         <div class="fs-pista">
-          <div class="fs-slide on" data-cap="Doble altura"><img class="fs-img" src="img/cv-05.jpg" alt="Sala a doble altura con techo de madera y mezzanina" id="fichaFoto" loading="lazy" width="1200" height="1600"></div>
-          <div class="fs-slide" data-cap="El camino al mar"><img class="fs-img" data-src="img/gal/pasillo-pergola.jpeg" alt="Pasillo con pérgola hacia el mar" width="1650" height="2200"></div>
-          <div class="fs-slide" data-cap="Sala frente al mar"><img class="fs-img" data-src="img/gal/nuevas/cv-03.jpeg" alt="Sala frente al mar" width="2200" height="1650"></div>
-          <div class="fs-slide" data-cap="Sala de estar"><img class="fs-img" data-src="img/gal/nuevas/cv-04.jpeg" alt="Sala de estar" width="2200" height="1650"></div>
-          <div class="fs-slide" data-cap="Ventanal al mar"><img class="fs-img" data-src="img/gal/fotos2/sala-ventanal-lancha.jpg" alt="Ventanal de la sala con la lancha al fondo" width="1920" height="2560"></div>
-          <div class="fs-slide" data-cap="Vista al cerro"><img class="fs-img" data-src="img/gal/fotos2/sala-puffs-cerro.jpg" alt="Sala con puffs y vista al cerro" width="1920" height="2560"></div>
-          <div class="fs-slide" data-cap="Mesa frente al mar"><img class="fs-img" data-src="img/gal/nuevas/cv-21.jpeg" alt="Mesa frente al mar" width="1650" height="2200"></div>
-          <div class="fs-slide" data-cap="Habitación azul"><img class="fs-img" data-src="img/gal/fotos2/habitacion-azul-amplia.jpg" alt="Habitación azul" width="2560" height="1440"></div>
-          <div class="fs-slide" data-cap="Habitación con baño"><img class="fs-img" data-src="img/gal/fotos2/habitacion-azul-bano.jpg" alt="Habitación azul con baño" width="1080" height="608"></div>
-          <div class="fs-slide" data-cap="Ventana al jardín"><img class="fs-img" data-src="img/gal/fotos2/habitacion-azul-ventana.jpg" alt="Habitación con ventana al jardín" width="1440" height="2560"></div>
-          <div class="fs-slide" data-cap="Bote privado"><img class="fs-img" data-src="img/gal/nuevas/cv-13.jpeg" alt="Bote privado" width="1650" height="2200"></div>
+          <div class="fs-slide on" data-cap="Doble altura"><img class="fs-img" src="img/r/cv-05-1400.webp" alt="Sala a doble altura con techo de madera y mezzanina" id="fichaFoto" loading="lazy" width="1200" height="1600"></div>
+          <div class="fs-slide" data-cap="El camino al mar"><img class="fs-img" data-src="img/r/gal_pasillo-pergola-1400.webp" alt="Pasillo con pérgola hacia el mar" width="1650" height="2200"></div>
+          <div class="fs-slide" data-cap="Sala frente al mar"><img class="fs-img" data-src="img/r/gal_nuevas_cv-03-1400.webp" alt="Sala frente al mar" width="2200" height="1650"></div>
+          <div class="fs-slide" data-cap="Sala de estar"><img class="fs-img" data-src="img/r/gal_nuevas_cv-04-1400.webp" alt="Sala de estar" width="2200" height="1650"></div>
+          <div class="fs-slide" data-cap="Ventanal al mar"><img class="fs-img" data-src="img/r/gal_fotos2_sala-ventanal-lancha-1400.webp" alt="Ventanal de la sala con la lancha al fondo" width="1920" height="2560"></div>
+          <div class="fs-slide" data-cap="Vista al cerro"><img class="fs-img" data-src="img/r/gal_fotos2_sala-puffs-cerro-1400.webp" alt="Sala con puffs y vista al cerro" width="1920" height="2560"></div>
+          <div class="fs-slide" data-cap="Mesa frente al mar"><img class="fs-img" data-src="img/r/gal_nuevas_cv-21-1400.webp" alt="Mesa frente al mar" width="1650" height="2200"></div>
+          <div class="fs-slide" data-cap="Habitación azul"><img class="fs-img" data-src="img/r/gal_fotos2_habitacion-azul-amplia-1400.webp" alt="Habitación azul" width="2560" height="1440"></div>
+          <div class="fs-slide" data-cap="Habitación con baño"><img class="fs-img" data-src="img/r/gal_fotos2_habitacion-azul-bano-1400.webp" alt="Habitación azul con baño" width="1080" height="608"></div>
+          <div class="fs-slide" data-cap="Ventana al jardín"><img class="fs-img" data-src="img/r/gal_fotos2_habitacion-azul-ventana-1400.webp" alt="Habitación con ventana al jardín" width="1440" height="2560"></div>
+          <div class="fs-slide" data-cap="Bote privado"><img class="fs-img" data-src="img/r/gal_nuevas_cv-13-1400.webp" alt="Bote privado" width="1650" height="2200"></div>
         </div>
-        <figcaption><span class="fs-cap">Doble altura</span><span class="fs-num"><b>01</b> / 11</span></figcaption>
+        <p class="fs-pie"><span class="fs-cap">Doble altura</span><span class="fs-num"><b>01</b> / 11</span></p>
         <button class="fs-flecha prev" type="button" aria-label="Foto anterior"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12.5 4 6.5 10l6 6"/></svg></button>
         <button class="fs-flecha next" type="button" aria-label="Foto siguiente"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4l6 6-6 6"/></svg></button>
         </div>
@@ -669,7 +671,7 @@ setTimeout(function(){
       </div>
     <div class="cartas">
       <article class="carta">
-          <div class="carta-fotos" aria-roledescription="carrusel" aria-label="Fotos del cuarto"><ul class="cf-pista" tabindex="0"><li><img src="img/cuartos/completas/c1-1.jpg" width="1400" height="788" alt="Cuarto principal con cabecera azul y televisor" loading="lazy" decoding="async"></li><li><img src="img/cuartos/completas/c1-2.jpg" width="1400" height="1050" alt="Cama del cuarto principal y televisor" loading="lazy" decoding="async"></li><li><img src="img/cuartos/completas/c1-3.jpg" width="1050" height="1400" alt="Cabecera azul del cuarto principal" loading="lazy" decoding="async"></li><li><img src="img/cuartos/completas/c1-4.jpg" width="1400" height="1050" alt="Cama del cuarto principal" loading="lazy" decoding="async"></li><li><img src="img/cuartos/completas/c1-5.jpg" width="1050" height="1400" alt="Mesa de noche del cuarto principal" loading="lazy" decoding="async"></li><li><img src="img/cuartos/completas/c1-6.jpg" width="1080" height="608" alt="Cuarto principal con la puerta del baño" loading="lazy" decoding="async"></li><li><img src="img/cuartos/completas/c1-7.jpg" width="720" height="1280" alt="Cojines del cuarto principal" loading="lazy" decoding="async"></li><li><img src="img/cuartos/completas/c1-8.jpg" width="720" height="1280" alt="Toallas Casa Verde en la cama" loading="lazy" decoding="async"></li><li><img src="img/cuartos/completas/c1-9.jpg" width="1050" height="1400" alt="Baño del cuarto principal" loading="lazy" decoding="async"><span class="cf-et">Baño</span></li></ul><span class="cf-num"><b>1</b> / 9</span><button class="cf-flecha prev" type="button" aria-label="Foto anterior"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12.5 4 6.5 10l6 6"/></svg></button><button class="cf-flecha next" type="button" aria-label="Foto siguiente"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4l6 6-6 6"/></svg></button></div>
+          <div class="carta-fotos" role="group" aria-roledescription="carrusel" aria-label="Fotos del cuarto"><ul class="cf-pista" tabindex="0"><li><img src="img/cuartos/completas/c1-1.jpg" width="1400" height="788" alt="Cuarto principal con cabecera azul y televisor" loading="lazy" decoding="async"></li><li><img src="img/cuartos/completas/c1-2.jpg" width="1400" height="1050" alt="Cama del cuarto principal y televisor" loading="lazy" decoding="async"></li><li><img src="img/cuartos/completas/c1-3.jpg" width="1050" height="1400" alt="Cabecera azul del cuarto principal" loading="lazy" decoding="async"></li><li><img src="img/cuartos/completas/c1-4.jpg" width="1400" height="1050" alt="Cama del cuarto principal" loading="lazy" decoding="async"></li><li><img src="img/cuartos/completas/c1-5.jpg" width="1050" height="1400" alt="Mesa de noche del cuarto principal" loading="lazy" decoding="async"></li><li><img src="img/cuartos/completas/c1-6.jpg" width="1080" height="608" alt="Cuarto principal con la puerta del baño" loading="lazy" decoding="async"></li><li><img src="img/cuartos/completas/c1-7.jpg" width="720" height="1280" alt="Cojines del cuarto principal" loading="lazy" decoding="async"></li><li><img src="img/cuartos/completas/c1-8.jpg" width="720" height="1280" alt="Toallas Casa Verde en la cama" loading="lazy" decoding="async"></li><li><img src="img/cuartos/completas/c1-9.jpg" width="1050" height="1400" alt="Baño del cuarto principal" loading="lazy" decoding="async"><span class="cf-et">Baño</span></li></ul><span class="cf-num"><b>1</b> / 9</span><button class="cf-flecha prev" type="button" aria-label="Foto anterior"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12.5 4 6.5 10l6 6"/></svg></button><button class="cf-flecha next" type="button" aria-label="Foto siguiente"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4l6 6-6 6"/></svg></button></div>
         <div class="carta-texto">
           <span class="carta-num">01</span>
           <h3 class="carta-nombre">Cuarto principal</h3>
@@ -678,7 +680,7 @@ setTimeout(function(){
         </div>
       </article>
       <article class="carta vertical">
-          <div class="carta-fotos" aria-roledescription="carrusel" aria-label="Fotos del cuarto"><ul class="cf-pista" tabindex="0"><li><img src="img/cuartos/completas/c2-1.jpg" width="788" height="1400" alt="Cama del cuarto dos con cabecera azul" loading="lazy" decoding="async"></li><li><img src="img/cuartos/completas/c2-2.jpg" width="1050" height="1400" alt="Litera del cuarto dos" loading="lazy" decoding="async"></li><li><img src="img/cuartos/completas/c2-3.jpg" width="1050" height="1400" alt="Cojines del cuarto dos" loading="lazy" decoding="async"></li><li><img src="img/cuartos/completas/c2-4.jpg" width="788" height="1400" alt="Ventana del cuarto dos" loading="lazy" decoding="async"></li><li><img src="img/cuartos/completas/c2-5.jpg" width="788" height="1400" alt="Una pausa para leer en el cuarto dos" loading="lazy" decoding="async"></li></ul><span class="cf-num"><b>1</b> / 5</span><button class="cf-flecha prev" type="button" aria-label="Foto anterior"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12.5 4 6.5 10l6 6"/></svg></button><button class="cf-flecha next" type="button" aria-label="Foto siguiente"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4l6 6-6 6"/></svg></button></div>
+          <div class="carta-fotos" role="group" aria-roledescription="carrusel" aria-label="Fotos del cuarto"><ul class="cf-pista" tabindex="0"><li><img src="img/cuartos/completas/c2-1.jpg" width="788" height="1400" alt="Cama del cuarto dos con cabecera azul" loading="lazy" decoding="async"></li><li><img src="img/cuartos/completas/c2-2.jpg" width="1050" height="1400" alt="Litera del cuarto dos" loading="lazy" decoding="async"></li><li><img src="img/cuartos/completas/c2-3.jpg" width="1050" height="1400" alt="Cojines del cuarto dos" loading="lazy" decoding="async"></li><li><img src="img/cuartos/completas/c2-4.jpg" width="788" height="1400" alt="Ventana del cuarto dos" loading="lazy" decoding="async"></li><li><img src="img/cuartos/completas/c2-5.jpg" width="788" height="1400" alt="Una pausa para leer en el cuarto dos" loading="lazy" decoding="async"></li></ul><span class="cf-num"><b>1</b> / 5</span><button class="cf-flecha prev" type="button" aria-label="Foto anterior"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12.5 4 6.5 10l6 6"/></svg></button><button class="cf-flecha next" type="button" aria-label="Foto siguiente"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4l6 6-6 6"/></svg></button></div>
         <div class="carta-texto">
           <span class="carta-num">02</span>
           <h3 class="carta-nombre">Cuarto dos</h3>
@@ -687,7 +689,7 @@ setTimeout(function(){
         </div>
       </article>
       <article class="carta">
-          <div class="carta-fotos" aria-roledescription="carrusel" aria-label="Fotos del cuarto"><ul class="cf-pista" tabindex="0"><li><img src="img/cuartos/completas/c3-1.jpg" width="1400" height="1050" alt="Cuarto tres con cabecera verde agua" loading="lazy" decoding="async"></li><li><img src="img/cuartos/completas/c3-2.jpg" width="1050" height="1400" alt="Cama del cuarto tres" loading="lazy" decoding="async"></li><li><img src="img/cuartos/completas/c3-3.jpg" width="1050" height="1400" alt="Cojines de langosta del cuarto tres" loading="lazy" decoding="async"></li><li><img src="img/cuartos/completas/c3-4.jpg" width="1050" height="1400" alt="Cabecera verde agua del cuarto tres" loading="lazy" decoding="async"></li><li><img src="img/cuartos/completas/c3-5.jpg" width="788" height="1400" alt="Detalle de los cojines del cuarto tres" loading="lazy" decoding="async"></li><li><img src="img/cuartos/completas/c3-6.jpg" width="1050" height="1400" alt="Lavamanos del baño del cuarto tres" loading="lazy" decoding="async"><span class="cf-et">Baño</span></li><li><img src="img/cuartos/completas/c3-7.jpg" width="1050" height="1400" alt="Ducha del baño del cuarto tres" loading="lazy" decoding="async"><span class="cf-et">Baño</span></li></ul><span class="cf-num"><b>1</b> / 7</span><button class="cf-flecha prev" type="button" aria-label="Foto anterior"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12.5 4 6.5 10l6 6"/></svg></button><button class="cf-flecha next" type="button" aria-label="Foto siguiente"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4l6 6-6 6"/></svg></button></div>
+          <div class="carta-fotos" role="group" aria-roledescription="carrusel" aria-label="Fotos del cuarto"><ul class="cf-pista" tabindex="0"><li><img src="img/cuartos/completas/c3-1.jpg" width="1400" height="1050" alt="Cuarto tres con cabecera verde agua" loading="lazy" decoding="async"></li><li><img src="img/cuartos/completas/c3-2.jpg" width="1050" height="1400" alt="Cama del cuarto tres" loading="lazy" decoding="async"></li><li><img src="img/cuartos/completas/c3-3.jpg" width="1050" height="1400" alt="Cojines de langosta del cuarto tres" loading="lazy" decoding="async"></li><li><img src="img/cuartos/completas/c3-4.jpg" width="1050" height="1400" alt="Cabecera verde agua del cuarto tres" loading="lazy" decoding="async"></li><li><img src="img/cuartos/completas/c3-5.jpg" width="788" height="1400" alt="Detalle de los cojines del cuarto tres" loading="lazy" decoding="async"></li><li><img src="img/cuartos/completas/c3-6.jpg" width="1050" height="1400" alt="Lavamanos del baño del cuarto tres" loading="lazy" decoding="async"><span class="cf-et">Baño</span></li><li><img src="img/cuartos/completas/c3-7.jpg" width="1050" height="1400" alt="Ducha del baño del cuarto tres" loading="lazy" decoding="async"><span class="cf-et">Baño</span></li></ul><span class="cf-num"><b>1</b> / 7</span><button class="cf-flecha prev" type="button" aria-label="Foto anterior"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12.5 4 6.5 10l6 6"/></svg></button><button class="cf-flecha next" type="button" aria-label="Foto siguiente"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 4l6 6-6 6"/></svg></button></div>
         <div class="carta-texto">
           <span class="carta-num">03</span>
           <h3 class="carta-nombre">Cuarto tres</h3>
