@@ -102,6 +102,8 @@ a{color:inherit;text-decoration:none}
 .flota-der>*{width:min(360px,100%)}
 .flota-marca{font-size:clamp(22px,2.1vw,34px);font-weight:600;letter-spacing:-.03em;font-variation-settings:var(--ancho)}
 .flota-modelo{font-size:clamp(56px,6.2vw,112px);font-weight:500;letter-spacing:-.06em;line-height:.9;margin-top:clamp(14px,2.4vh,30px);font-variation-settings:var(--ancho)}
+/* nombre de la lancha: verde de la casa, en otra letra (Cormorant itálica) */
+.flota-nombre{margin-top:clamp(10px,1.6vh,18px);font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-weight:500;font-size:clamp(24px,2.4vw,40px);line-height:1.05;letter-spacing:.02em;color:var(--verde)}
 .flota-datos{margin-top:auto;width:min(380px,100%);border-top:1px solid rgba(49,39,38,.2);padding-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:18px 26px}
 .flota-datos .et{color:rgba(49,39,38,.55)}
 .flota-datos .va{font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-top:4px;font-variation-settings:normal}
@@ -143,6 +145,7 @@ a{color:inherit;text-decoration:none}
   .flota-der{display:none}
   .flota-izq{width:52%}
   .flota-modelo{font-size:clamp(30px,8.6vw,40px)}
+  .flota-nombre{font-size:21px;margin-top:6px;white-space:nowrap}
   .flota-datos{grid-template-columns:1fr;gap:12px}
   .flota-bote{left:auto;right:20px;height:calc(100svh - 190px);transform:translateY(-50%)}
 }
@@ -484,6 +487,7 @@ html.js footer:not(.bg-on){background:#0f1615}
   .flota-ficha{padding:76px 20px 20px}
   .flota-izq{width:64%}
   .flota-modelo{font-size:30px;margin-top:6px}
+  .flota-nombre{font-size:18px;margin-top:2px}
   .flota-datos{grid-template-columns:1fr 1fr;gap:8px 18px;padding-top:10px}
 }
 /* las escenas fijas miden la pantalla grande (sin barra del navegador) para que nunca quede una franja negra abajo;
@@ -737,13 +741,14 @@ setTimeout(function(){
         <div class="flota-izq">
           <div class="flota-marca">Beretta</div>
           <h2 class="flota-modelo" id="t-flota">Chimana</h2>
+          <div class="flota-nombre">“MOSQUITO’S FREE”</div>
           <div class="flota-datos">
             <div><div class="et">Motores</div><div class="va">2 Yamaha 150 HP fuera de borda</div></div>
             <div><div class="et">Potencia</div><div class="va">300&nbsp;HP (2&nbsp;×&nbsp;150&nbsp;HP)</div></div>
             <div><div class="et">A bordo</div><div class="va">Capitán y marinero</div></div>
             <div><div class="et">Techo</div><div class="va">T-top</div></div>
             <div><div class="et">Asientos</div><div class="va">Sofás a los costados y en popa</div></div>
-            <div><div class="et">Salidas</div><div class="va">A los cayos, a tu ritmo</div></div>
+            <div><div class="et">Salidas</div><div class="va">A los cayos, donde quieras, cuando desees</div></div>
           </div>
         </div>
         <div class="flota-der">
@@ -805,7 +810,7 @@ setTimeout(function(){
         </details>
         <details class="faq-item">
           <summary><h3>¿A dónde podemos ir con la lancha?</h3><svg class="faq-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></summary>
-          <div class="faq-a"><p>A cualquier cayo del Parque Nacional Archipiélago Los Roques: Francisquí, Madrisquí, Crasquí, Noronquí, Cayo de Agua y los demás, siempre dentro de las normas del parque.</p></div>
+          <div class="faq-a"><p>A cualquier cayo del Parque Nacional Archipiélago Los Roques, respetando siempre las normas del parque.</p></div>
         </details>
         <details class="faq-item">
           <summary><h3>¿Cuándo salimos en lancha?</h3><svg class="faq-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></summary>
@@ -837,7 +842,7 @@ setTimeout(function(){
         </details>
       </div>
     </div>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿Qué incluye la casa?", "acceptedAnswer": {"@type": "Answer", "text": "Alojamiento para hasta 10 huéspedes en tres habitaciones con baño privado y aire acondicionado split, WiFi Starlink, un equipo de 3 personas con chef y la lancha con capitán y marinero."}}, {"@type": "Question", "name": "¿La gasolina de la lancha está incluida?", "acceptedAnswer": {"@type": "Answer", "text": "No. La lancha, el capitán y el marinero vienen con la casa, pero la gasolina la paga el huésped según lo que se use en cada salida."}}, {"@type": "Question", "name": "¿A dónde podemos ir con la lancha?", "acceptedAnswer": {"@type": "Answer", "text": "A cualquier cayo del Parque Nacional Archipiélago Los Roques: Francisquí, Madrisquí, Crasquí, Noronquí, Cayo de Agua y los demás, siempre dentro de las normas del parque."}}, {"@type": "Question", "name": "¿Cuándo salimos en lancha?", "acceptedAnswer": {"@type": "Answer", "text": "Las salidas se coordinan cada día con el capitán, según el clima y el plan del grupo."}}, {"@type": "Question", "name": "¿La comida está incluida?", "acceptedAnswer": {"@type": "Answer", "text": "No, ¡pero disfruta del menú dirigido por nuestro chef! Normalmente se sugiere un menú según el número de personas alojadas y los días de estadía. Una vez acordado, se envía también la lista de ingredientes para que la traiga el cliente. Además hay otras dos opciones para la comida: Compra en Caracas: tenemos gente que puede recoger los ingredientes del menú en el sitio acordado en Caracas, con un costo extra. Comida incluida: se incluye la comida con un costo extra diario por persona."}}, {"@type": "Question", "name": "¿Qué no incluye el precio?", "acceptedAnswer": {"@type": "Answer", "text": "Los boletos aéreos y traslados hasta Los Roques, la tasa de ingreso al Parque Nacional, la gasolina, la comida, bebidas y las propinas."}}, {"@type": "Question", "name": "¿A qué hora es la entrada y la salida?", "acceptedAnswer": {"@type": "Answer", "text": "La entrada es a las 2:00 pm y la salida a las 12:00 del mediodía."}}, {"@type": "Question", "name": "¿Cómo reservo?", "acceptedAnswer": {"@type": "Answer", "text": "Escríbenos por WhatsApp con tus fechas y cuántos son. La reserva queda confirmada cuando te enviamos la confirmación por escrito y recibimos el anticipo."}}, {"@type": "Question", "name": "¿Qué datos piden para reservar?", "acceptedAnswer": {"@type": "Answer", "text": "Nombre completo, cédula o pasaporte y nacionalidad de cada huésped. Son necesarios para el registro de huéspedes y para el acceso al Parque Nacional."}}, {"@type": "Question", "name": "¿Puedo cancelar?", "acceptedAnswer": {"@type": "Answer", "text": "No es lo común. Sin embargo, si es por causa de fuerza mayor, lo evaluamos y podemos cambiar la fecha de tu estadía."}}]}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿Qué incluye la casa?", "acceptedAnswer": {"@type": "Answer", "text": "Alojamiento para hasta 10 huéspedes en tres habitaciones con baño privado y aire acondicionado split, WiFi Starlink, un equipo de 3 personas con chef y la lancha con capitán y marinero."}}, {"@type": "Question", "name": "¿La gasolina de la lancha está incluida?", "acceptedAnswer": {"@type": "Answer", "text": "No. La lancha, el capitán y el marinero vienen con la casa, pero la gasolina la paga el huésped según lo que se use en cada salida."}}, {"@type": "Question", "name": "¿A dónde podemos ir con la lancha?", "acceptedAnswer": {"@type": "Answer", "text": "A cualquier cayo del Parque Nacional Archipiélago Los Roques, respetando siempre las normas del parque."}}, {"@type": "Question", "name": "¿Cuándo salimos en lancha?", "acceptedAnswer": {"@type": "Answer", "text": "Las salidas se coordinan cada día con el capitán, según el clima y el plan del grupo."}}, {"@type": "Question", "name": "¿La comida está incluida?", "acceptedAnswer": {"@type": "Answer", "text": "No, ¡pero disfruta del menú dirigido por nuestro chef! Normalmente se sugiere un menú según el número de personas alojadas y los días de estadía. Una vez acordado, se envía también la lista de ingredientes para que la traiga el cliente. Además hay otras dos opciones para la comida: Compra en Caracas: tenemos gente que puede recoger los ingredientes del menú en el sitio acordado en Caracas, con un costo extra. Comida incluida: se incluye la comida con un costo extra diario por persona."}}, {"@type": "Question", "name": "¿Qué no incluye el precio?", "acceptedAnswer": {"@type": "Answer", "text": "Los boletos aéreos y traslados hasta Los Roques, la tasa de ingreso al Parque Nacional, la gasolina, la comida, bebidas y las propinas."}}, {"@type": "Question", "name": "¿A qué hora es la entrada y la salida?", "acceptedAnswer": {"@type": "Answer", "text": "La entrada es a las 2:00 pm y la salida a las 12:00 del mediodía."}}, {"@type": "Question", "name": "¿Cómo reservo?", "acceptedAnswer": {"@type": "Answer", "text": "Escríbenos por WhatsApp con tus fechas y cuántos son. La reserva queda confirmada cuando te enviamos la confirmación por escrito y recibimos el anticipo."}}, {"@type": "Question", "name": "¿Qué datos piden para reservar?", "acceptedAnswer": {"@type": "Answer", "text": "Nombre completo, cédula o pasaporte y nacionalidad de cada huésped. Son necesarios para el registro de huéspedes y para el acceso al Parque Nacional."}}, {"@type": "Question", "name": "¿Puedo cancelar?", "acceptedAnswer": {"@type": "Answer", "text": "No es lo común. Sin embargo, si es por causa de fuerza mayor, lo evaluamos y podemos cambiar la fecha de tu estadía."}}]}</script>
   </section>
 </main>
 
@@ -1071,7 +1076,7 @@ setTimeout(function(){
       var R = function(sel){ return document.querySelector(sel).getBoundingClientRect(); };
       var a;
       if(cel){
-        var iz = R('.flota-izq'), mo = R('.flota-modelo'), da = R('.flota-datos');
+        var iz = R('.flota-izq'), mo = R('.flota-nombre'), da = R('.flota-datos');
         a = {l: iz.left, r: Math.min(iz.right, bL - 16), t: mo.bottom + 18, b: da.top - 18, lado: 'izq'};
       } else {
         var de = R('.flota-der'), pp = R('.flota-der p');
